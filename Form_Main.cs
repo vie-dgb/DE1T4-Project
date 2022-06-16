@@ -366,8 +366,6 @@ namespace DE1T4_Project
                 DeltaPLC.Write(PLC_Addr.Valve, 0);
             }
         }
-
-
         #endregion
 
         #endregion
