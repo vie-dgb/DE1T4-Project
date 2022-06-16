@@ -10,40 +10,56 @@ using SharpDX.MediaFoundation;
 using System.Drawing;
 using Emgu.CV;
 using Emgu.CV.Structure;
-using System.Xml.Serialization;
 using System.IO;
-using System.Xml;
 
 namespace DE1T4_Project
 {
-    public class frameCofig
+    public class frameConfig
     {
-        public Rectangle rect { get; set; }
+        public string X { get; set; }
+        public string Y { get; set; }
+        public string Height { get; set; }
+        public string Width { get; set; }
     }
 
     public class accessData 
     {
-        public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\save.xml";
-        public static XmlSerializer seraialSave_cofig = new XmlSerializer(typeof(frameCofig));
+        public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\saveFrame.txt";
         public static void saveData(Rectangle _rect)
         {
-            frameCofig newData = new frameCofig();
-            newData.rect = _rect;
+            frameConfig newData = new frameConfig();
+            newData.X = _rect.X.ToString();
+            newData.Y = _rect.Y.ToString();
+            newData.Height = _rect.Height.ToString();
+            newData.Width  = _rect.Width.ToString();
             if (settingCam.rect != null)
             {
-                settingCam.updateFrame = false;
-                FileStream write_stream = File.OpenWrite(savePath);
-                seraialSave_cofig.Serialize(write_stream, newData);
-                write_stream.Dispose();
+                string[] lines =
+                {
+                    newData.X, newData.Y, newData.Width, newData.Height
+                };
+                File.WriteAllLines(savePath, lines);
             }
         }
 
         public static Rectangle readData()
         {
-            FileStream read_stream = File.OpenRead(savePath);
-            frameCofig _result = new frameCofig();
-            _result = (frameCofig)(seraialSave_cofig.Deserialize(read_stream));
-            return _result.rect;
+            Rectangle returnrect = new Rectangle();
+            string[] lines = File.ReadAllLines(savePath);
+            returnrect.X = checkEmptyInt(lines[0], int.Parse(lines[0]));
+            returnrect.Y = checkEmptyInt(lines[1], int.Parse(lines[1]));
+            returnrect.Width = checkEmptyInt(lines[2], int.Parse(lines[2]));
+            returnrect.Height = checkEmptyInt(lines[3], int.Parse(lines[3]));
+            return returnrect;
+        }
+
+        public static int checkEmptyInt(string emptyCheck, int value)
+        {
+            if (emptyCheck != string.Empty)
+            {
+                return value;
+            }
+            else return 0;
         }
     }
 

@@ -25,6 +25,7 @@ namespace DE1T4_Project
         // plc
         private Plc DeltaPLC = null;
         private ErrorCode errCode;
+
         public Form_Main()
         {
             InitializeComponent();
@@ -46,7 +47,6 @@ namespace DE1T4_Project
                     break;
                 }
             }
-
         }
 
         /*          MenuStrip event          */

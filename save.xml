@@ -1,17 +1,7 @@
 <?xml version="1.0"?>
-<frameCofig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
-  <rect>
-    <Location>
-      <X>220</X>
-      <Y>2</Y>
-    </Location>
-    <Size>
-      <Width>200</Width>
-      <Height>326</Height>
-    </Size>
-    <X>220</X>
-    <Y>2</Y>
-    <Width>200</Width>
-    <Height>326</Height>
-  </rect>
-</frameCofig>g>g>
+<frameConfig xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <X>199</X>
+  <Y>94</Y>
+  <Height>225</Height>
+  <Width>245</Width>
+</frameConfig>>

@@ -40,9 +40,11 @@ namespace DE1T4_Project
 
         private void setCamTimer_Tick(object sender, EventArgs e)
         {
-
-            Image tmpImg = settingCam.set_Frame.ToImage<Bgr, byte>().ToBitmap();
-            picBox_config.Image = tmpImg;
+            if (!settingCam.set_Frame.IsEmpty)
+            {
+                Image tmpImg = settingCam.set_Frame.ToImage<Bgr, byte>().ToBitmap();
+                picBox_config.Image = tmpImg;
+            }
         }
 
         private void imgBox_Config_Paint(object sender, PaintEventArgs e)
@@ -95,6 +97,7 @@ namespace DE1T4_Project
                 settingCam.EndLcation = e.Location;
                 settingCam.IsMouseDown = false;
                 accessData.saveData(settingCam.rect);
+                settingCam.updateFrame = false;
             }
         }
 
