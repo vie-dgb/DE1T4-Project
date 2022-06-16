@@ -1,0 +1,16 @@
+﻿This is DE1T4 project by 4M1T from DHDKTD14A - IUH(Industrial University of HoChiMinh City).
+A project Pick&Place with Delta robot & Computer vision.
+
+System Delta robot & conveyor control by PLC Siemens S7-1200 1214c dc/dc/dc.
+Winform app communication with PLC via S7.Net Library.
+Computer vision camera source by webcan.
+
+All library use in form:
+	- S7.Net
+	- From NugetPackages:
+		+ Emgu.CV - ver: 4.5.5.4823.
+		+ Emgu.CV.Bitmap - Ver: 4.5.5.4823.
+		+ Emgu.CV.runtime.windows - Ver: 4.5.5.4823.
+		+ Emgu.CV.UI - Ver: 4.5.5.4823.
+		+ SharpDX.MediaFoundation - Ver: 4.2.0.
+		+ DirectShowLib - ver: 1.0.0.
