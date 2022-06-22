@@ -22,44 +22,170 @@ namespace DE1T4_Project
         public string Width { get; set; }
     }
 
-    public class accessData 
+    public class cNum
     {
+        public enum nameLines
+        {
+            Rect_X,
+            Rect_Y,
+            Rect_Height,
+            Rect_Width,
+        }
+
+        public enum numSet
+        {
+            Name,
+            Hue_Max,
+            Hue_Min,
+            Sat_Max,
+            Sat_Min,
+            Val_Max,
+            Val_Min,
+        }
+    }
+
+    public class accessData
+    {
+
         public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\saveFrame.txt";
-        public static void saveData(Rectangle _rect)
+
+        public static void saveCamData(Rectangle _rect)
         {
             frameConfig newData = new frameConfig();
             newData.X = _rect.X.ToString();
             newData.Y = _rect.Y.ToString();
             newData.Height = _rect.Height.ToString();
             newData.Width  = _rect.Width.ToString();
+
+            string[] Readlines = File.ReadAllLines(savePath);
+
             if (settingCam.rect != null)
             {
-                string[] lines =
-                {
-                    newData.X, newData.Y, newData.Width, newData.Height
-                };
-                File.WriteAllLines(savePath, lines);
+                int ind = Convert.ToInt32(cNum.nameLines.Rect_X);
+                Readlines[ind] = newData.X;
+
+                ind = Convert.ToInt32(cNum.nameLines.Rect_Y);
+                Readlines[ind] = newData.Y;
+
+                ind = Convert.ToInt32(cNum.nameLines.Rect_Width);
+                Readlines[ind] = newData.Width;
+
+                ind = Convert.ToInt32(cNum.nameLines.Rect_Height);
+                Readlines[ind] = newData.Height;
+
+                File.WriteAllLines(savePath, Readlines);
             }
         }
 
-        public static Rectangle readData()
+        public static Rectangle readCamData()
         {
             Rectangle returnrect = new Rectangle();
             string[] lines = File.ReadAllLines(savePath);
-            returnrect.X = checkEmptyInt(lines[0], int.Parse(lines[0]));
-            returnrect.Y = checkEmptyInt(lines[1], int.Parse(lines[1]));
-            returnrect.Width = checkEmptyInt(lines[2], int.Parse(lines[2]));
-            returnrect.Height = checkEmptyInt(lines[3], int.Parse(lines[3]));
+
+            int ind = Convert.ToInt32(cNum.nameLines.Rect_X);
+            returnrect.X = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Rect_Y);
+            returnrect.Y = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Rect_Width);
+            returnrect.Width = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Rect_Height);
+            returnrect.Height = checkEmptyInt(lines, ind);
             return returnrect;
         }
 
-        public static int checkEmptyInt(string emptyCheck, int value)
+        public static ImgSet readInforImgData(int set)
         {
-            if (emptyCheck != string.Empty)
+            ImgSet retResult = new ImgSet();
+            string[] lines = File.ReadAllLines(savePath);
+            double H_Max, H_Min, S_Max, S_Min, V_Max, V_Min;
+            int ind = calcSetInd(cNum.numSet.Name, set);
+
+            retResult.name = checkEmptyString(lines, ind); ind++;
+
+            H_Max = checkEmptyDouble(lines, ind); ind++;
+            H_Min = checkEmptyDouble(lines, ind); ind++;
+
+            S_Max = checkEmptyDouble(lines, ind); ind++;
+            S_Min = checkEmptyDouble(lines, ind); ind++;
+
+            V_Max = checkEmptyDouble(lines, ind); ind++;
+            V_Min = checkEmptyDouble(lines, ind);
+
+            retResult.Max = new Hsv(H_Max, S_Max, V_Max);
+            retResult.Min = new Hsv(H_Min, S_Min, V_Min);
+
+            return retResult;
+        }
+
+        public static void saveInforImgData(cNum.numSet para, int set, double value)
+        {
+            string[] Readlines = File.ReadAllLines(savePath);
+            int ind = calcSetInd(para, set);
+            Readlines[ind] = Convert.ToString(value);
+            File.WriteAllLines(savePath, Readlines);
+        }
+
+        public static void saveInforImgData(cNum.numSet para, int set, string name)
+        {
+            string[] Readlines = File.ReadAllLines(savePath);
+            int ind = calcSetInd(para, set);
+            Readlines[ind] = name;
+            File.WriteAllLines(savePath, Readlines);
+        }
+
+        public static int checkEmptyInt(string[] emptyCheck, int index)
+        {
+            int result;
+            if (index < emptyCheck.Length)
             {
-                return value;
+                if (emptyCheck[index] != string.Empty)
+                {
+                    result = Convert.ToInt32(emptyCheck[index]);
+                    return result;
+                }
             }
-            else return 0;
+            return 0;
+        }
+
+        public static double checkEmptyDouble(string[] emptyCheck, int index)
+        {
+            double result;
+            if (index < emptyCheck.Length)
+            {
+                if (emptyCheck[index] != string.Empty)
+                {
+                    result = Convert.ToDouble(emptyCheck[index]);
+                    return result;
+                }
+            }
+            return 0;
+        }
+
+        public static string checkEmptyString(string[] emptyCheck, int index)
+        {
+            string result;
+            if (index < emptyCheck.Length)
+            {
+                if (emptyCheck[index] != string.Empty)
+                {
+                    result = Convert.ToString(emptyCheck[index]);
+                    return result;
+                }
+            }
+            return "Color " + Convert.ToString(index);
+        }
+
+        private const int NumOfPara = 7;
+        private const int StartIndex = 4;
+        public static int calcSetInd(cNum.numSet inf, int nSet)
+        {
+            // index = start + inf + nSet * NumOfPara
+            int _re = 0;
+            _re = StartIndex + Convert.ToInt32(inf) + (nSet * NumOfPara);
+            return _re;
         }
     }
 
@@ -83,7 +209,17 @@ namespace DE1T4_Project
         public static bool captureInProgress = false;
         public static bool Dispose = false;
         public static CameraStruct.CamList[] List;
+        public static int Set;
+        public static ImgSet[] imgSet;
     }
+
+    public class ImgSet
+    {
+        public string name { get; set; }
+        public Hsv Max { get; set; }
+        public Hsv Min { get; set; }
+    }
+
 
     public class CameraStruct
     {

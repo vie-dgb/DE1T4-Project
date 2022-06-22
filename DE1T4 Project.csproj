@@ -133,7 +133,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Project Information.txt" />
-    <Content Include="save.xml" />
     <Content Include="saveFrame.txt" />
     <None Include="Resources\Asset 1.png" />
     <None Include="Resources\non-tick.png" />

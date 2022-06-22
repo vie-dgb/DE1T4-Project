@@ -31,22 +31,18 @@ namespace DE1T4_Project
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form_Main));
-            this.movement_grbox = new System.Windows.Forms.GroupBox();
-            this.tbx_mov_division = new System.Windows.Forms.TextBox();
-            this.label3 = new System.Windows.Forms.Label();
-            this.lb_mov_division = new System.Windows.Forms.Label();
-            this.btn_mov_Zplus = new System.Windows.Forms.Button();
-            this.btn_mov_Zmin = new System.Windows.Forms.Button();
-            this.btn_mov_Xmin = new System.Windows.Forms.Button();
-            this.btn_mov_Xplus = new System.Windows.Forms.Button();
-            this.btn_mov_Yplus = new System.Windows.Forms.Button();
-            this.btn_mov_Ymin = new System.Windows.Forms.Button();
             this.ToolHead_grbox = new System.Windows.Forms.GroupBox();
             this.lb_th_valve = new System.Windows.Forms.Label();
             this.sw_th_Valve = new MetroSet_UI.Controls.MetroSetSwitch();
             this.lb_th_vaccum = new System.Windows.Forms.Label();
             this.sw_th_Vaccum = new MetroSet_UI.Controls.MetroSetSwitch();
             this.position_grbox = new System.Windows.Forms.GroupBox();
+            this.lb_Pos_Z = new System.Windows.Forms.Label();
+            this.lb_Pos_Y = new System.Windows.Forms.Label();
+            this.lb_Pos_X = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
             this.btn_pos_home = new System.Windows.Forms.Button();
             this.Conveyor_grbox = new System.Windows.Forms.GroupBox();
             this.lb_con_mmps_v = new System.Windows.Forms.Label();
@@ -62,157 +58,70 @@ namespace DE1T4_Project
             this.lb_plc_ip = new System.Windows.Forms.Label();
             this.tbx_plc_ip = new System.Windows.Forms.TextBox();
             this.camera_grbox = new System.Windows.Forms.GroupBox();
+            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
             this.btn_cam_setting = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbb_Camlist = new System.Windows.Forms.ComboBox();
             this.btn_cam_connect = new System.Windows.Forms.Button();
             this.picbox_offCam = new System.Windows.Forms.PictureBox();
-            this.imgBox_drop = new Emgu.CV.UI.ImageBox();
             this.cyclicRead = new System.Windows.Forms.Timer(this.components);
-            this.movement2_grbox = new System.Windows.Forms.GroupBox();
-            this.tbx_mov_Z = new System.Windows.Forms.TextBox();
-            this.tbx_mov_Y = new System.Windows.Forms.TextBox();
-            this.tbx_mov_X = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
-            this.lb_Pos_X = new System.Windows.Forms.Label();
-            this.lb_Pos_Y = new System.Windows.Forms.Label();
-            this.lb_Pos_Z = new System.Windows.Forms.Label();
-            this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.btn_Mov_Move = new System.Windows.Forms.Button();
+            this.btn_mov_Ymin = new System.Windows.Forms.Button();
+            this.btn_mov_Yplus = new System.Windows.Forms.Button();
+            this.btn_mov_Xplus = new System.Windows.Forms.Button();
+            this.btn_mov_Xmin = new System.Windows.Forms.Button();
+            this.btn_mov_Zmin = new System.Windows.Forms.Button();
+            this.btn_mov_Zplus = new System.Windows.Forms.Button();
+            this.lb_mov_division = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.tbx_mov_division = new System.Windows.Forms.TextBox();
+            this.movement_grbox = new System.Windows.Forms.GroupBox();
             this.lb_mov_mmps = new System.Windows.Forms.Label();
             this.lb_mov_velocity = new System.Windows.Forms.Label();
             this.tbx_mov_velocity = new System.Windows.Forms.TextBox();
-            this.movement_grbox.SuspendLayout();
+            this.btn_Mov_Move = new System.Windows.Forms.Button();
+            this.label6 = new System.Windows.Forms.Label();
+            this.label7 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.tbx_mov_Z = new System.Windows.Forms.TextBox();
+            this.tbx_mov_Y = new System.Windows.Forms.TextBox();
+            this.tbx_mov_X = new System.Windows.Forms.TextBox();
+            this.imageProcess_grbox = new System.Windows.Forms.GroupBox();
+            this.label18 = new System.Windows.Forms.Label();
+            this.num_img_set = new System.Windows.Forms.NumericUpDown();
+            this.tbx_img_Name = new System.Windows.Forms.TextBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.lb_img_valMin = new System.Windows.Forms.Label();
+            this.lb_img_valMax = new System.Windows.Forms.Label();
+            this.scbar_ValMin = new System.Windows.Forms.HScrollBar();
+            this.label19 = new System.Windows.Forms.Label();
+            this.scbar_ValMax = new System.Windows.Forms.HScrollBar();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.lb_img_satMin = new System.Windows.Forms.Label();
+            this.lb_img_satMax = new System.Windows.Forms.Label();
+            this.scbar_SatMin = new System.Windows.Forms.HScrollBar();
+            this.label16 = new System.Windows.Forms.Label();
+            this.scbar_SatMax = new System.Windows.Forms.HScrollBar();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.lb_img_hueMin = new System.Windows.Forms.Label();
+            this.lb_img_hueMax = new System.Windows.Forms.Label();
+            this.scbar_HueMin = new System.Windows.Forms.HScrollBar();
+            this.label9 = new System.Windows.Forms.Label();
+            this.scbar_HueMax = new System.Windows.Forms.HScrollBar();
             this.ToolHead_grbox.SuspendLayout();
             this.position_grbox.SuspendLayout();
             this.Conveyor_grbox.SuspendLayout();
             this.PLC_grbox.SuspendLayout();
             this.camera_grbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox_drop)).BeginInit();
-            this.movement2_grbox.SuspendLayout();
+            this.movement_grbox.SuspendLayout();
+            this.imageProcess_grbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).BeginInit();
             this.SuspendLayout();
-            // 
-            // movement_grbox
-            // 
-            this.movement_grbox.BackColor = System.Drawing.Color.Gainsboro;
-            this.movement_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.movement_grbox.Controls.Add(this.tbx_mov_division);
-            this.movement_grbox.Controls.Add(this.label3);
-            this.movement_grbox.Controls.Add(this.lb_mov_division);
-            this.movement_grbox.Controls.Add(this.btn_mov_Zplus);
-            this.movement_grbox.Controls.Add(this.btn_mov_Zmin);
-            this.movement_grbox.Controls.Add(this.btn_mov_Xmin);
-            this.movement_grbox.Controls.Add(this.btn_mov_Xplus);
-            this.movement_grbox.Controls.Add(this.btn_mov_Yplus);
-            this.movement_grbox.Controls.Add(this.btn_mov_Ymin);
-            this.movement_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.movement_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.movement_grbox.Location = new System.Drawing.Point(1036, 12);
-            this.movement_grbox.Name = "movement_grbox";
-            this.movement_grbox.Size = new System.Drawing.Size(484, 180);
-            this.movement_grbox.TabIndex = 4;
-            this.movement_grbox.TabStop = false;
-            this.movement_grbox.Text = "Movement";
-            // 
-            // tbx_mov_division
-            // 
-            this.tbx_mov_division.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_division.Location = new System.Drawing.Point(332, 54);
-            this.tbx_mov_division.Name = "tbx_mov_division";
-            this.tbx_mov_division.Size = new System.Drawing.Size(78, 27);
-            this.tbx_mov_division.TabIndex = 21;
-            this.tbx_mov_division.TextChanged += new System.EventHandler(this.tbx_mov_division_TextChanged);
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(416, 57);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 23);
-            this.label3.TabIndex = 20;
-            this.label3.Text = "mm";
-            // 
-            // lb_mov_division
-            // 
-            this.lb_mov_division.AutoSize = true;
-            this.lb_mov_division.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mov_division.Location = new System.Drawing.Point(244, 57);
-            this.lb_mov_division.Name = "lb_mov_division";
-            this.lb_mov_division.Size = new System.Drawing.Size(82, 23);
-            this.lb_mov_division.TabIndex = 19;
-            this.lb_mov_division.Text = "Division";
-            // 
-            // btn_mov_Zplus
-            // 
-            this.btn_mov_Zplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Zplus.Location = new System.Drawing.Point(170, 53);
-            this.btn_mov_Zplus.Name = "btn_mov_Zplus";
-            this.btn_mov_Zplus.Size = new System.Drawing.Size(68, 35);
-            this.btn_mov_Zplus.TabIndex = 5;
-            this.btn_mov_Zplus.Text = "Z+";
-            this.btn_mov_Zplus.UseVisualStyleBackColor = true;
-            this.btn_mov_Zplus.Click += new System.EventHandler(this.btn_mov_Zplus_Click);
-            // 
-            // btn_mov_Zmin
-            // 
-            this.btn_mov_Zmin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Zmin.Location = new System.Drawing.Point(170, 104);
-            this.btn_mov_Zmin.Name = "btn_mov_Zmin";
-            this.btn_mov_Zmin.Size = new System.Drawing.Size(68, 35);
-            this.btn_mov_Zmin.TabIndex = 4;
-            this.btn_mov_Zmin.Text = "Z-";
-            this.btn_mov_Zmin.UseVisualStyleBackColor = true;
-            this.btn_mov_Zmin.Click += new System.EventHandler(this.btn_mov_Zmin_Click);
-            // 
-            // btn_mov_Xmin
-            // 
-            this.btn_mov_Xmin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Xmin.Location = new System.Drawing.Point(22, 104);
-            this.btn_mov_Xmin.Name = "btn_mov_Xmin";
-            this.btn_mov_Xmin.Size = new System.Drawing.Size(68, 35);
-            this.btn_mov_Xmin.TabIndex = 3;
-            this.btn_mov_Xmin.Text = "X-";
-            this.btn_mov_Xmin.UseVisualStyleBackColor = true;
-            this.btn_mov_Xmin.Click += new System.EventHandler(this.btn_mov_Xmin_Click);
-            // 
-            // btn_mov_Xplus
-            // 
-            this.btn_mov_Xplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Xplus.Location = new System.Drawing.Point(22, 53);
-            this.btn_mov_Xplus.Name = "btn_mov_Xplus";
-            this.btn_mov_Xplus.Size = new System.Drawing.Size(68, 35);
-            this.btn_mov_Xplus.TabIndex = 2;
-            this.btn_mov_Xplus.Text = "X+";
-            this.btn_mov_Xplus.UseVisualStyleBackColor = true;
-            this.btn_mov_Xplus.Click += new System.EventHandler(this.btn_mov_Xplus_Click);
-            // 
-            // btn_mov_Yplus
-            // 
-            this.btn_mov_Yplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Yplus.Location = new System.Drawing.Point(96, 53);
-            this.btn_mov_Yplus.Name = "btn_mov_Yplus";
-            this.btn_mov_Yplus.Size = new System.Drawing.Size(68, 35);
-            this.btn_mov_Yplus.TabIndex = 1;
-            this.btn_mov_Yplus.Text = "Y+";
-            this.btn_mov_Yplus.UseVisualStyleBackColor = true;
-            this.btn_mov_Yplus.Click += new System.EventHandler(this.btn_mov_Yplus_Click);
-            // 
-            // btn_mov_Ymin
-            // 
-            this.btn_mov_Ymin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Ymin.Location = new System.Drawing.Point(96, 104);
-            this.btn_mov_Ymin.Name = "btn_mov_Ymin";
-            this.btn_mov_Ymin.Size = new System.Drawing.Size(68, 35);
-            this.btn_mov_Ymin.TabIndex = 0;
-            this.btn_mov_Ymin.Text = "Y-";
-            this.btn_mov_Ymin.UseVisualStyleBackColor = true;
-            this.btn_mov_Ymin.Click += new System.EventHandler(this.btn_mov_Ymin_Click);
             // 
             // ToolHead_grbox
             // 
@@ -323,6 +232,66 @@ namespace DE1T4_Project
             this.position_grbox.TabStop = false;
             this.position_grbox.Text = "Position";
             // 
+            // lb_Pos_Z
+            // 
+            this.lb_Pos_Z.AutoSize = true;
+            this.lb_Pos_Z.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Pos_Z.Location = new System.Drawing.Point(197, 111);
+            this.lb_Pos_Z.Name = "lb_Pos_Z";
+            this.lb_Pos_Z.Size = new System.Drawing.Size(42, 28);
+            this.lb_Pos_Z.TabIndex = 21;
+            this.lb_Pos_Z.Text = "???";
+            // 
+            // lb_Pos_Y
+            // 
+            this.lb_Pos_Y.AutoSize = true;
+            this.lb_Pos_Y.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Pos_Y.Location = new System.Drawing.Point(197, 75);
+            this.lb_Pos_Y.Name = "lb_Pos_Y";
+            this.lb_Pos_Y.Size = new System.Drawing.Size(42, 28);
+            this.lb_Pos_Y.TabIndex = 20;
+            this.lb_Pos_Y.Text = "???";
+            // 
+            // lb_Pos_X
+            // 
+            this.lb_Pos_X.AutoSize = true;
+            this.lb_Pos_X.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_Pos_X.Location = new System.Drawing.Point(197, 41);
+            this.lb_Pos_X.Name = "lb_Pos_X";
+            this.lb_Pos_X.Size = new System.Drawing.Size(42, 28);
+            this.lb_Pos_X.TabIndex = 19;
+            this.lb_Pos_X.Text = "???";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label5.Location = new System.Drawing.Point(159, 111);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(31, 28);
+            this.label5.TabIndex = 18;
+            this.label5.Text = "Z:";
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label4.Location = new System.Drawing.Point(159, 75);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(31, 28);
+            this.label4.TabIndex = 17;
+            this.label4.Text = "Y:";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label2.Location = new System.Drawing.Point(159, 39);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(32, 28);
+            this.label2.TabIndex = 16;
+            this.label2.Text = "X:";
+            // 
             // btn_pos_home
             // 
             this.btn_pos_home.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pos_home.BackgroundImage")));
@@ -412,6 +381,7 @@ namespace DE1T4_Project
             this.tbx_con_speed.Name = "tbx_con_speed";
             this.tbx_con_speed.Size = new System.Drawing.Size(73, 27);
             this.tbx_con_speed.TabIndex = 12;
+            this.tbx_con_speed.TextChanged += new System.EventHandler(this.tbx_con_speed_TextChanged);
             // 
             // lb_con_Speed
             // 
@@ -498,7 +468,7 @@ namespace DE1T4_Project
             // 
             this.camera_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.camera_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.camera_grbox.Controls.Add(this.imgBox_drop);
+            this.camera_grbox.Controls.Add(this.imgBox_crop);
             this.camera_grbox.Controls.Add(this.btn_cam_setting);
             this.camera_grbox.Controls.Add(this.label1);
             this.camera_grbox.Controls.Add(this.cbb_Camlist);
@@ -512,6 +482,17 @@ namespace DE1T4_Project
             this.camera_grbox.TabIndex = 8;
             this.camera_grbox.TabStop = false;
             this.camera_grbox.Text = "Camera";
+            // 
+            // imgBox_crop
+            // 
+            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
+            this.imgBox_crop.Name = "imgBox_crop";
+            this.imgBox_crop.Size = new System.Drawing.Size(640, 480);
+            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgBox_crop.TabIndex = 18;
+            this.imgBox_crop.TabStop = false;
+            this.imgBox_crop.Visible = false;
             // 
             // btn_cam_setting
             // 
@@ -566,197 +547,529 @@ namespace DE1T4_Project
             this.picbox_offCam.TabIndex = 17;
             this.picbox_offCam.TabStop = false;
             // 
-            // imgBox_drop
-            // 
-            this.imgBox_drop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgBox_drop.Location = new System.Drawing.Point(6, 87);
-            this.imgBox_drop.Name = "imgBox_drop";
-            this.imgBox_drop.Size = new System.Drawing.Size(640, 480);
-            this.imgBox_drop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgBox_drop.TabIndex = 18;
-            this.imgBox_drop.TabStop = false;
-            this.imgBox_drop.Visible = false;
-            // 
             // cyclicRead
             // 
             this.cyclicRead.Interval = 500;
             this.cyclicRead.Tick += new System.EventHandler(this.cyclicRead_Tick);
             // 
-            // movement2_grbox
+            // btn_mov_Ymin
             // 
-            this.movement2_grbox.BackColor = System.Drawing.Color.Gainsboro;
-            this.movement2_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.movement2_grbox.Controls.Add(this.lb_mov_mmps);
-            this.movement2_grbox.Controls.Add(this.lb_mov_velocity);
-            this.movement2_grbox.Controls.Add(this.tbx_mov_velocity);
-            this.movement2_grbox.Controls.Add(this.btn_Mov_Move);
-            this.movement2_grbox.Controls.Add(this.label6);
-            this.movement2_grbox.Controls.Add(this.label7);
-            this.movement2_grbox.Controls.Add(this.label8);
-            this.movement2_grbox.Controls.Add(this.tbx_mov_Z);
-            this.movement2_grbox.Controls.Add(this.tbx_mov_Y);
-            this.movement2_grbox.Controls.Add(this.tbx_mov_X);
-            this.movement2_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.movement2_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.movement2_grbox.Location = new System.Drawing.Point(1036, 198);
-            this.movement2_grbox.Name = "movement2_grbox";
-            this.movement2_grbox.Size = new System.Drawing.Size(484, 135);
-            this.movement2_grbox.TabIndex = 9;
-            this.movement2_grbox.TabStop = false;
-            this.movement2_grbox.Text = "Movement";
+            this.btn_mov_Ymin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mov_Ymin.Location = new System.Drawing.Point(96, 104);
+            this.btn_mov_Ymin.Name = "btn_mov_Ymin";
+            this.btn_mov_Ymin.Size = new System.Drawing.Size(68, 35);
+            this.btn_mov_Ymin.TabIndex = 0;
+            this.btn_mov_Ymin.Text = "Y-";
+            this.btn_mov_Ymin.UseVisualStyleBackColor = true;
+            this.btn_mov_Ymin.Click += new System.EventHandler(this.btn_mov_Ymin_Click);
             // 
-            // tbx_mov_Z
+            // btn_mov_Yplus
             // 
-            this.tbx_mov_Z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_Z.Location = new System.Drawing.Point(359, 43);
-            this.tbx_mov_Z.Name = "tbx_mov_Z";
-            this.tbx_mov_Z.Size = new System.Drawing.Size(80, 27);
-            this.tbx_mov_Z.TabIndex = 11;
+            this.btn_mov_Yplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mov_Yplus.Location = new System.Drawing.Point(96, 53);
+            this.btn_mov_Yplus.Name = "btn_mov_Yplus";
+            this.btn_mov_Yplus.Size = new System.Drawing.Size(68, 35);
+            this.btn_mov_Yplus.TabIndex = 1;
+            this.btn_mov_Yplus.Text = "Y+";
+            this.btn_mov_Yplus.UseVisualStyleBackColor = true;
+            this.btn_mov_Yplus.Click += new System.EventHandler(this.btn_mov_Yplus_Click);
             // 
-            // tbx_mov_Y
+            // btn_mov_Xplus
             // 
-            this.tbx_mov_Y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_Y.Location = new System.Drawing.Point(216, 43);
-            this.tbx_mov_Y.Name = "tbx_mov_Y";
-            this.tbx_mov_Y.Size = new System.Drawing.Size(80, 27);
-            this.tbx_mov_Y.TabIndex = 10;
+            this.btn_mov_Xplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mov_Xplus.Location = new System.Drawing.Point(22, 53);
+            this.btn_mov_Xplus.Name = "btn_mov_Xplus";
+            this.btn_mov_Xplus.Size = new System.Drawing.Size(68, 35);
+            this.btn_mov_Xplus.TabIndex = 2;
+            this.btn_mov_Xplus.Text = "X+";
+            this.btn_mov_Xplus.UseVisualStyleBackColor = true;
+            this.btn_mov_Xplus.Click += new System.EventHandler(this.btn_mov_Xplus_Click);
             // 
-            // tbx_mov_X
+            // btn_mov_Xmin
             // 
-            this.tbx_mov_X.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_X.Location = new System.Drawing.Point(73, 43);
-            this.tbx_mov_X.Name = "tbx_mov_X";
-            this.tbx_mov_X.Size = new System.Drawing.Size(80, 27);
-            this.tbx_mov_X.TabIndex = 9;
+            this.btn_mov_Xmin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mov_Xmin.Location = new System.Drawing.Point(22, 104);
+            this.btn_mov_Xmin.Name = "btn_mov_Xmin";
+            this.btn_mov_Xmin.Size = new System.Drawing.Size(68, 35);
+            this.btn_mov_Xmin.TabIndex = 3;
+            this.btn_mov_Xmin.Text = "X-";
+            this.btn_mov_Xmin.UseVisualStyleBackColor = true;
+            this.btn_mov_Xmin.Click += new System.EventHandler(this.btn_mov_Xmin_Click);
             // 
-            // label2
+            // btn_mov_Zmin
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(159, 39);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(32, 28);
-            this.label2.TabIndex = 16;
-            this.label2.Text = "X:";
+            this.btn_mov_Zmin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mov_Zmin.Location = new System.Drawing.Point(170, 104);
+            this.btn_mov_Zmin.Name = "btn_mov_Zmin";
+            this.btn_mov_Zmin.Size = new System.Drawing.Size(68, 35);
+            this.btn_mov_Zmin.TabIndex = 4;
+            this.btn_mov_Zmin.Text = "Z-";
+            this.btn_mov_Zmin.UseVisualStyleBackColor = true;
+            this.btn_mov_Zmin.Click += new System.EventHandler(this.btn_mov_Zmin_Click);
             // 
-            // label4
+            // btn_mov_Zplus
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(159, 75);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(31, 28);
-            this.label4.TabIndex = 17;
-            this.label4.Text = "Y:";
+            this.btn_mov_Zplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_mov_Zplus.Location = new System.Drawing.Point(170, 53);
+            this.btn_mov_Zplus.Name = "btn_mov_Zplus";
+            this.btn_mov_Zplus.Size = new System.Drawing.Size(68, 35);
+            this.btn_mov_Zplus.TabIndex = 5;
+            this.btn_mov_Zplus.Text = "Z+";
+            this.btn_mov_Zplus.UseVisualStyleBackColor = true;
+            this.btn_mov_Zplus.Click += new System.EventHandler(this.btn_mov_Zplus_Click);
             // 
-            // label5
+            // lb_mov_division
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(159, 111);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(31, 28);
-            this.label5.TabIndex = 18;
-            this.label5.Text = "Z:";
+            this.lb_mov_division.AutoSize = true;
+            this.lb_mov_division.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_mov_division.Location = new System.Drawing.Point(244, 57);
+            this.lb_mov_division.Name = "lb_mov_division";
+            this.lb_mov_division.Size = new System.Drawing.Size(82, 23);
+            this.lb_mov_division.TabIndex = 19;
+            this.lb_mov_division.Text = "Division";
             // 
-            // lb_Pos_X
+            // label3
             // 
-            this.lb_Pos_X.AutoSize = true;
-            this.lb_Pos_X.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Pos_X.Location = new System.Drawing.Point(197, 41);
-            this.lb_Pos_X.Name = "lb_Pos_X";
-            this.lb_Pos_X.Size = new System.Drawing.Size(42, 28);
-            this.lb_Pos_X.TabIndex = 19;
-            this.lb_Pos_X.Text = "???";
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label3.Location = new System.Drawing.Point(416, 57);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(44, 23);
+            this.label3.TabIndex = 20;
+            this.label3.Text = "mm";
             // 
-            // lb_Pos_Y
+            // tbx_mov_division
             // 
-            this.lb_Pos_Y.AutoSize = true;
-            this.lb_Pos_Y.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Pos_Y.Location = new System.Drawing.Point(197, 75);
-            this.lb_Pos_Y.Name = "lb_Pos_Y";
-            this.lb_Pos_Y.Size = new System.Drawing.Size(42, 28);
-            this.lb_Pos_Y.TabIndex = 20;
-            this.lb_Pos_Y.Text = "???";
+            this.tbx_mov_division.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_mov_division.Location = new System.Drawing.Point(332, 54);
+            this.tbx_mov_division.Name = "tbx_mov_division";
+            this.tbx_mov_division.Size = new System.Drawing.Size(78, 27);
+            this.tbx_mov_division.TabIndex = 21;
+            this.tbx_mov_division.TextChanged += new System.EventHandler(this.tbx_mov_division_TextChanged);
             // 
-            // lb_Pos_Z
+            // movement_grbox
             // 
-            this.lb_Pos_Z.AutoSize = true;
-            this.lb_Pos_Z.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Pos_Z.Location = new System.Drawing.Point(197, 111);
-            this.lb_Pos_Z.Name = "lb_Pos_Z";
-            this.lb_Pos_Z.Size = new System.Drawing.Size(42, 28);
-            this.lb_Pos_Z.TabIndex = 21;
-            this.lb_Pos_Z.Text = "???";
-            // 
-            // label6
-            // 
-            this.label6.AutoSize = true;
-            this.label6.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(322, 43);
-            this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(31, 28);
-            this.label6.TabIndex = 21;
-            this.label6.Text = "Z:";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(179, 43);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(31, 28);
-            this.label7.TabIndex = 20;
-            this.label7.Text = "Y:";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(35, 43);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(32, 28);
-            this.label8.TabIndex = 19;
-            this.label8.Text = "X:";
-            // 
-            // btn_Mov_Move
-            // 
-            this.btn_Mov_Move.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Mov_Move.Location = new System.Drawing.Point(337, 87);
-            this.btn_Mov_Move.Name = "btn_Mov_Move";
-            this.btn_Mov_Move.Size = new System.Drawing.Size(123, 40);
-            this.btn_Mov_Move.TabIndex = 22;
-            this.btn_Mov_Move.Text = "Move";
-            this.btn_Mov_Move.UseVisualStyleBackColor = true;
-            this.btn_Mov_Move.Click += new System.EventHandler(this.btn_Mov_Move_Click);
+            this.movement_grbox.BackColor = System.Drawing.Color.Gainsboro;
+            this.movement_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.movement_grbox.Controls.Add(this.lb_mov_mmps);
+            this.movement_grbox.Controls.Add(this.lb_mov_velocity);
+            this.movement_grbox.Controls.Add(this.tbx_mov_velocity);
+            this.movement_grbox.Controls.Add(this.btn_Mov_Move);
+            this.movement_grbox.Controls.Add(this.label6);
+            this.movement_grbox.Controls.Add(this.label7);
+            this.movement_grbox.Controls.Add(this.label8);
+            this.movement_grbox.Controls.Add(this.tbx_mov_Z);
+            this.movement_grbox.Controls.Add(this.tbx_mov_Y);
+            this.movement_grbox.Controls.Add(this.tbx_mov_X);
+            this.movement_grbox.Controls.Add(this.tbx_mov_division);
+            this.movement_grbox.Controls.Add(this.label3);
+            this.movement_grbox.Controls.Add(this.lb_mov_division);
+            this.movement_grbox.Controls.Add(this.btn_mov_Zplus);
+            this.movement_grbox.Controls.Add(this.btn_mov_Zmin);
+            this.movement_grbox.Controls.Add(this.btn_mov_Xmin);
+            this.movement_grbox.Controls.Add(this.btn_mov_Xplus);
+            this.movement_grbox.Controls.Add(this.btn_mov_Yplus);
+            this.movement_grbox.Controls.Add(this.btn_mov_Ymin);
+            this.movement_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.movement_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.movement_grbox.Location = new System.Drawing.Point(1036, 12);
+            this.movement_grbox.Name = "movement_grbox";
+            this.movement_grbox.Size = new System.Drawing.Size(484, 270);
+            this.movement_grbox.TabIndex = 4;
+            this.movement_grbox.TabStop = false;
+            this.movement_grbox.Text = "Movement";
             // 
             // lb_mov_mmps
             // 
             this.lb_mov_mmps.AutoSize = true;
             this.lb_mov_mmps.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mov_mmps.Location = new System.Drawing.Point(205, 94);
+            this.lb_mov_mmps.Location = new System.Drawing.Point(416, 112);
             this.lb_mov_mmps.Name = "lb_mov_mmps";
             this.lb_mov_mmps.Size = new System.Drawing.Size(63, 23);
-            this.lb_mov_mmps.TabIndex = 25;
+            this.lb_mov_mmps.TabIndex = 35;
             this.lb_mov_mmps.Text = "mm/s";
             // 
             // lb_mov_velocity
             // 
             this.lb_mov_velocity.AutoSize = true;
             this.lb_mov_velocity.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mov_velocity.Location = new System.Drawing.Point(36, 94);
+            this.lb_mov_velocity.Location = new System.Drawing.Point(247, 112);
             this.lb_mov_velocity.Name = "lb_mov_velocity";
             this.lb_mov_velocity.Size = new System.Drawing.Size(79, 23);
-            this.lb_mov_velocity.TabIndex = 24;
+            this.lb_mov_velocity.TabIndex = 34;
             this.lb_mov_velocity.Text = "Velocity";
             // 
             // tbx_mov_velocity
             // 
             this.tbx_mov_velocity.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_velocity.Location = new System.Drawing.Point(121, 92);
+            this.tbx_mov_velocity.Location = new System.Drawing.Point(332, 110);
             this.tbx_mov_velocity.Name = "tbx_mov_velocity";
             this.tbx_mov_velocity.Size = new System.Drawing.Size(78, 27);
-            this.tbx_mov_velocity.TabIndex = 23;
+            this.tbx_mov_velocity.TabIndex = 33;
+            // 
+            // btn_Mov_Move
+            // 
+            this.btn_Mov_Move.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_Mov_Move.Location = new System.Drawing.Point(30, 209);
+            this.btn_Mov_Move.Name = "btn_Mov_Move";
+            this.btn_Mov_Move.Size = new System.Drawing.Size(123, 40);
+            this.btn_Mov_Move.TabIndex = 32;
+            this.btn_Mov_Move.Text = "Move";
+            this.btn_Mov_Move.UseVisualStyleBackColor = true;
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(312, 165);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(31, 28);
+            this.label6.TabIndex = 31;
+            this.label6.Text = "Z:";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label7.Location = new System.Drawing.Point(169, 165);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(31, 28);
+            this.label7.TabIndex = 30;
+            this.label7.Text = "Y:";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(25, 165);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(32, 28);
+            this.label8.TabIndex = 29;
+            this.label8.Text = "X:";
+            // 
+            // tbx_mov_Z
+            // 
+            this.tbx_mov_Z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_mov_Z.Location = new System.Drawing.Point(349, 165);
+            this.tbx_mov_Z.Name = "tbx_mov_Z";
+            this.tbx_mov_Z.Size = new System.Drawing.Size(80, 27);
+            this.tbx_mov_Z.TabIndex = 28;
+            // 
+            // tbx_mov_Y
+            // 
+            this.tbx_mov_Y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_mov_Y.Location = new System.Drawing.Point(206, 165);
+            this.tbx_mov_Y.Name = "tbx_mov_Y";
+            this.tbx_mov_Y.Size = new System.Drawing.Size(80, 27);
+            this.tbx_mov_Y.TabIndex = 27;
+            // 
+            // tbx_mov_X
+            // 
+            this.tbx_mov_X.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_mov_X.Location = new System.Drawing.Point(63, 165);
+            this.tbx_mov_X.Name = "tbx_mov_X";
+            this.tbx_mov_X.Size = new System.Drawing.Size(80, 27);
+            this.tbx_mov_X.TabIndex = 26;
+            // 
+            // imageProcess_grbox
+            // 
+            this.imageProcess_grbox.BackColor = System.Drawing.Color.Gainsboro;
+            this.imageProcess_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.imageProcess_grbox.Controls.Add(this.label18);
+            this.imageProcess_grbox.Controls.Add(this.num_img_set);
+            this.imageProcess_grbox.Controls.Add(this.tbx_img_Name);
+            this.imageProcess_grbox.Controls.Add(this.label17);
+            this.imageProcess_grbox.Controls.Add(this.label14);
+            this.imageProcess_grbox.Controls.Add(this.label15);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_valMin);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_valMax);
+            this.imageProcess_grbox.Controls.Add(this.scbar_ValMin);
+            this.imageProcess_grbox.Controls.Add(this.label19);
+            this.imageProcess_grbox.Controls.Add(this.scbar_ValMax);
+            this.imageProcess_grbox.Controls.Add(this.label12);
+            this.imageProcess_grbox.Controls.Add(this.label13);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_satMin);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_satMax);
+            this.imageProcess_grbox.Controls.Add(this.scbar_SatMin);
+            this.imageProcess_grbox.Controls.Add(this.label16);
+            this.imageProcess_grbox.Controls.Add(this.scbar_SatMax);
+            this.imageProcess_grbox.Controls.Add(this.label11);
+            this.imageProcess_grbox.Controls.Add(this.label10);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_hueMin);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_hueMax);
+            this.imageProcess_grbox.Controls.Add(this.scbar_HueMin);
+            this.imageProcess_grbox.Controls.Add(this.label9);
+            this.imageProcess_grbox.Controls.Add(this.scbar_HueMax);
+            this.imageProcess_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.imageProcess_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.imageProcess_grbox.Location = new System.Drawing.Point(677, 198);
+            this.imageProcess_grbox.Name = "imageProcess_grbox";
+            this.imageProcess_grbox.Size = new System.Drawing.Size(353, 573);
+            this.imageProcess_grbox.TabIndex = 36;
+            this.imageProcess_grbox.TabStop = false;
+            this.imageProcess_grbox.Text = "Image";
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Location = new System.Drawing.Point(15, 46);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(44, 28);
+            this.label18.TabIndex = 53;
+            this.label18.Text = "Set";
+            // 
+            // num_img_set
+            // 
+            this.num_img_set.Location = new System.Drawing.Point(84, 40);
+            this.num_img_set.Maximum = new decimal(new int[] {
+            3,
+            0,
+            0,
+            0});
+            this.num_img_set.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_img_set.Name = "num_img_set";
+            this.num_img_set.Size = new System.Drawing.Size(54, 34);
+            this.num_img_set.TabIndex = 52;
+            this.num_img_set.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.num_img_set.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
+            // 
+            // tbx_img_Name
+            // 
+            this.tbx_img_Name.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_img_Name.Location = new System.Drawing.Point(85, 110);
+            this.tbx_img_Name.Name = "tbx_img_Name";
+            this.tbx_img_Name.Size = new System.Drawing.Size(198, 27);
+            this.tbx_img_Name.TabIndex = 51;
+            this.tbx_img_Name.TextChanged += new System.EventHandler(this.tbx_img_Name_TextChanged);
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(15, 110);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(72, 28);
+            this.label17.TabIndex = 50;
+            this.label17.Text = "Name";
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label14.Location = new System.Drawing.Point(8, 533);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(43, 23);
+            this.label14.TabIndex = 49;
+            this.label14.Text = "Min";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label15.Location = new System.Drawing.Point(8, 489);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(46, 23);
+            this.label15.TabIndex = 48;
+            this.label15.Text = "Max";
+            // 
+            // lb_img_valMin
+            // 
+            this.lb_img_valMin.AutoSize = true;
+            this.lb_img_valMin.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_valMin.Location = new System.Drawing.Point(286, 533);
+            this.lb_img_valMin.Name = "lb_img_valMin";
+            this.lb_img_valMin.Size = new System.Drawing.Size(55, 23);
+            this.lb_img_valMin.TabIndex = 47;
+            this.lb_img_valMin.Text = "Vmin";
+            // 
+            // lb_img_valMax
+            // 
+            this.lb_img_valMax.AutoSize = true;
+            this.lb_img_valMax.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_valMax.Location = new System.Drawing.Point(286, 489);
+            this.lb_img_valMax.Name = "lb_img_valMax";
+            this.lb_img_valMax.Size = new System.Drawing.Size(58, 23);
+            this.lb_img_valMax.TabIndex = 46;
+            this.lb_img_valMax.Text = "Vmax";
+            // 
+            // scbar_ValMin
+            // 
+            this.scbar_ValMin.LargeChange = 1;
+            this.scbar_ValMin.Location = new System.Drawing.Point(63, 528);
+            this.scbar_ValMin.Maximum = 255;
+            this.scbar_ValMin.Name = "scbar_ValMin";
+            this.scbar_ValMin.Size = new System.Drawing.Size(220, 28);
+            this.scbar_ValMin.TabIndex = 45;
+            this.scbar_ValMin.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_ValMin_Scroll);
+            // 
+            // label19
+            // 
+            this.label19.AutoSize = true;
+            this.label19.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Location = new System.Drawing.Point(6, 445);
+            this.label19.Name = "label19";
+            this.label19.Size = new System.Drawing.Size(81, 33);
+            this.label19.TabIndex = 44;
+            this.label19.Text = "Value";
+            // 
+            // scbar_ValMax
+            // 
+            this.scbar_ValMax.LargeChange = 1;
+            this.scbar_ValMax.Location = new System.Drawing.Point(63, 484);
+            this.scbar_ValMax.Maximum = 255;
+            this.scbar_ValMax.Name = "scbar_ValMax";
+            this.scbar_ValMax.Size = new System.Drawing.Size(220, 28);
+            this.scbar_ValMax.TabIndex = 43;
+            this.scbar_ValMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_ValMax_Scroll);
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label12.Location = new System.Drawing.Point(8, 406);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(43, 23);
+            this.label12.TabIndex = 42;
+            this.label12.Text = "Min";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label13.Location = new System.Drawing.Point(8, 362);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(46, 23);
+            this.label13.TabIndex = 41;
+            this.label13.Text = "Max";
+            // 
+            // lb_img_satMin
+            // 
+            this.lb_img_satMin.AutoSize = true;
+            this.lb_img_satMin.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_satMin.Location = new System.Drawing.Point(286, 406);
+            this.lb_img_satMin.Name = "lb_img_satMin";
+            this.lb_img_satMin.Size = new System.Drawing.Size(54, 23);
+            this.lb_img_satMin.TabIndex = 40;
+            this.lb_img_satMin.Text = "Smin";
+            // 
+            // lb_img_satMax
+            // 
+            this.lb_img_satMax.AutoSize = true;
+            this.lb_img_satMax.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_satMax.Location = new System.Drawing.Point(286, 362);
+            this.lb_img_satMax.Name = "lb_img_satMax";
+            this.lb_img_satMax.Size = new System.Drawing.Size(57, 23);
+            this.lb_img_satMax.TabIndex = 39;
+            this.lb_img_satMax.Text = "Smax";
+            // 
+            // scbar_SatMin
+            // 
+            this.scbar_SatMin.LargeChange = 1;
+            this.scbar_SatMin.Location = new System.Drawing.Point(63, 401);
+            this.scbar_SatMin.Maximum = 255;
+            this.scbar_SatMin.Name = "scbar_SatMin";
+            this.scbar_SatMin.Size = new System.Drawing.Size(220, 28);
+            this.scbar_SatMin.TabIndex = 38;
+            this.scbar_SatMin.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_SatMin_Scroll);
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Location = new System.Drawing.Point(6, 318);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(141, 33);
+            this.label16.TabIndex = 37;
+            this.label16.Text = "Saturation";
+            // 
+            // scbar_SatMax
+            // 
+            this.scbar_SatMax.LargeChange = 1;
+            this.scbar_SatMax.Location = new System.Drawing.Point(63, 357);
+            this.scbar_SatMax.Maximum = 255;
+            this.scbar_SatMax.Name = "scbar_SatMax";
+            this.scbar_SatMax.Size = new System.Drawing.Size(220, 28);
+            this.scbar_SatMax.TabIndex = 36;
+            this.scbar_SatMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_SatMax_Scroll);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label11.Location = new System.Drawing.Point(8, 277);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(43, 23);
+            this.label11.TabIndex = 35;
+            this.label11.Text = "Min";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(8, 233);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(46, 23);
+            this.label10.TabIndex = 34;
+            this.label10.Text = "Max";
+            // 
+            // lb_img_hueMin
+            // 
+            this.lb_img_hueMin.AutoSize = true;
+            this.lb_img_hueMin.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_hueMin.Location = new System.Drawing.Point(286, 277);
+            this.lb_img_hueMin.Name = "lb_img_hueMin";
+            this.lb_img_hueMin.Size = new System.Drawing.Size(58, 23);
+            this.lb_img_hueMin.TabIndex = 33;
+            this.lb_img_hueMin.Text = "Hmin";
+            // 
+            // lb_img_hueMax
+            // 
+            this.lb_img_hueMax.AutoSize = true;
+            this.lb_img_hueMax.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_hueMax.Location = new System.Drawing.Point(286, 233);
+            this.lb_img_hueMax.Name = "lb_img_hueMax";
+            this.lb_img_hueMax.Size = new System.Drawing.Size(61, 23);
+            this.lb_img_hueMax.TabIndex = 32;
+            this.lb_img_hueMax.Text = "Hmax";
+            // 
+            // scbar_HueMin
+            // 
+            this.scbar_HueMin.LargeChange = 1;
+            this.scbar_HueMin.Location = new System.Drawing.Point(63, 272);
+            this.scbar_HueMin.Maximum = 255;
+            this.scbar_HueMin.Name = "scbar_HueMin";
+            this.scbar_HueMin.Size = new System.Drawing.Size(220, 28);
+            this.scbar_HueMin.TabIndex = 31;
+            this.scbar_HueMin.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMin_Scroll);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(6, 189);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(63, 33);
+            this.label9.TabIndex = 30;
+            this.label9.Text = "Hue";
+            // 
+            // scbar_HueMax
+            // 
+            this.scbar_HueMax.LargeChange = 1;
+            this.scbar_HueMax.Location = new System.Drawing.Point(63, 228);
+            this.scbar_HueMax.Maximum = 255;
+            this.scbar_HueMax.Name = "scbar_HueMax";
+            this.scbar_HueMax.Size = new System.Drawing.Size(220, 28);
+            this.scbar_HueMax.TabIndex = 0;
+            this.scbar_HueMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMax_Scroll);
             // 
             // Form_Main
             // 
@@ -764,7 +1077,7 @@ namespace DE1T4_Project
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1532, 783);
-            this.Controls.Add(this.movement2_grbox);
+            this.Controls.Add(this.imageProcess_grbox);
             this.Controls.Add(this.camera_grbox);
             this.Controls.Add(this.PLC_grbox);
             this.Controls.Add(this.Conveyor_grbox);
@@ -776,8 +1089,6 @@ namespace DE1T4_Project
             this.Text = "DE1T4 Pick&Place Project";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form_Main_Load);
-            this.movement_grbox.ResumeLayout(false);
-            this.movement_grbox.PerformLayout();
             this.ToolHead_grbox.ResumeLayout(false);
             this.ToolHead_grbox.PerformLayout();
             this.position_grbox.ResumeLayout(false);
@@ -788,16 +1099,18 @@ namespace DE1T4_Project
             this.PLC_grbox.PerformLayout();
             this.camera_grbox.ResumeLayout(false);
             this.camera_grbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox_drop)).EndInit();
-            this.movement2_grbox.ResumeLayout(false);
-            this.movement2_grbox.PerformLayout();
+            this.movement_grbox.ResumeLayout(false);
+            this.movement_grbox.PerformLayout();
+            this.imageProcess_grbox.ResumeLayout(false);
+            this.imageProcess_grbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox movement_grbox;
         private System.Windows.Forms.GroupBox ToolHead_grbox;
         private MetroSet_UI.Controls.MetroSetSwitch sw_th_Vaccum;
         private System.Windows.Forms.Label lb_th_valve;
@@ -805,12 +1118,6 @@ namespace DE1T4_Project
         private System.Windows.Forms.Label lb_th_vaccum;
         private System.Windows.Forms.GroupBox position_grbox;
         private System.Windows.Forms.Button btn_pos_home;
-        private System.Windows.Forms.Button btn_mov_Zplus;
-        private System.Windows.Forms.Button btn_mov_Zmin;
-        private System.Windows.Forms.Button btn_mov_Xmin;
-        private System.Windows.Forms.Button btn_mov_Xplus;
-        private System.Windows.Forms.Button btn_mov_Yplus;
-        private System.Windows.Forms.Button btn_mov_Ymin;
         private System.Windows.Forms.GroupBox Conveyor_grbox;
         private System.Windows.Forms.Label lb_con_Velocity;
         private System.Windows.Forms.Label lb_Con_Run;
@@ -823,9 +1130,6 @@ namespace DE1T4_Project
         private System.Windows.Forms.Label lb_plc_ip;
         private System.Windows.Forms.TextBox tbx_plc_ip;
         private System.Windows.Forms.Label lb_con_accSpeed;
-        private System.Windows.Forms.TextBox tbx_mov_division;
-        private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.Label lb_mov_division;
         private System.Windows.Forms.Label lb_con_mmps_v;
         private System.Windows.Forms.GroupBox camera_grbox;
         private System.Windows.Forms.ComboBox cbb_Camlist;
@@ -833,25 +1137,60 @@ namespace DE1T4_Project
         private System.Windows.Forms.Button btn_cam_setting;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picbox_offCam;
-        private Emgu.CV.UI.ImageBox imgBox_drop;
+        private Emgu.CV.UI.ImageBox imgBox_crop;
         private System.Windows.Forms.Timer cyclicRead;
-        private System.Windows.Forms.GroupBox movement2_grbox;
-        private System.Windows.Forms.TextBox tbx_mov_Z;
-        private System.Windows.Forms.TextBox tbx_mov_Y;
-        private System.Windows.Forms.TextBox tbx_mov_X;
         private System.Windows.Forms.Label lb_Pos_Z;
         private System.Windows.Forms.Label lb_Pos_Y;
         private System.Windows.Forms.Label lb_Pos_X;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_mov_Ymin;
+        private System.Windows.Forms.Button btn_mov_Yplus;
+        private System.Windows.Forms.Button btn_mov_Xplus;
+        private System.Windows.Forms.Button btn_mov_Xmin;
+        private System.Windows.Forms.Button btn_mov_Zmin;
+        private System.Windows.Forms.Button btn_mov_Zplus;
+        private System.Windows.Forms.Label lb_mov_division;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox tbx_mov_division;
+        private System.Windows.Forms.GroupBox movement_grbox;
+        private System.Windows.Forms.Label lb_mov_mmps;
+        private System.Windows.Forms.Label lb_mov_velocity;
+        private System.Windows.Forms.TextBox tbx_mov_velocity;
         private System.Windows.Forms.Button btn_Mov_Move;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.Label lb_mov_mmps;
-        private System.Windows.Forms.Label lb_mov_velocity;
-        private System.Windows.Forms.TextBox tbx_mov_velocity;
+        private System.Windows.Forms.TextBox tbx_mov_Z;
+        private System.Windows.Forms.TextBox tbx_mov_Y;
+        private System.Windows.Forms.TextBox tbx_mov_X;
+        private System.Windows.Forms.GroupBox imageProcess_grbox;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label lb_img_hueMin;
+        private System.Windows.Forms.Label lb_img_hueMax;
+        private System.Windows.Forms.HScrollBar scbar_HueMin;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.HScrollBar scbar_HueMax;
+        private System.Windows.Forms.Label label14;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label lb_img_valMin;
+        private System.Windows.Forms.Label lb_img_valMax;
+        private System.Windows.Forms.HScrollBar scbar_ValMin;
+        private System.Windows.Forms.Label label19;
+        private System.Windows.Forms.HScrollBar scbar_ValMax;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label13;
+        private System.Windows.Forms.Label lb_img_satMin;
+        private System.Windows.Forms.Label lb_img_satMax;
+        private System.Windows.Forms.HScrollBar scbar_SatMin;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.HScrollBar scbar_SatMax;
+        private System.Windows.Forms.NumericUpDown num_img_set;
+        private System.Windows.Forms.TextBox tbx_img_Name;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label18;
     }
 }
 

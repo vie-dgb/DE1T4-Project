@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
 using Emgu.CV.Structure;
+using Emgu.CV.Util;
 using Emgu.Util;
 using S7;
 using S7.Net;
@@ -25,7 +26,8 @@ namespace DE1T4_Project
         // plc
         private Plc DeltaPLC = null;
         private ErrorCode errCode;
-
+        // number of set color
+        private const int NUMOFSET = 3;
         public Form_Main()
         {
             InitializeComponent();
@@ -47,6 +49,13 @@ namespace DE1T4_Project
                     break;
                 }
             }
+            // load setup data
+            CameraSelect.imgSet = new ImgSet[NUMOFSET];
+            for(int i=0;i<NUMOFSET; i++)
+            {
+                CameraSelect.imgSet[i] = accessData.readInforImgData(i);
+            }
+            updatePageSet();
         }
 
         /*          MenuStrip event          */
@@ -89,10 +98,10 @@ namespace DE1T4_Project
         {
             if (!CameraSelect.captureInProgress)
             {
-                settingCam.rect = accessData.readData();
+                settingCam.rect = accessData.readCamData();
                 Camera_Enable();
                 // change imagebox
-                imgBox_drop.Visible = true;
+                imgBox_crop.Visible = true;
                 picbox_offCam.Visible = false;
                 // check connect - refresh button
                 if (CamProcess.IsOpened)
@@ -107,7 +116,7 @@ namespace DE1T4_Project
                 Camera_Disable();
                 // change imagebox
                 picbox_offCam.Visible = true;
-                imgBox_drop.Visible = false;
+                imgBox_crop.Visible = false;
                 // refresh button
                 Itf_Lb.set_cam_btn_status(ref btn_cam_connect, false);
                 // disable setting camera button
@@ -153,16 +162,21 @@ namespace DE1T4_Project
                 // save for crop image
                 Image<Bgr, byte> _imgFrame = new Image<Bgr, byte>(_frame.Width, _frame.Height);
                 _imgFrame = _frame.ToImage<Bgr, byte>();
-                // save for config
-                settingCam.set_Frame = _frame;
+                // save for config if form is open
+                if(settingCam.IsConFig)
+                {
+                    settingCam.set_Frame = _frame;
+                }
                 // not excute when config
                 if (!settingCam.updateFrame)
                 {
                     _imgFrame.ROI = settingCam.rect;
-                    Image<Bgr, byte> __temp = _imgFrame.CopyBlank();
-                    _imgFrame.CopyTo(__temp);
+                    Image<Bgr, byte> imgCrop = _imgFrame.CopyBlank();
+                    _imgFrame.CopyTo(imgCrop);
                     _imgFrame.ROI = Rectangle.Empty;
-                    imgBox_drop.Image = __temp;
+
+                    imgCrop = processAndShow(imgCrop, new Hsv(10, 100, 0), new Hsv(60, 255, 255));
+                    imgBox_crop.Image = imgCrop;
                 }
             }
         }
@@ -192,9 +206,42 @@ namespace DE1T4_Project
         }
         #endregion
         #region image process
-        private void processAndShow()
+        private Image<Bgr, byte> processAndShow(Image<Bgr, byte> inputImg, Hsv _low, Hsv _high)
         {
+            // convert bgr to hsv
+            Image<Hsv, byte> hsvImg = new Image<Hsv, byte>(inputImg.Width, inputImg.Height);
+            CvInvoke.CvtColor(inputImg, hsvImg, ColorConversion.Bgr2Hsv);
+            // smooth image with gaussian blur
+            CvInvoke.GaussianBlur(hsvImg, hsvImg, new Size(5, 5), 1);
+            // convert hsv to binary with range limit
+            Image<Gray, byte> imgtemp = hsvImg.InRange(_low, _high);
+            imgtemp = imgtemp.Erode(2);
+            imgtemp = imgtemp.Dilate(2);
 
+            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+            Mat n = new Mat();
+            CvInvoke.FindContours(imgtemp, contours, n, Emgu.CV.CvEnum.RetrType.Ccomp, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
+            
+            for (int i = 0; i < contours.Size; i++)
+            {
+                double pemir = CvInvoke.ArcLength(contours[i], true);
+                VectorOfPoint approx = new VectorOfPoint();
+                CvInvoke.ApproxPolyDP(contours[i], approx, 0.03 * pemir, true);
+
+                var moments = CvInvoke.Moments(contours[i]);
+                double area = moments.M00;
+
+                int x = (int)(moments.M10 / moments.M00);
+                int y = (int)(moments.M01 / moments.M00);
+                string x1 = x.ToString("D2");
+                string y1 = y.ToString("D2");
+                string td = x1 + "," + y1;
+                CvInvoke.DrawContours(inputImg, contours, i, new MCvScalar(0, 255, 0), 3);
+                CvInvoke.Circle(inputImg, new Point(x, y), 2, new MCvScalar(0, 255, 0), 2);
+                CvInvoke.PutText(inputImg, td, new Point(x, y), Emgu.CV.CvEnum.FontFace.HersheySimplex, 0.5, new MCvScalar(0, 0, 255), 2);
+            }
+
+            return inputImg;
         }
         #endregion
 
@@ -228,7 +275,7 @@ namespace DE1T4_Project
                     }
                     // enables cyclic read
                     cyclicRead.Enabled = true;
-                    cyclicRead.Interval = 500;
+                    cyclicRead.Interval = 1000;
                     cyclicRead.Start();
                 }
                 catch (Exception ex)
@@ -372,57 +419,88 @@ namespace DE1T4_Project
         #region Conveyor
         private void sw_con_Run_SwitchedChanged(object sender)
         {
-            if (sw_con_Run.Switched)
+            double conveyor_Speed;
+            PLCSelect.ReadBusy = true;
+
+            if(sw_con_Run.Switched)
             {
-                DeltaPLC.Write(PLC_Addr.Conveyor, 0);
+                if(PLCSelect.ConveyorSpeed_Change)
+                {
+                    conveyor_Speed = Convert.ToDouble(tbx_con_speed.Text);
+                    DeltaPLC.Write(PLC_Addr.PID_Setpoint, conveyor_Speed.ConvertToUInt());
+                    PLCSelect.ConveyorSpeed_Change = false;
+                }
+
+                DeltaPLC.Write(PLC_Addr.Conveyor, 1);
             }
             else
             {
-                DeltaPLC.Write(PLC_Addr.Conveyor, 1);
+                DeltaPLC.Write(PLC_Addr.Conveyor, 0);
             }
+
+            PLCSelect.ReadBusy = false;
         }
+        private void tbx_con_speed_TextChanged(object sender, EventArgs e)
+        {
+            PLCSelect.ConveyorSpeed_Change = true;
+        }
+
         #endregion
 
         private void cyclicRead_Tick(object sender, EventArgs e)
         {
             if ((PLCSelect.IsConnect==true) && (PLCSelect.ReadBusy==false))
             {
-                if (PLC_Addr.HomingDone.flag)
+                try
                 {
-                    PLC_Addr.HomingDone.bit = read_Singles_Bit(DataType.DataBlock, PLC_Addr.HomingDone.Addr);
-
-                    if (!PLC_Addr.HomingDone.hold)
+                    if (PLC_Addr.HomingDone.flag)
                     {
-                        PLC_Addr.HomingDone.flag = false;
+                        PLC_Addr.HomingDone.bit = read_Singles_Bit(DataType.DataBlock, PLC_Addr.HomingDone.Addr);
+
+                        if (!PLC_Addr.HomingDone.hold)
+                        {
+                            PLC_Addr.HomingDone.flag = false;
+                        }
+                    }
+
+                    if (PLC_Addr.Pos_Last_X.flag)
+                    {
+
+                        PLCSelect.Pos.X = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_X.Addr)).ConvertToDouble();
+                        PLCSelect.Pos.Y = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_Y.Addr)).ConvertToDouble();
+                        PLCSelect.Pos.Z = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_Z.Addr)).ConvertToDouble();
+                        lb_Pos_X.Text = Math.Round(PLCSelect.Pos.X).ToString();
+                        lb_Pos_Y.Text = Math.Round(PLCSelect.Pos.Y).ToString();
+                        lb_Pos_Z.Text = Math.Round(PLCSelect.Pos.Z).ToString();
+
+                        if (!PLC_Addr.Pos_Last_X.hold)
+                        {
+                            PLC_Addr.Pos_Last_X.hold = false;
+                        }
+                    }
+
+                    if (sw_con_Run.Switched)
+                    {
+                        PLCSelect.Conveyor_Velocity = ((uint)DeltaPLC.Read(PLC_Addr.Conveyor_MMPS)).ConvertToInt();
+                        lb_con_accSpeed.Text = PLCSelect.Conveyor_Velocity.ToString();
+                    }
+
+                    if (PLCSelect.Read_Init)
+                    {
+                        PLCSelect.EESpeed = ((ushort)DeltaPLC.Read(PLC_Addr.EESpeed)).ConvertToShort();
+                        PLCSelect.Division = ((uint)DeltaPLC.Read(PLC_Addr.Division)).ConvertToDouble();
+                        tbx_mov_velocity.Text = PLCSelect.EESpeed.ToString();
+                        tbx_mov_division.Text = PLCSelect.Division.ToString();
+                        tbx_mov_X.Text = Math.Round(PLCSelect.Pos.X).ToString();
+                        tbx_mov_Y.Text = Math.Round(PLCSelect.Pos.Y).ToString();
+                        tbx_mov_Z.Text = Math.Round(PLCSelect.Pos.Z).ToString();
+                        tbx_con_speed.Text = "50";
+                        PLCSelect.Read_Init = false;
                     }
                 }
-
-                if (PLC_Addr.Pos_Last_X.flag)
+                catch (Exception ex)
                 {
-
-                    PLCSelect.Pos.X = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_X.Addr)).ConvertToDouble();
-                    PLCSelect.Pos.Y = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_Y.Addr)).ConvertToDouble();
-                    PLCSelect.Pos.Z = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_Z.Addr)).ConvertToDouble();
-                    lb_Pos_X.Text = Math.Round(PLCSelect.Pos.X).ToString(); 
-                    lb_Pos_Y.Text = Math.Round(PLCSelect.Pos.Y).ToString();
-                    lb_Pos_Z.Text = Math.Round(PLCSelect.Pos.Z).ToString();
-
-                    if (!PLC_Addr.Pos_Last_X.hold)
-                    {
-                        PLC_Addr.Pos_Last_X.hold = false;
-                    }
-                }
-
-                if (PLCSelect.Read_Init)
-                {
-                    PLCSelect.EESpeed = ((ushort)DeltaPLC.Read(PLC_Addr.EESpeed)).ConvertToShort();
-                    PLCSelect.Division = ((uint)DeltaPLC.Read(PLC_Addr.Division)).ConvertToDouble();
-                    tbx_mov_velocity.Text = PLCSelect.EESpeed.ToString();
-                    tbx_mov_division.Text = PLCSelect.Division.ToString();
-                    tbx_mov_X.Text = Math.Round(PLCSelect.Pos.X).ToString();
-                    tbx_mov_Y.Text = Math.Round(PLCSelect.Pos.Y).ToString();
-                    tbx_mov_Z.Text = Math.Round(PLCSelect.Pos.Z).ToString();
-                    PLCSelect.Read_Init = false;
+                    MessageBox.Show(this, ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -446,5 +524,103 @@ namespace DE1T4_Project
             byte write_Byte = rTmp_Byte[0];
             return write_Byte.SelectBit(bitInd);
         }
+
+        #region img set change
+        // change num
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            int set = Convert.ToInt32(num_img_set.Value) - 1;
+            CameraSelect.Set = set;
+            CameraSelect.imgSet[set] = accessData.readInforImgData(set);
+            updatePageSet();
+        }
+        // change name
+        private void tbx_img_Name_TextChanged(object sender, EventArgs e)
+        {
+            int set = Convert.ToInt32(num_img_set.Value) - 1;
+            accessData.saveInforImgData(cNum.numSet.Name, set, tbx_img_Name.Text);
+        }
+        // change hue max
+        private void scbar_HueMax_Scroll(object sender, ScrollEventArgs e)
+        {
+            scrollbarValueChange(scbar_HueMax, lb_img_hueMax);
+            accessData.saveInforImgData(cNum.numSet.Hue_Max, CameraSelect.Set, Convert.ToDouble(scbar_HueMax.Value));
+            scrollbarChangeLimit(scbar_HueMax, scbar_HueMin, lb_img_hueMin, cNum.numSet.Hue_Min);
+        }
+        // change hue min
+        private void scbar_HueMin_Scroll(object sender, ScrollEventArgs e)
+        {
+            scrollbarValueChange(scbar_HueMin, lb_img_hueMin);
+            accessData.saveInforImgData(cNum.numSet.Hue_Min, CameraSelect.Set, Convert.ToDouble(scbar_HueMin.Value));
+        }
+        // change saturation max
+        private void scbar_SatMax_Scroll(object sender, ScrollEventArgs e)
+        {
+            scrollbarValueChange(scbar_SatMax, lb_img_satMax);
+            accessData.saveInforImgData(cNum.numSet.Sat_Max, CameraSelect.Set, Convert.ToDouble(scbar_SatMax.Value));
+            scrollbarChangeLimit(scbar_SatMax, scbar_SatMin, lb_img_satMin, cNum.numSet.Sat_Min);
+        }
+        // change saturation main
+        private void scbar_SatMin_Scroll(object sender, ScrollEventArgs e)
+        {
+            scrollbarValueChange(scbar_SatMin, lb_img_satMin);
+            accessData.saveInforImgData(cNum.numSet.Sat_Min, CameraSelect.Set, Convert.ToDouble(scbar_SatMin.Value));
+        }
+        // change value max
+        private void scbar_ValMax_Scroll(object sender, ScrollEventArgs e)
+        {
+            scrollbarValueChange(scbar_ValMax, lb_img_valMax);
+            accessData.saveInforImgData(cNum.numSet.Val_Max, CameraSelect.Set, Convert.ToDouble(scbar_ValMax.Value));
+            scrollbarChangeLimit(scbar_ValMax, scbar_ValMin, lb_img_valMin, cNum.numSet.Val_Min);
+        }
+        // change value min
+        private void scbar_ValMin_Scroll(object sender, ScrollEventArgs e)
+        {
+            scrollbarValueChange(scbar_ValMin, lb_img_valMin);
+            accessData.saveInforImgData(cNum.numSet.Val_Min, CameraSelect.Set, Convert.ToDouble(scbar_ValMin.Value));
+        }
+        // use when update all elements of set group
+        private void updatePageSet()
+        {
+            tbx_img_Name.Text = CameraSelect.imgSet[CameraSelect.Set].name;
+
+            scrollbarValueChange(scbar_HueMax, lb_img_hueMax, CameraSelect.imgSet[CameraSelect.Set].Max.Hue);
+            scrollbarValueChange(scbar_HueMin, lb_img_hueMin, CameraSelect.imgSet[CameraSelect.Set].Min.Hue);
+            scrollbarChangeLimit(scbar_HueMax, scbar_HueMin, lb_img_hueMin, cNum.numSet.Hue_Min);
+
+            scrollbarValueChange(scbar_SatMax, lb_img_satMax, CameraSelect.imgSet[CameraSelect.Set].Max.Satuation);
+            scrollbarValueChange(scbar_SatMin, lb_img_satMin, CameraSelect.imgSet[CameraSelect.Set].Min.Satuation);
+            scrollbarChangeLimit(scbar_SatMax, scbar_SatMin, lb_img_satMin, cNum.numSet.Sat_Min);
+           
+            scrollbarValueChange(scbar_ValMax, lb_img_valMax, CameraSelect.imgSet[CameraSelect.Set].Max.Value);
+            scrollbarValueChange(scbar_ValMin, lb_img_valMin, CameraSelect.imgSet[CameraSelect.Set].Min.Value);
+            scrollbarChangeLimit(scbar_ValMax, scbar_ValMin, lb_img_valMin, cNum.numSet.Val_Min);
+        }
+        // change limit value
+        private void scrollbarChangeLimit(HScrollBar scbarMax, HScrollBar scbarMin, Label lb, cNum.numSet para)
+        {
+            scbarMin.Maximum = scbarMax.Value - 1;
+            if (scbarMax.Value <= scbarMin.Value)
+            {
+                scbarMin.Value = scbarMax.Value - 1;
+                scrollbarValueChange(scbarMin, lb);
+                accessData.saveInforImgData(para, CameraSelect.Set, Convert.ToDouble(scbarMin.Value));
+            }
+        }
+        // use when change num set
+        private void scrollbarValueChange(HScrollBar scbar, Label lb, double value)
+        {
+            scbar.Value = Convert.ToInt32(value);
+            lb.Text = Convert.ToString(value);
+        }
+        // use when change element of num set, save value to txt
+        private void scrollbarValueChange(HScrollBar scbar, Label lb)
+        {
+            int value = scbar.Value;
+            lb.Text = Convert.ToString(value);
+        }
+        #endregion
+
+        
     }
 }

@@ -13,9 +13,12 @@ namespace DE1T4_Project
         public static bool Read_HomeStatus = false;
         public static bool ReadBusy = false;
         public static bool Division_Change = false;
+        public static bool EESpeed_Change = false;
+        public static bool ConveyorSpeed_Change = true;
         public static DeltaPosition Pos = new DeltaPosition() { X = 0, Y = 0, Z = 0, };
         public static short EESpeed;
         public static double Division;
+        public static int Conveyor_Velocity;
     }
 
     class DeltaPosition
@@ -41,6 +44,7 @@ namespace DE1T4_Project
         public static PLCRead Pos_Last_X = new PLCRead() { flag = true, hold = true, Addr = "DB26.DBD122" };
         public static PLCRead Pos_Last_Y = new PLCRead() { flag = true, hold = true, Addr = "DB26.DBD126" };
         public static PLCRead Pos_Last_Z = new PLCRead() { flag = true, hold = true, Addr = "DB26.DBD130" };
+        public const string Conveyor_MMPS = "DB11.DBD56";
 
         // write
         public const string Home = "M0.0";
@@ -65,6 +69,8 @@ namespace DE1T4_Project
         public const string Push_POS_X = "DB13.DBD8";
         public const string Push_POS_Y = "DB13.DBD12";
         public const string Push_POS_Z = "DB13.DBD16";
+
+        public const string PID_Setpoint = "DB11.DBD60";
     }
 
 }

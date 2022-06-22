@@ -96,7 +96,7 @@ namespace DE1T4_Project
             {
                 settingCam.EndLcation = e.Location;
                 settingCam.IsMouseDown = false;
-                accessData.saveData(settingCam.rect);
+                accessData.saveCamData(settingCam.rect);
                 settingCam.updateFrame = false;
             }
         }
@@ -106,7 +106,7 @@ namespace DE1T4_Project
             settingCam.StartLocation = new Point(0, 0);
             settingCam.EndLcation = new Point(0,0);
             GetRectangle();
-            accessData.saveData(settingCam.rect);
+            accessData.saveCamData(settingCam.rect);
         }
     }
 }
