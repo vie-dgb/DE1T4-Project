@@ -86,6 +86,7 @@ namespace DE1T4_Project
             this.tbx_mov_Y = new System.Windows.Forms.TextBox();
             this.tbx_mov_X = new System.Windows.Forms.TextBox();
             this.imageProcess_grbox = new System.Windows.Forms.GroupBox();
+            this.sw_img_gray = new MetroSet_UI.Controls.MetroSetSwitch();
             this.label18 = new System.Windows.Forms.Label();
             this.num_img_set = new System.Windows.Forms.NumericUpDown();
             this.tbx_img_Name = new System.Windows.Forms.TextBox();
@@ -111,6 +112,13 @@ namespace DE1T4_Project
             this.scbar_HueMin = new System.Windows.Forms.HScrollBar();
             this.label9 = new System.Windows.Forms.Label();
             this.scbar_HueMax = new System.Windows.Forms.HScrollBar();
+            this.label20 = new System.Windows.Forms.Label();
+            this.cbx_img_shape = new System.Windows.Forms.ComboBox();
+            this.tbx_img_Area_max = new System.Windows.Forms.TextBox();
+            this.tbx_img_Area_min = new System.Windows.Forms.TextBox();
+            this.label21 = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.lb_cam_area = new System.Windows.Forms.Label();
             this.ToolHead_grbox.SuspendLayout();
             this.position_grbox.SuspendLayout();
             this.Conveyor_grbox.SuspendLayout();
@@ -468,11 +476,12 @@ namespace DE1T4_Project
             // 
             this.camera_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.camera_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.camera_grbox.Controls.Add(this.imgBox_crop);
+            this.camera_grbox.Controls.Add(this.lb_cam_area);
             this.camera_grbox.Controls.Add(this.btn_cam_setting);
             this.camera_grbox.Controls.Add(this.label1);
             this.camera_grbox.Controls.Add(this.cbb_Camlist);
             this.camera_grbox.Controls.Add(this.btn_cam_connect);
+            this.camera_grbox.Controls.Add(this.imgBox_crop);
             this.camera_grbox.Controls.Add(this.picbox_offCam);
             this.camera_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.camera_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
@@ -488,7 +497,7 @@ namespace DE1T4_Project
             this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
             this.imgBox_crop.Name = "imgBox_crop";
-            this.imgBox_crop.Size = new System.Drawing.Size(640, 480);
+            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
             this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.imgBox_crop.TabIndex = 18;
             this.imgBox_crop.TabStop = false;
@@ -543,7 +552,8 @@ namespace DE1T4_Project
             this.picbox_offCam.Image = global::DE1T4_Project.Properties.Resources.offCam;
             this.picbox_offCam.Location = new System.Drawing.Point(6, 87);
             this.picbox_offCam.Name = "picbox_offCam";
-            this.picbox_offCam.Size = new System.Drawing.Size(640, 480);
+            this.picbox_offCam.Size = new System.Drawing.Size(512, 384);
+            this.picbox_offCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.picbox_offCam.TabIndex = 17;
             this.picbox_offCam.TabStop = false;
             // 
@@ -775,6 +785,13 @@ namespace DE1T4_Project
             // 
             this.imageProcess_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.imageProcess_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.imageProcess_grbox.Controls.Add(this.label22);
+            this.imageProcess_grbox.Controls.Add(this.label21);
+            this.imageProcess_grbox.Controls.Add(this.tbx_img_Area_min);
+            this.imageProcess_grbox.Controls.Add(this.tbx_img_Area_max);
+            this.imageProcess_grbox.Controls.Add(this.cbx_img_shape);
+            this.imageProcess_grbox.Controls.Add(this.label20);
+            this.imageProcess_grbox.Controls.Add(this.sw_img_gray);
             this.imageProcess_grbox.Controls.Add(this.label18);
             this.imageProcess_grbox.Controls.Add(this.num_img_set);
             this.imageProcess_grbox.Controls.Add(this.tbx_img_Name);
@@ -809,11 +826,36 @@ namespace DE1T4_Project
             this.imageProcess_grbox.TabStop = false;
             this.imageProcess_grbox.Text = "Image";
             // 
+            // sw_img_gray
+            // 
+            this.sw_img_gray.BackColor = System.Drawing.Color.Transparent;
+            this.sw_img_gray.BackgroundColor = System.Drawing.Color.Empty;
+            this.sw_img_gray.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
+            this.sw_img_gray.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sw_img_gray.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
+            this.sw_img_gray.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sw_img_gray.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.sw_img_gray.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sw_img_gray.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.sw_img_gray.IsDerivedStyle = true;
+            this.sw_img_gray.Location = new System.Drawing.Point(225, 17);
+            this.sw_img_gray.Name = "sw_img_gray";
+            this.sw_img_gray.Size = new System.Drawing.Size(58, 22);
+            this.sw_img_gray.Style = MetroSet_UI.Enums.Style.Light;
+            this.sw_img_gray.StyleManager = null;
+            this.sw_img_gray.Switched = false;
+            this.sw_img_gray.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+            this.sw_img_gray.TabIndex = 54;
+            this.sw_img_gray.Text = "metroSetSwitch1";
+            this.sw_img_gray.ThemeAuthor = "Narwin";
+            this.sw_img_gray.ThemeName = "MetroLite";
+            this.sw_img_gray.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            // 
             // label18
             // 
             this.label18.AutoSize = true;
             this.label18.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label18.Location = new System.Drawing.Point(15, 46);
+            this.label18.Location = new System.Drawing.Point(15, 45);
             this.label18.Name = "label18";
             this.label18.Size = new System.Drawing.Size(44, 28);
             this.label18.TabIndex = 53;
@@ -821,7 +863,7 @@ namespace DE1T4_Project
             // 
             // num_img_set
             // 
-            this.num_img_set.Location = new System.Drawing.Point(84, 40);
+            this.num_img_set.Location = new System.Drawing.Point(65, 39);
             this.num_img_set.Maximum = new decimal(new int[] {
             3,
             0,
@@ -845,9 +887,9 @@ namespace DE1T4_Project
             // tbx_img_Name
             // 
             this.tbx_img_Name.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Name.Location = new System.Drawing.Point(85, 110);
+            this.tbx_img_Name.Location = new System.Drawing.Point(154, 91);
             this.tbx_img_Name.Name = "tbx_img_Name";
-            this.tbx_img_Name.Size = new System.Drawing.Size(198, 27);
+            this.tbx_img_Name.Size = new System.Drawing.Size(174, 27);
             this.tbx_img_Name.TabIndex = 51;
             this.tbx_img_Name.TextChanged += new System.EventHandler(this.tbx_img_Name_TextChanged);
             // 
@@ -855,7 +897,7 @@ namespace DE1T4_Project
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(15, 110);
+            this.label17.Location = new System.Drawing.Point(15, 88);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(72, 28);
             this.label17.TabIndex = 50;
@@ -926,9 +968,11 @@ namespace DE1T4_Project
             this.scbar_ValMax.LargeChange = 1;
             this.scbar_ValMax.Location = new System.Drawing.Point(63, 484);
             this.scbar_ValMax.Maximum = 255;
+            this.scbar_ValMax.Minimum = 1;
             this.scbar_ValMax.Name = "scbar_ValMax";
             this.scbar_ValMax.Size = new System.Drawing.Size(220, 28);
             this.scbar_ValMax.TabIndex = 43;
+            this.scbar_ValMax.Value = 1;
             this.scbar_ValMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_ValMax_Scroll);
             // 
             // label12
@@ -996,9 +1040,11 @@ namespace DE1T4_Project
             this.scbar_SatMax.LargeChange = 1;
             this.scbar_SatMax.Location = new System.Drawing.Point(63, 357);
             this.scbar_SatMax.Maximum = 255;
+            this.scbar_SatMax.Minimum = 1;
             this.scbar_SatMax.Name = "scbar_SatMax";
             this.scbar_SatMax.Size = new System.Drawing.Size(220, 28);
             this.scbar_SatMax.TabIndex = 36;
+            this.scbar_SatMax.Value = 1;
             this.scbar_SatMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_SatMax_Scroll);
             // 
             // label11
@@ -1066,10 +1112,84 @@ namespace DE1T4_Project
             this.scbar_HueMax.LargeChange = 1;
             this.scbar_HueMax.Location = new System.Drawing.Point(63, 228);
             this.scbar_HueMax.Maximum = 255;
+            this.scbar_HueMax.Minimum = 1;
             this.scbar_HueMax.Name = "scbar_HueMax";
             this.scbar_HueMax.Size = new System.Drawing.Size(220, 28);
             this.scbar_HueMax.TabIndex = 0;
+            this.scbar_HueMax.Value = 1;
             this.scbar_HueMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMax_Scroll);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(136, 45);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(84, 28);
+            this.label20.TabIndex = 55;
+            this.label20.Text = "Shapes";
+            // 
+            // cbx_img_shape
+            // 
+            this.cbx_img_shape.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_img_shape.FormattingEnabled = true;
+            this.cbx_img_shape.Items.AddRange(new object[] {
+            "Circle",
+            "Triangle",
+            "Rectangle"});
+            this.cbx_img_shape.Location = new System.Drawing.Point(219, 45);
+            this.cbx_img_shape.Name = "cbx_img_shape";
+            this.cbx_img_shape.Size = new System.Drawing.Size(121, 28);
+            this.cbx_img_shape.TabIndex = 56;
+            this.cbx_img_shape.SelectedIndexChanged += new System.EventHandler(this.cbx_img_shape_SelectedIndexChanged);
+            // 
+            // tbx_img_Area_max
+            // 
+            this.tbx_img_Area_max.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_img_Area_max.Location = new System.Drawing.Point(154, 124);
+            this.tbx_img_Area_max.Name = "tbx_img_Area_max";
+            this.tbx_img_Area_max.Size = new System.Drawing.Size(135, 27);
+            this.tbx_img_Area_max.TabIndex = 57;
+            this.tbx_img_Area_max.Leave += new System.EventHandler(this.tbx_img_Area_max_Leave);
+            // 
+            // tbx_img_Area_min
+            // 
+            this.tbx_img_Area_min.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_img_Area_min.Location = new System.Drawing.Point(154, 157);
+            this.tbx_img_Area_min.Name = "tbx_img_Area_min";
+            this.tbx_img_Area_min.Size = new System.Drawing.Size(135, 27);
+            this.tbx_img_Area_min.TabIndex = 58;
+            this.tbx_img_Area_min.Leave += new System.EventHandler(this.tbx_img_Area_min_Leave);
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(15, 121);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(110, 28);
+            this.label21.TabIndex = 59;
+            this.label21.Text = "Area max";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(15, 154);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(106, 28);
+            this.label22.TabIndex = 60;
+            this.label22.Text = "Area min";
+            // 
+            // lb_cam_area
+            // 
+            this.lb_cam_area.AutoSize = true;
+            this.lb_cam_area.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_cam_area.Location = new System.Drawing.Point(14, 489);
+            this.lb_cam_area.Name = "lb_cam_area";
+            this.lb_cam_area.Size = new System.Drawing.Size(46, 23);
+            this.lb_cam_area.TabIndex = 35;
+            this.lb_cam_area.Text = "Max";
             // 
             // Form_Main
             // 
@@ -1191,6 +1311,14 @@ namespace DE1T4_Project
         private System.Windows.Forms.TextBox tbx_img_Name;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
+        private MetroSet_UI.Controls.MetroSetSwitch sw_img_gray;
+        private System.Windows.Forms.ComboBox cbx_img_shape;
+        private System.Windows.Forms.Label label20;
+        private System.Windows.Forms.TextBox tbx_img_Area_min;
+        private System.Windows.Forms.TextBox tbx_img_Area_max;
+        private System.Windows.Forms.Label label22;
+        private System.Windows.Forms.Label label21;
+        private System.Windows.Forms.Label lb_cam_area;
     }
 }
 

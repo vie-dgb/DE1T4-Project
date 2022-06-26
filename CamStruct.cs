@@ -35,6 +35,9 @@ namespace DE1T4_Project
         public enum numSet
         {
             Name,
+            Shapes,
+            Area_Max,
+            Area_Min,
             Hue_Max,
             Hue_Min,
             Sat_Max,
@@ -42,13 +45,21 @@ namespace DE1T4_Project
             Val_Max,
             Val_Min,
         }
+
+        public enum shp
+        {
+            Circles,
+            Triangles,
+            Rectangles,
+        }
+
     }
 
     public class accessData
     {
 
         public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\saveFrame.txt";
-
+        public const int NUMOFSET = 3;
         public static void saveCamData(Rectangle _rect)
         {
             frameConfig newData = new frameConfig();
@@ -104,6 +115,10 @@ namespace DE1T4_Project
             int ind = calcSetInd(cNum.numSet.Name, set);
 
             retResult.name = checkEmptyString(lines, ind); ind++;
+            retResult.shape = checkEmptyInt(lines, ind); ind++;
+
+            retResult.area_max = checkEmptyDouble(lines, ind); ind++;
+            retResult.area_min = checkEmptyDouble(lines, ind); ind++;
 
             H_Max = checkEmptyDouble(lines, ind); ind++;
             H_Min = checkEmptyDouble(lines, ind); ind++;
@@ -118,6 +133,14 @@ namespace DE1T4_Project
             retResult.Min = new Hsv(H_Min, S_Min, V_Min);
 
             return retResult;
+        }
+
+        public static void saveInforImgData(cNum.numSet para, int set, int value)
+        {
+            string[] Readlines = File.ReadAllLines(savePath);
+            int ind = calcSetInd(para, set);
+            Readlines[ind] = Convert.ToString(value);
+            File.WriteAllLines(savePath, Readlines);
         }
 
         public static void saveInforImgData(cNum.numSet para, int set, double value)
@@ -178,7 +201,7 @@ namespace DE1T4_Project
             return "Color " + Convert.ToString(index);
         }
 
-        private const int NumOfPara = 7;
+        private const int NumOfPara = 10;
         private const int StartIndex = 4;
         public static int calcSetInd(cNum.numSet inf, int nSet)
         {
@@ -202,7 +225,7 @@ namespace DE1T4_Project
         public static double fps;
     }
 
-    public class CameraSelect 
+    public class Cam_S
     {
         public static int Index;
         public static string Name;
@@ -216,6 +239,9 @@ namespace DE1T4_Project
     public class ImgSet
     {
         public string name { get; set; }
+        public int shape { get; set; }
+        public double area_max { get; set; }
+        public double area_min { get; set; }
         public Hsv Max { get; set; }
         public Hsv Min { get; set; }
     }
