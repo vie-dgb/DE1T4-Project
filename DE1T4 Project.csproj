@@ -59,6 +59,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CamStruct.cs" />
+    <Compile Include="Queue.cs" />
     <Compile Include="PLCStruct.cs" />
     <Compile Include="Form_CamSetting.cs">
       <SubType>Form</SubType>

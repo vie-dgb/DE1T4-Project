@@ -20,6 +20,10 @@ namespace DE1T4_Project
         public string Y { get; set; }
         public string Height { get; set; }
         public string Width { get; set; }
+        public string Start_X { get; set; }
+        public string Start_Y { get; set; }
+        public string Stop_X { get; set; }
+        public string Stop_Y { get; set; }
     }
 
     public class cNum
@@ -30,6 +34,10 @@ namespace DE1T4_Project
             Rect_Y,
             Rect_Height,
             Rect_Width,
+            Start_Location_X,
+            Start_Location_Y,
+            Stop_Location_X,
+            Stop_Location_Y,
         }
 
         public enum numSet
@@ -38,6 +46,7 @@ namespace DE1T4_Project
             Shapes,
             Area_Max,
             Area_Min,
+            Lable_Color,
             Hue_Max,
             Hue_Min,
             Sat_Max,
@@ -51,6 +60,7 @@ namespace DE1T4_Project
             Circles,
             Triangles,
             Rectangles,
+            Non,
         }
 
     }
@@ -60,13 +70,17 @@ namespace DE1T4_Project
 
         public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\saveFrame.txt";
         public const int NUMOFSET = 3;
-        public static void saveCamData(Rectangle _rect)
+        public static void saveCamData(Rectangle _rect, Point _Start, Point _Stop)
         {
             frameConfig newData = new frameConfig();
             newData.X = _rect.X.ToString();
             newData.Y = _rect.Y.ToString();
             newData.Height = _rect.Height.ToString();
             newData.Width  = _rect.Width.ToString();
+            newData.Start_X = _Start.X.ToString();
+            newData.Start_Y = _Start.Y.ToString();
+            newData.Stop_X = _Stop.X.ToString();
+            newData.Stop_Y = _Stop.Y.ToString();
 
             string[] Readlines = File.ReadAllLines(savePath);
 
@@ -83,6 +97,20 @@ namespace DE1T4_Project
 
                 ind = Convert.ToInt32(cNum.nameLines.Rect_Height);
                 Readlines[ind] = newData.Height;
+
+                ind = Convert.ToInt32(cNum.nameLines.Start_Location_X);
+                Readlines[ind] = newData.Start_X;
+
+                ind = Convert.ToInt32(cNum.nameLines.Start_Location_Y);
+                Readlines[ind] = newData.Start_Y;
+
+                ind = Convert.ToInt32(cNum.nameLines.Stop_Location_X);
+                Readlines[ind] = newData.Stop_X;
+
+                ind = Convert.ToInt32(cNum.nameLines.Stop_Location_Y);
+                Readlines[ind] = newData.Stop_Y;
+
+
 
                 File.WriteAllLines(savePath, Readlines);
             }
@@ -104,6 +132,19 @@ namespace DE1T4_Project
 
             ind = Convert.ToInt32(cNum.nameLines.Rect_Height);
             returnrect.Height = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Start_Location_X);
+            settingCam.StartLocation.X = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Start_Location_Y);
+            settingCam.StartLocation.Y = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Stop_Location_X);
+            settingCam.EndLcation.X = checkEmptyInt(lines, ind);
+
+            ind = Convert.ToInt32(cNum.nameLines.Stop_Location_Y);
+            settingCam.EndLcation.Y = checkEmptyInt(lines, ind);
+
             return returnrect;
         }
 
@@ -119,6 +160,8 @@ namespace DE1T4_Project
 
             retResult.area_max = checkEmptyDouble(lines, ind); ind++;
             retResult.area_min = checkEmptyDouble(lines, ind); ind++;
+
+            retResult.Lable_Color = checkEmptyInt32(lines, ind); ind++;
 
             H_Max = checkEmptyDouble(lines, ind); ind++;
             H_Min = checkEmptyDouble(lines, ind); ind++;
@@ -156,6 +199,19 @@ namespace DE1T4_Project
             string[] Readlines = File.ReadAllLines(savePath);
             int ind = calcSetInd(para, set);
             Readlines[ind] = name;
+            File.WriteAllLines(savePath, Readlines);
+        }
+
+        public static void saveInforImgData(cNum.numSet para, int set, Color saveColor)
+        {
+            // read txt & fine index
+            string[] Readlines = File.ReadAllLines(savePath);
+            int ind = calcSetInd(para, set);
+            // convert color to string
+            Int32 colorArgb = Convert.ToInt32(saveColor.ToArgb());
+            string saveString = colorArgb.ToString();
+            // save
+            Readlines[ind] = saveString;
             File.WriteAllLines(savePath, Readlines);
         }
 
@@ -201,8 +257,26 @@ namespace DE1T4_Project
             return "Color " + Convert.ToString(index);
         }
 
-        private const int NumOfPara = 10;
-        private const int StartIndex = 4;
+        public static Int32 checkEmptyInt32(string[] emptyCheck, int index)
+        {
+            Int32 result;
+            if (index < emptyCheck.Length)
+            {
+                if (emptyCheck[index] != string.Empty)
+                {
+                    string colorString = emptyCheck[index];
+                    Int32 colorArgb = Convert.ToInt32(colorString);
+                    // if value is zero choose normal color (red)
+                    if (colorArgb == 0)     result = Convert.ToInt32(Color.FromArgb(Convert.ToInt32(Color.Red)));
+                    else                    result = colorArgb;
+                    return result;
+                }
+            }
+            return Convert.ToInt32(Color.FromArgb(Convert.ToInt32(Color.Red)));
+        }
+
+        private const int NumOfPara = 11;
+        private const int StartIndex = 8;
         public static int calcSetInd(cNum.numSet inf, int nSet)
         {
             // index = start + inf + nSet * NumOfPara
@@ -242,6 +316,7 @@ namespace DE1T4_Project
         public int shape { get; set; }
         public double area_max { get; set; }
         public double area_min { get; set; }
+        public Int32 Lable_Color { get; set; }
         public Hsv Max { get; set; }
         public Hsv Min { get; set; }
     }

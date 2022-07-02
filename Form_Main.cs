@@ -27,6 +27,7 @@ namespace DE1T4_Project
         private Plc DeltaPLC = null;
         private ErrorCode errCode;
         // image process
+        double tmpArea;
         public Form_Main()
         {
             InitializeComponent();
@@ -58,11 +59,9 @@ namespace DE1T4_Project
             scbar_HueMax.Value = 255;
         }
 
-        /*          MenuStrip event          */
-
         //-----------Camera----------------//
-        #region Camera
-        #region Event
+    #region Camera
+        #region Camera Event
         // update list camera
         private void cbb_Camlist_DropDown(object sender, EventArgs e)
         {
@@ -122,7 +121,6 @@ namespace DE1T4_Project
                 // disable setting camera button
                 btn_cam_setting.Enabled = false;
             }
-
         }
         // start capture
         private void Camera_Enable()
@@ -148,7 +146,6 @@ namespace DE1T4_Project
                 {
                     //start the capture
                     CamProcess.Start();
-                    bool tmppp = CamProcess.Set(CapProp.Fps, 5);
                     Cam_S.captureInProgress = true;
                     cbb_Camlist.Enabled = false;
                 }
@@ -159,7 +156,7 @@ namespace DE1T4_Project
         {
             if (CamProcess != null && CamProcess.Ptr != IntPtr.Zero)
             {
-                CamProcess.Retrieve(_frame);
+                CamProcess.Read(_frame);
                 // save for crop image
                 Image<Bgr, byte> _imgFrame = new Image<Bgr, byte>(_frame.Width, _frame.Height);
                 _imgFrame = _frame.ToImage<Bgr, byte>();
@@ -179,7 +176,8 @@ namespace DE1T4_Project
                     {
                         if (sw_img_gray.Switched == true)
                         {
-                            imgBox_crop.Image = processAndShowGray(imgCrop, Cam_S.imgSet[Cam_S.Set].Min, Cam_S.imgSet[Cam_S.Set].Max);
+                            imgBox_crop.Image = processAndShowGray(imgCrop, Cam_S.imgSet[Cam_S.Set].Min,
+                                Cam_S.imgSet[Cam_S.Set].Max);
                         }
                         else
                         {
@@ -188,6 +186,11 @@ namespace DE1T4_Project
                     }
                 }
             }
+            // 25fps => 40ms/frame (normal)
+            // 10fps => 100ms/frame
+            // 5 fps => 200ms/frame
+            // delay = fpsneedtime - normalfpstime
+            CvInvoke.WaitKey(160);
         }
         // stop capture
         private void Camera_Disable()
@@ -211,7 +214,6 @@ namespace DE1T4_Project
             settingCam.set_Frame = new Mat();
             settingCam.fps = CamProcess.Get(Emgu.CV.CvEnum.CapProp.Fps);
             _camSet.ShowDialog();
-
         }
         #endregion
         #region image process
@@ -222,6 +224,8 @@ namespace DE1T4_Project
 
             for (int cntSet = 0; cntSet < accessData.NUMOFSET; cntSet++)
             {
+                Color contourColor = new Color();
+                contourColor = Color.FromArgb(Cam_S.imgSet[cntSet].Lable_Color);
                 Hsv highRange = imgSet[cntSet].Max;
                 Hsv lowRange = imgSet[cntSet].Min;
 
@@ -245,98 +249,117 @@ namespace DE1T4_Project
 
                 VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
                 Mat n = new Mat();
-                CvInvoke.FindContours(grayImg, contours, n, Emgu.CV.CvEnum.RetrType.Ccomp, Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
-
-                List<Triangle2DF> triangleList = new List<Triangle2DF>();
-                List<RotatedRect> boxList = new List<RotatedRect>(); //a box is a rotated rectangle
-
+                CvInvoke.FindContours(grayImg, contours, n, Emgu.CV.CvEnum.RetrType.Ccomp, 
+                    Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
+                
                 for (int i = 0; i < contours.Size; i++)
                 {
+                    ObElement tmpObj = new ObElement();
+                    bool drawCenter = false;
                     double pemir = CvInvoke.ArcLength(contours[i], true);
                     VectorOfPoint approx = new VectorOfPoint();
                     // epsilon in the range of 1 - 5 % of the original contour perimeter.
                     CvInvoke.ApproxPolyDP(contours[i], approx, 0.04 * pemir, true);
-
+                    
                     // find center
-                    var moments = CvInvoke.Moments(contours[i]);
+                    Moments moments = CvInvoke.Moments(contours[i]);
                     double area = moments.M00 * 2;
 
                     int x = (int)(moments.M10 / moments.M00);
                     int y = (int)(moments.M01 / moments.M00);
-                    string x1 = x.ToString();
-                    string y1 = y.ToString();
-                    string td = x1 + "," + y1;
+                    string txtPos = x.ToString() + "," + y.ToString();
 
                     // detect shapes
                     // if contour has 3 vertices => triangles
                     // if contour has 4 vertices => rectangles
                     // else => circles
 
-                    if (CvInvoke.ContourArea(approx, false) > 250) //only consider contours with area greater than 250
-                    {
-                        if (approx.Size == 3) //The contour has 3 vertices, it is a triangle
-                        {
-                            Point[] pts = approx.ToArray();
-                            triangleList.Add(new Triangle2DF(
-                                pts[0],
-                                pts[1],
-                                pts[2]
-                            ));
-                        }
-                        else if (approx.Size == 4) //The contour has 4 vertices.
-                        {
-                            #region determine if all the angles in the contour are within [80, 100] degree
-                            bool isRectangle = true;
-                            Point[] pts = approx.ToArray();
-                            LineSegment2D[] edges = PointCollection.PolyLine(pts, true);
+                    tmpArea = CvInvoke.ContourArea(approx, false);
+                    cNum.shp shpNum = (cNum.shp)imgSet[cntSet].shape;
+                    List<Triangle2DF> triangle = new List<Triangle2DF>();
+                    List<RotatedRect> boxList = new List<RotatedRect>(); //a box is a rotated rectangle
 
-                            for (int j = 0; j < edges.Length; j++)
-                            {
-                                double angle = Math.Abs(
-                                    edges[(j + 1) % edges.Length].GetExteriorAngleDegree(edges[j]));
-                                if (angle < 80 || angle > 100)
+                    if ((tmpArea >= imgSet[cntSet].area_min) && (tmpArea <= imgSet[cntSet].area_max))
+                    //only consider contours with area greater than 250
+                    {
+
+                        switch (shpNum) 
+                        {
+                            case cNum.shp.Circles:
+                                #region circles dectect
+                                if (approx.Size > 5) 
                                 {
-                                    isRectangle = false;
-                                    break;
+                                    // draw circles
+                                    //_result = returnCircles(_result, contours, i);
+                                    //int radius = (int)((double)(Math.Sqrt(tmpArea / Math.PI)));
+                                    //CvInvoke.Circle(_result, new Point(x, y), 2, new Bgr(Color.Red).MCvScalar, 2);
+                                    CvInvoke.DrawContours(_result, contours, i, 
+                                        new Bgr(contourColor).MCvScalar,3);
+                                    drawCenter = true;
                                 }
-                            }
+                                #endregion
+                                break;
+                            case cNum.shp.Triangles:
+                                #region triangles dectect
+                                if (approx.Size == 3)
+                                {
+                                    Point[] pts = approx.ToArray();
+                                    triangle.Add(new Triangle2DF(pts[0], pts[1], pts[2]));
 
-                            #endregion
+                                    foreach (Triangle2DF triAng in triangle)
+                                    {
+                                        CvInvoke.Polylines(_result, Array.ConvertAll(triAng.GetVertices(), 
+                                            Point.Round), true, new Bgr(contourColor).MCvScalar, 3);
+                                    }
+                                    drawCenter = true;
+                                }
+                                #endregion
+                                break;
+                            case cNum.shp.Rectangles:
+                                #region rectangles dectect
+                                if (approx.Size == 4)
+                                {
+                                    #region determine if all the angles in the contour are within [80, 100] degree
+                                    bool isRectangle = true;
+                                    Point[] pts = approx.ToArray();
+                                    LineSegment2D[] edges = PointCollection.PolyLine(pts, true);
 
-                            if (isRectangle) boxList.Add(CvInvoke.MinAreaRect(approx));
+                                    for (int j = 0; j < edges.Length; j++)
+                                    {
+                                        double angle = Math.Abs(
+                                            edges[(j + 1) % edges.Length].GetExteriorAngleDegree(edges[j]));
+                                        if (angle < 80 || angle > 100)
+                                        {
+                                            isRectangle = false;
+                                            break;
+                                        }
+                                    }
+                                    #endregion
+                                    if (isRectangle) boxList.Add(CvInvoke.MinAreaRect(approx));
+                                    foreach (RotatedRect box in boxList)
+                                    {
+                                        CvInvoke.Polylines(_result, Array.ConvertAll(box.GetVertices(), 
+                                            Point.Round), true, new Bgr(contourColor).MCvScalar, 2);
+                                    }
+                                    drawCenter = true;
+                                }
+                                #endregion
+                                break;
+                            case cNum.shp.Non:
+                                
+                                break;
+                        }
+                        if (drawCenter)
+                        {
+                            CvInvoke.Circle(_result, new Point(x, y), 2, new Bgr(contourColor).MCvScalar, 2);
+                            CvInvoke.PutText(_result, txtPos, new Point(x, y), 
+                                Emgu.CV.CvEnum.FontFace.HersheySimplex, 0.5, new Bgr(contourColor).MCvScalar, 2);
+                            tmpObj = ObQueue.saveTmpObj(shpNum, x, y, area);
+                            ObQueue.checkObject(tmpObj);
                         }
                     }
-
-                    #region draw triangles and rectangles
-                    //triangleRectangleImage.SetTo(new MCvScalar(0));
-                    foreach (Triangle2DF triangle in triangleList)
-                    {
-                        CvInvoke.Polylines(_result, Array.ConvertAll(triangle.GetVertices(), Point.Round),
-                            true, new Bgr(Color.DarkBlue).MCvScalar, 2);
-                    }
-
-                    foreach (RotatedRect box in boxList)
-                    {
-                        CvInvoke.Polylines(_result, Array.ConvertAll(box.GetVertices(), Point.Round), true,
-                            new Bgr(Color.Cyan).MCvScalar, 2);
-                    }
-
-                    //Drawing a light gray frame around the image
-                    CvInvoke.Rectangle(_result,
-                        new Rectangle(Point.Empty,
-                            new Size(_result.Width - 1, _result.Height - 1)),
-                        new MCvScalar(120, 120, 120));
-                    #endregion
-
-                    //CvInvoke.DrawContours(_result, contours, i, new MCvScalar(0, 255, 0), 3);
-                    CvInvoke.Circle(_result, new Point(x, y), 2, new MCvScalar(0, 255, 0), 2);
-                    CvInvoke.PutText(_result, td, new Point(x, y), Emgu.CV.CvEnum.FontFace.HersheySimplex, 0.5, new MCvScalar(0, 0, 255), 2);
-
-                    double tmpArea = CvInvoke.ContourArea(approx, false);
-                    //lb_cam_area.Text = tmpArea.ToString();
                 }
             }
-            
 
             return _result;
         }
@@ -352,69 +375,73 @@ namespace DE1T4_Project
             Image<Gray, byte> imgtemp = hsvImg.InRange(_low, _high);
             imgtemp = imgtemp.Erode(2);
             imgtemp = imgtemp.Dilate(2);
+                        
             return imgtemp;
         }
-        #endregion
 
+        private void link_img_getArea_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            lb_img_area.Text = tmpArea.ToString();
+        }
         #endregion
-
-        #region PLC
+    #endregion
+        //--------------PLC----------------//
+    #region PLC
+        #region Connect
         // plc connect
         private void btn_plc_connect_Click(object sender, EventArgs e)
-        {
-            if (!PLCSelect.IsConnect)
             {
-                try
+                if (!PLCSelect.IsConnect)
                 {
-                    // check textbox empty
-                    if (string.IsNullOrEmpty(tbx_plc_ip.Text)) throw new Exception("Please enter IP Address.");
-                    // init for plc
-                    S7.Net.CpuType cpuType = CpuType.S71200;
-                    string ipAddress = tbx_plc_ip.Text;
-                    DeltaPLC = new Plc(cpuType, ipAddress, 0, 1);
-                    // check plc is available
-                    if (!DeltaPLC.IsAvailable) throw new Exception("Not found PLC!");
-                    // open connect
-                    errCode = DeltaPLC.Open();
-                    // check connect successfully?
-                    if (errCode != ErrorCode.NoError) throw new Exception(DeltaPLC.LastErrorString);
-                    else
+                    try
                     {
-                        Itf_Lb.set_plc_btn_status(ref btn_plc_connect, true);
-                        this.SetEnableButtonConnect(false);
-                        PLCSelect.IsConnect = !PLCSelect.IsConnect;
+                        // check textbox empty
+                        if (string.IsNullOrEmpty(tbx_plc_ip.Text)) throw new Exception("Please enter IP Address.");
+                        // init for plc
+                        S7.Net.CpuType cpuType = CpuType.S71200;
+                        string ipAddress = tbx_plc_ip.Text;
+                        DeltaPLC = new Plc(cpuType, ipAddress, 0, 1);
+                        // check plc is available
+                        if (!DeltaPLC.IsAvailable) throw new Exception("Not found PLC!");
+                        // open connect
+                        errCode = DeltaPLC.Open();
+                        // check connect successfully?
+                        if (errCode != ErrorCode.NoError) throw new Exception(DeltaPLC.LastErrorString);
+                        else
+                        {
+                            Itf_Lb.set_plc_btn_status(ref btn_plc_connect, true);
+                            this.SetEnableButtonConnect(false);
+                            PLCSelect.IsConnect = !PLCSelect.IsConnect;
+                        }
+                        // enables cyclic read
+                        cyclicRead.Enabled = true;
+                        cyclicRead.Interval = 1000;
+                        cyclicRead.Start();
                     }
-                    // enables cyclic read
-                    cyclicRead.Enabled = true;
-                    cyclicRead.Interval = 1000;
-                    cyclicRead.Start();
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(this, ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
-                catch (Exception ex)
+                else
                 {
-                    MessageBox.Show(this, ex.Message, "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    cyclicRead.Stop();
+                    cyclicRead.Enabled = false;
+
+                    DeltaPLC.Close();
+                    MessageBox.Show(this, "Disconnected PLC!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Itf_Lb.set_plc_btn_status(ref btn_plc_connect, false);
+                    this.SetEnableButtonConnect(true);
+                    PLCSelect.IsConnect = !PLCSelect.IsConnect;
                 }
             }
-            else
-            {
-                cyclicRead.Stop();
-                cyclicRead.Enabled = false;
-
-                DeltaPLC.Close();
-                MessageBox.Show(this, "Disconnected PLC!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                Itf_Lb.set_plc_btn_status(ref btn_plc_connect, false);
-                this.SetEnableButtonConnect(true);
-                PLCSelect.IsConnect = !PLCSelect.IsConnect;
-            }
-        }
         // enable textbox
         private void SetEnableButtonConnect(bool status)
         {
             tbx_plc_ip.Enabled = status;
         }
-
-        /*----------------------------------------------*/
-        // button home
-        #region move
+        #endregion
+        #region home
         private void btn_pos_home_Click(object sender, EventArgs e)
         {
             DeltaPLC.Write(PLC_Addr.Home, 1);
@@ -422,7 +449,8 @@ namespace DE1T4_Project
             PLC_Addr.HomingDone.hold = false;
             PLC_Addr.HomingDone.flag = true;
         }
-
+        #endregion
+        #region move manual point to point
         private void btn_Mov_Move_Click(object sender, EventArgs e)
         {
             PLCSelect.ReadBusy = true;
@@ -430,9 +458,8 @@ namespace DE1T4_Project
             PLCSelect.Pos.X = Convert.ToDouble(tbx_mov_X.Text);
             PLCSelect.Pos.Y = Convert.ToDouble(tbx_mov_Y.Text);
             PLCSelect.Pos.Z = Convert.ToDouble(tbx_mov_Z.Text);
+            //DeltaPosition tmp = deltaScales(PLCSelect.Pos, 1.2, 1);
             PushToRingBuffer(PLCSelect.Pos);
-            DeltaPLC.Write(PLC_Addr.MoveTO, 1);
-            DeltaPLC.Write(PLC_Addr.MoveTO, 0);
 
             short speed = Convert.ToInt16(tbx_mov_velocity.Text);
             short nPoint = Convert.ToInt16(1);
@@ -440,10 +467,20 @@ namespace DE1T4_Project
             DeltaPLC.Write(PLC_Addr.nPoint, nPoint.ConvertToUshort());
             DeltaPLC.Write(PLC_Addr.EESpeed, speed.ConvertToUshort());
 
+            DeltaPLC.Write(PLC_Addr.MoveTO, 1);
+            DeltaPLC.Write(PLC_Addr.MoveTO, 0);
             PLCSelect.ReadBusy = false;
         }
-        #endregion
+        private void PushToRingBuffer(DeltaPosition Position)
+        {
+            DeltaPLC.Write(PLC_Addr.Push_POS_X, Position.X.ConvertToUInt());
+            DeltaPLC.Write(PLC_Addr.Push_POS_Y, Position.Y.ConvertToUInt());
+            DeltaPLC.Write(PLC_Addr.Push_POS_Z, Position.Z.ConvertToUInt());
 
+            DeltaPLC.Write(PLC_Addr.AddNewPos, 1);
+            DeltaPLC.Write(PLC_Addr.AddNewPos, 0);
+        }
+        #endregion
         #region XYZ move
         private void btn_mov_Xplus_Click(object sender, EventArgs e)
         {
@@ -474,7 +511,10 @@ namespace DE1T4_Project
         {
             moveXYZ(PLC_Addr.Zminus);
         }
-
+        private void tbx_mov_division_TextChanged(object sender, EventArgs e)
+        {
+            PLCSelect.Division_Change = true;
+        }
         private void moveXYZ(string _addr)
         {
             PLCSelect.ReadBusy = true;
@@ -492,13 +532,15 @@ namespace DE1T4_Project
 
             PLCSelect.ReadBusy = false;
         }
-
-        private void tbx_mov_division_TextChanged(object sender, EventArgs e)
+        private DeltaPosition deltaScales(DeltaPosition input, double scalesXY, double scalesZ)
         {
-            PLCSelect.Division_Change = true;
+            DeltaPosition tmp = input;
+            tmp.X = tmp.X * scalesXY;
+            tmp.Y = tmp.Y * scalesXY;
+            tmp.Z = tmp.Z * ((double)1/scalesZ);
+            return tmp;
         }
         #endregion
-
         #region Tool Head
         // switch vaccum
         private void sw_th_Vaccum_SwitchedChanged(object sender)
@@ -525,17 +567,15 @@ namespace DE1T4_Project
             }
         }
         #endregion
-
-        #endregion
         #region Conveyor
         private void sw_con_Run_SwitchedChanged(object sender)
         {
             double conveyor_Speed;
             PLCSelect.ReadBusy = true;
 
-            if(sw_con_Run.Switched)
+            if (sw_con_Run.Switched)
             {
-                if(PLCSelect.ConveyorSpeed_Change)
+                if (PLCSelect.ConveyorSpeed_Change)
                 {
                     conveyor_Speed = Convert.ToDouble(tbx_con_speed.Text);
                     DeltaPLC.Write(PLC_Addr.PID_Setpoint, conveyor_Speed.ConvertToUInt());
@@ -557,7 +597,9 @@ namespace DE1T4_Project
         }
 
         #endregion
-        #region PLC cyclic
+    #endregion
+
+    #region PLC cyclic read data
         private void cyclicRead_Tick(object sender, EventArgs e)
         {
             if ((PLCSelect.IsConnect==true) && (PLCSelect.ReadBusy==false))
@@ -580,6 +622,8 @@ namespace DE1T4_Project
                         PLCSelect.Pos.X = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_X.Addr)).ConvertToDouble();
                         PLCSelect.Pos.Y = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_Y.Addr)).ConvertToDouble();
                         PLCSelect.Pos.Z = ((uint)DeltaPLC.Read(PLC_Addr.Pos_Last_Z.Addr)).ConvertToDouble();
+                        //double tmpS = (double)5 / (double)6;
+                        //PLCSelect.Pos = deltaScales(PLCSelect.Pos, tmpS, 1);
                         lb_Pos_X.Text = Math.Round(PLCSelect.Pos.X).ToString();
                         lb_Pos_Y.Text = Math.Round(PLCSelect.Pos.Y).ToString();
                         lb_Pos_Z.Text = Math.Round(PLCSelect.Pos.Z).ToString();
@@ -615,17 +659,6 @@ namespace DE1T4_Project
                 }
             }
         }
-
-        private void PushToRingBuffer(DeltaPosition Position)
-        {
-            DeltaPLC.Write(PLC_Addr.Push_POS_X, Position.X.ConvertToUInt());
-            DeltaPLC.Write(PLC_Addr.Push_POS_Y, Position.Y.ConvertToUInt());
-            DeltaPLC.Write(PLC_Addr.Push_POS_Z, Position.Z.ConvertToUInt());
-
-            DeltaPLC.Write(PLC_Addr.AddNewPos, 1);
-            DeltaPLC.Write(PLC_Addr.AddNewPos, 0);
-        }
-
         private bool read_Singles_Bit(DataType _type,String addr)
         {
             int _dbInd = int.Parse(addr.Substring(2, 2));
@@ -636,7 +669,10 @@ namespace DE1T4_Project
             return write_Byte.SelectBit(bitInd);
         }
         #endregion
-        #region img set change
+
+        //--------Image proccess----------//
+    #region img set change
+        #region img set change event
         // change num
         private void numericUpDown1_ValueChanged(object sender, EventArgs e)
         {
@@ -656,6 +692,23 @@ namespace DE1T4_Project
             accessData.saveInforImgData(cNum.numSet.Name, set, tbx_img_Name.Text);
             Cam_S.imgSet[Cam_S.Set].name = tbx_img_Name.Text;
         }
+        // change color lable
+        private void btn_img_colorLB_Click(object sender, EventArgs e)
+        {
+            if (color_lable.ShowDialog() == DialogResult.OK)
+            {
+                // save
+                int set = Convert.ToInt32(num_img_set.Value) - 1;
+                accessData.saveInforImgData(cNum.numSet.Lable_Color, set, color_lable.Color);
+                // convert to int32
+                string colorString = Convert.ToString(color_lable.Color.ToArgb());
+                Int32 colorArgb = Convert.ToInt32(colorString);
+                Cam_S.imgSet[Cam_S.Set].Lable_Color = colorArgb;
+
+                changeBtnColor(Cam_S.imgSet[Cam_S.Set].Lable_Color, ref btn_img_colorLB);
+            }
+        }
+
         // select shapes
         private void cbx_img_shape_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -725,6 +778,8 @@ namespace DE1T4_Project
             accessData.saveInforImgData(cNum.numSet.Val_Min, Cam_S.Set, Convert.ToDouble(scbar_ValMin.Value));
             changeLimitValue(ref Cam_S.imgSet, cNum.numSet.Val_Min, scbar_ValMin.Value, Cam_S.Set);
         }
+        #endregion
+        #region function call from event
         // use when update all elements of set group
         private void updatePageSet()
         {
@@ -733,6 +788,8 @@ namespace DE1T4_Project
 
             tbx_img_Area_max.Text = Cam_S.imgSet[Cam_S.Set].area_max.ToString();
             tbx_img_Area_min.Text = Cam_S.imgSet[Cam_S.Set].area_min.ToString();
+
+            changeBtnColor(Cam_S.imgSet[Cam_S.Set].Lable_Color, ref btn_img_colorLB);
 
             scrollbarValueChange(scbar_HueMax, lb_img_hueMax, Cam_S.imgSet[Cam_S.Set].Max.Hue);
             scrollbarValueChange(scbar_HueMin, lb_img_hueMin, Cam_S.imgSet[Cam_S.Set].Min.Hue);
@@ -762,6 +819,15 @@ namespace DE1T4_Project
         private void scrollbarValueChange(HScrollBar scbar, Label lb)
         {
             lb.Text = Convert.ToString(scbar.Value);
+        }
+        private void changeBtnColor(Int32 argb, ref Button btn)
+        {
+            Color tmpCl = new Color();
+            tmpCl = Color.FromArgb(argb);
+            btn.BackColor = tmpCl;
+            tmpCl = Color.FromArgb(tmpCl.ToArgb() ^ 0xffffff);
+            btn.ForeColor = tmpCl;
+            btn.FlatAppearance.BorderColor = tmpCl;
         }
         private void changeLimitValue(ref ImgSet[] save, cNum.numSet para, int value, int set)
         {
@@ -804,7 +870,19 @@ namespace DE1T4_Project
             save[set] = tmpp;
         }
         #endregion
+    #endregion
 
-        
+        private void calibCam(Image<Bgr, byte> input)
+        {
+            //Image<Gray, byte> input_Gray = new Image<Gray, byte>(input.Width, input.Height);
+            //CvInvoke.CvtColor(input, input_Gray, ColorConversion.Bgr2Gray);
+            //bool found = CvInvoke.FindChessboardCorners(input_Gray, board_sz, corners, CV_CALIB_CB_ADAPTIVE_THRESH | CV_CALIB_CB_FILTER_QUADS);
+
+            //if (found)
+            //{
+            //    cornerSubPix(gray_image, corners, Size(11, 11), Size(-1, -1), TermCriteria(CV_TERMCRIT_EPS | CV_TERMCRIT_ITER, 30, 0.1));
+            //    drawChessboardCorners(gray_image, board_sz, corners, found);
+            //}
+        }
     }
 }

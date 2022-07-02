@@ -58,11 +58,11 @@ namespace DE1T4_Project
             this.lb_plc_ip = new System.Windows.Forms.Label();
             this.tbx_plc_ip = new System.Windows.Forms.TextBox();
             this.camera_grbox = new System.Windows.Forms.GroupBox();
-            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
             this.btn_cam_setting = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbb_Camlist = new System.Windows.Forms.ComboBox();
             this.btn_cam_connect = new System.Windows.Forms.Button();
+            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
             this.picbox_offCam = new System.Windows.Forms.PictureBox();
             this.cyclicRead = new System.Windows.Forms.Timer(this.components);
             this.btn_mov_Ymin = new System.Windows.Forms.Button();
@@ -86,7 +86,15 @@ namespace DE1T4_Project
             this.tbx_mov_Y = new System.Windows.Forms.TextBox();
             this.tbx_mov_X = new System.Windows.Forms.TextBox();
             this.imageProcess_grbox = new System.Windows.Forms.GroupBox();
-            this.sw_img_gray = new MetroSet_UI.Controls.MetroSetSwitch();
+            this.btn_img_colorLB = new System.Windows.Forms.Button();
+            this.link_img_getArea = new System.Windows.Forms.LinkLabel();
+            this.lb_img_area = new System.Windows.Forms.Label();
+            this.label22 = new System.Windows.Forms.Label();
+            this.label21 = new System.Windows.Forms.Label();
+            this.tbx_img_Area_min = new System.Windows.Forms.TextBox();
+            this.tbx_img_Area_max = new System.Windows.Forms.TextBox();
+            this.cbx_img_shape = new System.Windows.Forms.ComboBox();
+            this.label20 = new System.Windows.Forms.Label();
             this.label18 = new System.Windows.Forms.Label();
             this.num_img_set = new System.Windows.Forms.NumericUpDown();
             this.tbx_img_Name = new System.Windows.Forms.TextBox();
@@ -112,13 +120,12 @@ namespace DE1T4_Project
             this.scbar_HueMin = new System.Windows.Forms.HScrollBar();
             this.label9 = new System.Windows.Forms.Label();
             this.scbar_HueMax = new System.Windows.Forms.HScrollBar();
-            this.label20 = new System.Windows.Forms.Label();
-            this.cbx_img_shape = new System.Windows.Forms.ComboBox();
-            this.tbx_img_Area_max = new System.Windows.Forms.TextBox();
-            this.tbx_img_Area_min = new System.Windows.Forms.TextBox();
-            this.label21 = new System.Windows.Forms.Label();
-            this.label22 = new System.Windows.Forms.Label();
-            this.lb_cam_area = new System.Windows.Forms.Label();
+            this.color_lable = new System.Windows.Forms.ColorDialog();
+            this.sw_img_gray = new MetroSet_UI.Controls.MetroSetSwitch();
+            this.label25 = new System.Windows.Forms.Label();
+            this.metroSetSwitch1 = new MetroSet_UI.Controls.MetroSetSwitch();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label23 = new System.Windows.Forms.Label();
             this.ToolHead_grbox.SuspendLayout();
             this.position_grbox.SuspendLayout();
             this.Conveyor_grbox.SuspendLayout();
@@ -129,6 +136,7 @@ namespace DE1T4_Project
             this.movement_grbox.SuspendLayout();
             this.imageProcess_grbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).BeginInit();
+            this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolHead_grbox
@@ -476,7 +484,8 @@ namespace DE1T4_Project
             // 
             this.camera_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.camera_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.camera_grbox.Controls.Add(this.lb_cam_area);
+            this.camera_grbox.Controls.Add(this.label25);
+            this.camera_grbox.Controls.Add(this.sw_img_gray);
             this.camera_grbox.Controls.Add(this.btn_cam_setting);
             this.camera_grbox.Controls.Add(this.label1);
             this.camera_grbox.Controls.Add(this.cbb_Camlist);
@@ -487,27 +496,16 @@ namespace DE1T4_Project
             this.camera_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.camera_grbox.Location = new System.Drawing.Point(12, 198);
             this.camera_grbox.Name = "camera_grbox";
-            this.camera_grbox.Size = new System.Drawing.Size(659, 573);
+            this.camera_grbox.Size = new System.Drawing.Size(535, 573);
             this.camera_grbox.TabIndex = 8;
             this.camera_grbox.TabStop = false;
             this.camera_grbox.Text = "Camera";
-            // 
-            // imgBox_crop
-            // 
-            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
-            this.imgBox_crop.Name = "imgBox_crop";
-            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
-            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgBox_crop.TabIndex = 18;
-            this.imgBox_crop.TabStop = false;
-            this.imgBox_crop.Visible = false;
             // 
             // btn_cam_setting
             // 
             this.btn_cam_setting.Enabled = false;
             this.btn_cam_setting.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cam_setting.Location = new System.Drawing.Point(496, 33);
+            this.btn_cam_setting.Location = new System.Drawing.Point(6, 489);
             this.btn_cam_setting.Name = "btn_cam_setting";
             this.btn_cam_setting.Size = new System.Drawing.Size(150, 40);
             this.btn_cam_setting.TabIndex = 16;
@@ -546,6 +544,17 @@ namespace DE1T4_Project
             this.btn_cam_connect.Text = "Connect";
             this.btn_cam_connect.UseVisualStyleBackColor = true;
             this.btn_cam_connect.Click += new System.EventHandler(this.btn_cam_connect_Click);
+            // 
+            // imgBox_crop
+            // 
+            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
+            this.imgBox_crop.Name = "imgBox_crop";
+            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
+            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgBox_crop.TabIndex = 18;
+            this.imgBox_crop.TabStop = false;
+            this.imgBox_crop.Visible = false;
             // 
             // picbox_offCam
             // 
@@ -726,6 +735,7 @@ namespace DE1T4_Project
             this.btn_Mov_Move.TabIndex = 32;
             this.btn_Mov_Move.Text = "Move";
             this.btn_Mov_Move.UseVisualStyleBackColor = true;
+            this.btn_Mov_Move.Click += new System.EventHandler(this.btn_Mov_Move_Click);
             // 
             // label6
             // 
@@ -785,13 +795,15 @@ namespace DE1T4_Project
             // 
             this.imageProcess_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.imageProcess_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.imageProcess_grbox.Controls.Add(this.btn_img_colorLB);
+            this.imageProcess_grbox.Controls.Add(this.link_img_getArea);
+            this.imageProcess_grbox.Controls.Add(this.lb_img_area);
             this.imageProcess_grbox.Controls.Add(this.label22);
             this.imageProcess_grbox.Controls.Add(this.label21);
             this.imageProcess_grbox.Controls.Add(this.tbx_img_Area_min);
             this.imageProcess_grbox.Controls.Add(this.tbx_img_Area_max);
             this.imageProcess_grbox.Controls.Add(this.cbx_img_shape);
             this.imageProcess_grbox.Controls.Add(this.label20);
-            this.imageProcess_grbox.Controls.Add(this.sw_img_gray);
             this.imageProcess_grbox.Controls.Add(this.label18);
             this.imageProcess_grbox.Controls.Add(this.num_img_set);
             this.imageProcess_grbox.Controls.Add(this.tbx_img_Name);
@@ -819,51 +831,123 @@ namespace DE1T4_Project
             this.imageProcess_grbox.Controls.Add(this.scbar_HueMax);
             this.imageProcess_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.imageProcess_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.imageProcess_grbox.Location = new System.Drawing.Point(677, 198);
+            this.imageProcess_grbox.Location = new System.Drawing.Point(553, 198);
             this.imageProcess_grbox.Name = "imageProcess_grbox";
-            this.imageProcess_grbox.Size = new System.Drawing.Size(353, 573);
+            this.imageProcess_grbox.Size = new System.Drawing.Size(477, 573);
             this.imageProcess_grbox.TabIndex = 36;
             this.imageProcess_grbox.TabStop = false;
             this.imageProcess_grbox.Text = "Image";
             // 
-            // sw_img_gray
+            // btn_img_colorLB
             // 
-            this.sw_img_gray.BackColor = System.Drawing.Color.Transparent;
-            this.sw_img_gray.BackgroundColor = System.Drawing.Color.Empty;
-            this.sw_img_gray.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
-            this.sw_img_gray.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sw_img_gray.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
-            this.sw_img_gray.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sw_img_gray.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
-            this.sw_img_gray.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sw_img_gray.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
-            this.sw_img_gray.IsDerivedStyle = true;
-            this.sw_img_gray.Location = new System.Drawing.Point(225, 17);
-            this.sw_img_gray.Name = "sw_img_gray";
-            this.sw_img_gray.Size = new System.Drawing.Size(58, 22);
-            this.sw_img_gray.Style = MetroSet_UI.Enums.Style.Light;
-            this.sw_img_gray.StyleManager = null;
-            this.sw_img_gray.Switched = false;
-            this.sw_img_gray.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-            this.sw_img_gray.TabIndex = 54;
-            this.sw_img_gray.Text = "metroSetSwitch1";
-            this.sw_img_gray.ThemeAuthor = "Narwin";
-            this.sw_img_gray.ThemeName = "MetroLite";
-            this.sw_img_gray.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.btn_img_colorLB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btn_img_colorLB.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_img_colorLB.Location = new System.Drawing.Point(376, 41);
+            this.btn_img_colorLB.Name = "btn_img_colorLB";
+            this.btn_img_colorLB.Size = new System.Drawing.Size(95, 27);
+            this.btn_img_colorLB.TabIndex = 65;
+            this.btn_img_colorLB.Text = "LB Color";
+            this.btn_img_colorLB.UseVisualStyleBackColor = true;
+            this.btn_img_colorLB.Click += new System.EventHandler(this.btn_img_colorLB_Click);
+            // 
+            // link_img_getArea
+            // 
+            this.link_img_getArea.AutoSize = true;
+            this.link_img_getArea.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_img_getArea.Location = new System.Drawing.Point(241, 103);
+            this.link_img_getArea.Name = "link_img_getArea";
+            this.link_img_getArea.Size = new System.Drawing.Size(83, 23);
+            this.link_img_getArea.TabIndex = 62;
+            this.link_img_getArea.TabStop = true;
+            this.link_img_getArea.Text = "Get Area";
+            this.link_img_getArea.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_img_getArea_LinkClicked);
+            // 
+            // lb_img_area
+            // 
+            this.lb_img_area.AutoSize = true;
+            this.lb_img_area.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_area.Location = new System.Drawing.Point(330, 103);
+            this.lb_img_area.Name = "lb_img_area";
+            this.lb_img_area.Size = new System.Drawing.Size(34, 23);
+            this.lb_img_area.TabIndex = 61;
+            this.lb_img_area.Text = "##";
+            // 
+            // label22
+            // 
+            this.label22.AutoSize = true;
+            this.label22.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label22.Location = new System.Drawing.Point(232, 152);
+            this.label22.Name = "label22";
+            this.label22.Size = new System.Drawing.Size(88, 23);
+            this.label22.TabIndex = 60;
+            this.label22.Text = "Area min";
+            // 
+            // label21
+            // 
+            this.label21.AutoSize = true;
+            this.label21.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label21.Location = new System.Drawing.Point(15, 152);
+            this.label21.Name = "label21";
+            this.label21.Size = new System.Drawing.Size(91, 23);
+            this.label21.TabIndex = 59;
+            this.label21.Text = "Area max";
+            // 
+            // tbx_img_Area_min
+            // 
+            this.tbx_img_Area_min.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_img_Area_min.Location = new System.Drawing.Point(326, 148);
+            this.tbx_img_Area_min.Name = "tbx_img_Area_min";
+            this.tbx_img_Area_min.Size = new System.Drawing.Size(90, 27);
+            this.tbx_img_Area_min.TabIndex = 58;
+            this.tbx_img_Area_min.Leave += new System.EventHandler(this.tbx_img_Area_min_Leave);
+            // 
+            // tbx_img_Area_max
+            // 
+            this.tbx_img_Area_max.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_img_Area_max.Location = new System.Drawing.Point(112, 148);
+            this.tbx_img_Area_max.Name = "tbx_img_Area_max";
+            this.tbx_img_Area_max.Size = new System.Drawing.Size(90, 27);
+            this.tbx_img_Area_max.TabIndex = 57;
+            this.tbx_img_Area_max.Leave += new System.EventHandler(this.tbx_img_Area_max_Leave);
+            // 
+            // cbx_img_shape
+            // 
+            this.cbx_img_shape.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbx_img_shape.FormattingEnabled = true;
+            this.cbx_img_shape.Items.AddRange(new object[] {
+            "Circle",
+            "Triangle",
+            "Rectangle"});
+            this.cbx_img_shape.Location = new System.Drawing.Point(92, 98);
+            this.cbx_img_shape.Name = "cbx_img_shape";
+            this.cbx_img_shape.Size = new System.Drawing.Size(121, 28);
+            this.cbx_img_shape.TabIndex = 56;
+            this.cbx_img_shape.SelectedIndexChanged += new System.EventHandler(this.cbx_img_shape_SelectedIndexChanged);
+            // 
+            // label20
+            // 
+            this.label20.AutoSize = true;
+            this.label20.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label20.Location = new System.Drawing.Point(15, 103);
+            this.label20.Name = "label20";
+            this.label20.Size = new System.Drawing.Size(71, 23);
+            this.label20.TabIndex = 55;
+            this.label20.Text = "Shapes";
             // 
             // label18
             // 
             this.label18.AutoSize = true;
-            this.label18.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label18.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(15, 45);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(44, 28);
+            this.label18.Size = new System.Drawing.Size(37, 23);
             this.label18.TabIndex = 53;
             this.label18.Text = "Set";
             // 
             // num_img_set
             // 
-            this.num_img_set.Location = new System.Drawing.Point(65, 39);
+            this.num_img_set.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.num_img_set.Location = new System.Drawing.Point(58, 40);
             this.num_img_set.Maximum = new decimal(new int[] {
             3,
             0,
@@ -875,7 +959,7 @@ namespace DE1T4_Project
             0,
             0});
             this.num_img_set.Name = "num_img_set";
-            this.num_img_set.Size = new System.Drawing.Size(54, 34);
+            this.num_img_set.Size = new System.Drawing.Size(54, 31);
             this.num_img_set.TabIndex = 52;
             this.num_img_set.Value = new decimal(new int[] {
             1,
@@ -887,19 +971,19 @@ namespace DE1T4_Project
             // tbx_img_Name
             // 
             this.tbx_img_Name.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Name.Location = new System.Drawing.Point(154, 91);
+            this.tbx_img_Name.Location = new System.Drawing.Point(190, 41);
             this.tbx_img_Name.Name = "tbx_img_Name";
-            this.tbx_img_Name.Size = new System.Drawing.Size(174, 27);
+            this.tbx_img_Name.Size = new System.Drawing.Size(180, 27);
             this.tbx_img_Name.TabIndex = 51;
             this.tbx_img_Name.TextChanged += new System.EventHandler(this.tbx_img_Name_TextChanged);
             // 
             // label17
             // 
             this.label17.AutoSize = true;
-            this.label17.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(15, 88);
+            this.label17.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label17.Location = new System.Drawing.Point(125, 45);
             this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(72, 28);
+            this.label17.Size = new System.Drawing.Size(61, 23);
             this.label17.TabIndex = 50;
             this.label17.Text = "Name";
             // 
@@ -956,10 +1040,10 @@ namespace DE1T4_Project
             // label19
             // 
             this.label19.AutoSize = true;
-            this.label19.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label19.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label19.Location = new System.Drawing.Point(6, 445);
             this.label19.Name = "label19";
-            this.label19.Size = new System.Drawing.Size(81, 33);
+            this.label19.Size = new System.Drawing.Size(69, 28);
             this.label19.TabIndex = 44;
             this.label19.Text = "Value";
             // 
@@ -1028,10 +1112,10 @@ namespace DE1T4_Project
             // label16
             // 
             this.label16.AutoSize = true;
-            this.label16.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label16.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label16.Location = new System.Drawing.Point(6, 318);
             this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(141, 33);
+            this.label16.Size = new System.Drawing.Size(120, 28);
             this.label16.TabIndex = 37;
             this.label16.Text = "Saturation";
             // 
@@ -1100,10 +1184,10 @@ namespace DE1T4_Project
             // label9
             // 
             this.label9.AutoSize = true;
-            this.label9.Font = new System.Drawing.Font("Cambria", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(6, 189);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(63, 33);
+            this.label9.Size = new System.Drawing.Size(53, 28);
             this.label9.TabIndex = 30;
             this.label9.Text = "Hue";
             // 
@@ -1119,77 +1203,90 @@ namespace DE1T4_Project
             this.scbar_HueMax.Value = 1;
             this.scbar_HueMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMax_Scroll);
             // 
-            // label20
+            // sw_img_gray
             // 
-            this.label20.AutoSize = true;
-            this.label20.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label20.Location = new System.Drawing.Point(136, 45);
-            this.label20.Name = "label20";
-            this.label20.Size = new System.Drawing.Size(84, 28);
-            this.label20.TabIndex = 55;
-            this.label20.Text = "Shapes";
+            this.sw_img_gray.BackColor = System.Drawing.Color.Transparent;
+            this.sw_img_gray.BackgroundColor = System.Drawing.Color.Empty;
+            this.sw_img_gray.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
+            this.sw_img_gray.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sw_img_gray.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
+            this.sw_img_gray.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sw_img_gray.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.sw_img_gray.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sw_img_gray.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.sw_img_gray.IsDerivedStyle = true;
+            this.sw_img_gray.Location = new System.Drawing.Point(329, 500);
+            this.sw_img_gray.Name = "sw_img_gray";
+            this.sw_img_gray.Size = new System.Drawing.Size(58, 22);
+            this.sw_img_gray.Style = MetroSet_UI.Enums.Style.Light;
+            this.sw_img_gray.StyleManager = null;
+            this.sw_img_gray.Switched = false;
+            this.sw_img_gray.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+            this.sw_img_gray.TabIndex = 62;
+            this.sw_img_gray.Text = "metroSetSwitch1";
+            this.sw_img_gray.ThemeAuthor = "Narwin";
+            this.sw_img_gray.ThemeName = "MetroLite";
+            this.sw_img_gray.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
             // 
-            // cbx_img_shape
+            // label25
             // 
-            this.cbx_img_shape.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cbx_img_shape.FormattingEnabled = true;
-            this.cbx_img_shape.Items.AddRange(new object[] {
-            "Circle",
-            "Triangle",
-            "Rectangle"});
-            this.cbx_img_shape.Location = new System.Drawing.Point(219, 45);
-            this.cbx_img_shape.Name = "cbx_img_shape";
-            this.cbx_img_shape.Size = new System.Drawing.Size(121, 28);
-            this.cbx_img_shape.TabIndex = 56;
-            this.cbx_img_shape.SelectedIndexChanged += new System.EventHandler(this.cbx_img_shape_SelectedIndexChanged);
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(216, 499);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(107, 23);
+            this.label25.TabIndex = 63;
+            this.label25.Text = "Gray Image";
             // 
-            // tbx_img_Area_max
+            // metroSetSwitch1
             // 
-            this.tbx_img_Area_max.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Area_max.Location = new System.Drawing.Point(154, 124);
-            this.tbx_img_Area_max.Name = "tbx_img_Area_max";
-            this.tbx_img_Area_max.Size = new System.Drawing.Size(135, 27);
-            this.tbx_img_Area_max.TabIndex = 57;
-            this.tbx_img_Area_max.Leave += new System.EventHandler(this.tbx_img_Area_max_Leave);
+            this.metroSetSwitch1.BackColor = System.Drawing.Color.Transparent;
+            this.metroSetSwitch1.BackgroundColor = System.Drawing.Color.Empty;
+            this.metroSetSwitch1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
+            this.metroSetSwitch1.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetSwitch1.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
+            this.metroSetSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.metroSetSwitch1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.metroSetSwitch1.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.metroSetSwitch1.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.metroSetSwitch1.IsDerivedStyle = true;
+            this.metroSetSwitch1.Location = new System.Drawing.Point(95, 61);
+            this.metroSetSwitch1.Name = "metroSetSwitch1";
+            this.metroSetSwitch1.Size = new System.Drawing.Size(58, 22);
+            this.metroSetSwitch1.Style = MetroSet_UI.Enums.Style.Light;
+            this.metroSetSwitch1.StyleManager = null;
+            this.metroSetSwitch1.Switched = false;
+            this.metroSetSwitch1.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+            this.metroSetSwitch1.TabIndex = 56;
+            this.metroSetSwitch1.Text = "sw_auto_enable";
+            this.metroSetSwitch1.ThemeAuthor = "Narwin";
+            this.metroSetSwitch1.ThemeName = "MetroLite";
+            this.metroSetSwitch1.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
             // 
-            // tbx_img_Area_min
+            // groupBox1
             // 
-            this.tbx_img_Area_min.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Area_min.Location = new System.Drawing.Point(154, 157);
-            this.tbx_img_Area_min.Name = "tbx_img_Area_min";
-            this.tbx_img_Area_min.Size = new System.Drawing.Size(135, 27);
-            this.tbx_img_Area_min.TabIndex = 58;
-            this.tbx_img_Area_min.Leave += new System.EventHandler(this.tbx_img_Area_min_Leave);
+            this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.label23);
+            this.groupBox1.Controls.Add(this.metroSetSwitch1);
+            this.groupBox1.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox1.Location = new System.Drawing.Point(1036, 288);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(484, 483);
+            this.groupBox1.TabIndex = 37;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "Auto Mode";
             // 
-            // label21
+            // label23
             // 
-            this.label21.AutoSize = true;
-            this.label21.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(15, 121);
-            this.label21.Name = "label21";
-            this.label21.Size = new System.Drawing.Size(110, 28);
-            this.label21.TabIndex = 59;
-            this.label21.Text = "Area max";
-            // 
-            // label22
-            // 
-            this.label22.AutoSize = true;
-            this.label22.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(15, 154);
-            this.label22.Name = "label22";
-            this.label22.Size = new System.Drawing.Size(106, 28);
-            this.label22.TabIndex = 60;
-            this.label22.Text = "Area min";
-            // 
-            // lb_cam_area
-            // 
-            this.lb_cam_area.AutoSize = true;
-            this.lb_cam_area.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_cam_area.Location = new System.Drawing.Point(14, 489);
-            this.lb_cam_area.Name = "lb_cam_area";
-            this.lb_cam_area.Size = new System.Drawing.Size(46, 23);
-            this.lb_cam_area.TabIndex = 35;
-            this.lb_cam_area.Text = "Max";
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(17, 55);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(61, 28);
+            this.label23.TabIndex = 57;
+            this.label23.Text = "Auto";
             // 
             // Form_Main
             // 
@@ -1197,6 +1294,7 @@ namespace DE1T4_Project
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1532, 783);
+            this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imageProcess_grbox);
             this.Controls.Add(this.camera_grbox);
             this.Controls.Add(this.PLC_grbox);
@@ -1226,6 +1324,8 @@ namespace DE1T4_Project
             this.imageProcess_grbox.ResumeLayout(false);
             this.imageProcess_grbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).EndInit();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1311,14 +1411,21 @@ namespace DE1T4_Project
         private System.Windows.Forms.TextBox tbx_img_Name;
         private System.Windows.Forms.Label label17;
         private System.Windows.Forms.Label label18;
-        private MetroSet_UI.Controls.MetroSetSwitch sw_img_gray;
         private System.Windows.Forms.ComboBox cbx_img_shape;
         private System.Windows.Forms.Label label20;
         private System.Windows.Forms.TextBox tbx_img_Area_min;
         private System.Windows.Forms.TextBox tbx_img_Area_max;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label lb_cam_area;
+        private System.Windows.Forms.Label lb_img_area;
+        private System.Windows.Forms.LinkLabel link_img_getArea;
+        private System.Windows.Forms.ColorDialog color_lable;
+        private System.Windows.Forms.Button btn_img_colorLB;
+        private System.Windows.Forms.Label label25;
+        private MetroSet_UI.Controls.MetroSetSwitch sw_img_gray;
+        private MetroSet_UI.Controls.MetroSetSwitch metroSetSwitch1;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.Label label23;
     }
 }
 
