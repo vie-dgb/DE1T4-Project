@@ -73,6 +73,26 @@ namespace DE1T4_Project.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Layer_2IUH {
+            get {
+                object obj = ResourceManager.GetObject("Layer_2IUH", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Logo_IUH {
+            get {
+                object obj = ResourceManager.GetObject("Logo_IUH", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap non_tick {
             get {
                 object obj = ResourceManager.GetObject("non-tick", resourceCulture);

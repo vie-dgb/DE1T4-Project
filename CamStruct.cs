@@ -14,18 +14,6 @@ using System.IO;
 
 namespace DE1T4_Project
 {
-    public class frameConfig
-    {
-        public string X { get; set; }
-        public string Y { get; set; }
-        public string Height { get; set; }
-        public string Width { get; set; }
-        public string Start_X { get; set; }
-        public string Start_Y { get; set; }
-        public string Stop_X { get; set; }
-        public string Stop_Y { get; set; }
-    }
-
     public class cNum
     {
         public enum nameLines
@@ -38,6 +26,12 @@ namespace DE1T4_Project
             Start_Location_Y,
             Stop_Location_X,
             Stop_Location_Y,
+            Calib_Width,
+            Calib_Height,
+            Ratio_Width,
+            Ratio_Height,
+            TL_Position_X,      // top left position of frame
+            TL_Position_Y,
         }
 
         public enum numSet
@@ -65,11 +59,135 @@ namespace DE1T4_Project
 
     }
 
+    public class frameConfig
+    {
+        public string X { get; set; }
+        public string Y { get; set; }
+        public string Height { get; set; }
+        public string Width { get; set; }
+        public string Start_X { get; set; }
+        public string Start_Y { get; set; }
+        public string Stop_X { get; set; }
+        public string Stop_Y { get; set; }
+    }
+
+    public class Calib
+    {
+        public double Calib_Width { get; set; }
+        public double Calib_Height { get; set; }
+        public double Ratio_Width { get; set; }
+        public double Ratio_Height { get; set; }
+        public double TL_Position_X { get; set; }
+        public double TL_Position_Y { get; set; }
+    }
+
+    public class settingCam
+    {
+        public static Rectangle rect;
+        public static Point StartLocation;
+        public static Point EndLcation;
+        public static bool IsMouseDown = false;
+        public static bool updateFrame = false;
+        public static bool IsConFig = false;
+        public static Mat set_Frame;
+        public static double fps;
+        public static Calib calibCam = new Calib();
+    }
+
+    public class Cam_S
+    {
+        public static int Index;
+        public static string Name;
+        public static bool captureInProgress = false;
+        public static bool Dispose = false;
+        public static CameraStruct.CamList[] List;
+        public static int Set;
+        public static ImgSet[] imgSet;
+    }
+
+    public class ImgSet
+    {
+        public string name { get; set; }
+        public int shape { get; set; }
+        public double area_max { get; set; }
+        public double area_min { get; set; }
+        public Int32 Lable_Color { get; set; }
+        public Hsv Max { get; set; }
+        public Hsv Min { get; set; }
+    }
+
     public class accessData
     {
-
+        private const int NumOfPara = 11;
+        private const int StartIndex = 14;
         public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\saveFrame.txt";
         public const int NUMOFSET = 3;
+        public static void saveTLPos(ref Calib save, double X, double Y)
+        {
+            save.TL_Position_X = X;
+            save.TL_Position_Y = Y;
+            string[] Readlines = File.ReadAllLines(savePath);
+            int ind = Convert.ToInt32(cNum.nameLines.TL_Position_X);
+            Readlines[ind] = save.TL_Position_X.ToString();
+
+            ind = Convert.ToInt32(cNum.nameLines.TL_Position_Y);
+            Readlines[ind] = save.TL_Position_Y.ToString();
+            File.WriteAllLines(savePath, Readlines);
+        }
+        public static void readTLPos(ref Calib read)
+        {
+            string[] lines = File.ReadAllLines(savePath);
+            int ind = Convert.ToInt32(cNum.nameLines.TL_Position_X);
+            read.TL_Position_X = checkEmptyDouble(lines, ind);
+            ind = Convert.ToInt32(cNum.nameLines.TL_Position_Y);
+            read.TL_Position_Y = checkEmptyDouble(lines, ind);
+        }
+        public static void SaveCalibRatio(ref Calib save, double camHeight, double camWidth)
+        {
+            save.Ratio_Width = save.Calib_Width / camWidth;
+            save.Ratio_Height = save.Calib_Height / camHeight;
+
+            string[] Readlines = File.ReadAllLines(savePath);
+
+            int ind = Convert.ToInt32(cNum.nameLines.Calib_Width);
+            Readlines[ind] = save.Calib_Width.ToString();
+
+            ind = Convert.ToInt32(cNum.nameLines.Calib_Height);
+            Readlines[ind] = save.Calib_Height.ToString();
+
+            ind = Convert.ToInt32(cNum.nameLines.Ratio_Width);
+            Readlines[ind] = save.Ratio_Width.ToString();
+
+            ind = Convert.ToInt32(cNum.nameLines.Ratio_Height);
+            Readlines[ind] = save.Ratio_Height.ToString();
+
+            File.WriteAllLines(savePath, Readlines);
+        }
+        public static void SaveCalibRatio(ref Calib save)
+        {
+            string[] Readlines = File.ReadAllLines(savePath);
+
+            int ind = Convert.ToInt32(cNum.nameLines.Calib_Width);
+            Readlines[ind] = save.Calib_Width.ToString();
+
+            ind = Convert.ToInt32(cNum.nameLines.Calib_Height);
+            Readlines[ind] = save.Calib_Height.ToString();
+
+            File.WriteAllLines(savePath, Readlines);
+        }
+        public static void ReadCalibRatio(ref Calib read)
+        {
+            string[] lines = File.ReadAllLines(savePath);
+
+            int ind = Convert.ToInt32(cNum.nameLines.Calib_Width);
+            read.Calib_Width = checkEmptyDouble(lines, ind);
+            ind = Convert.ToInt32(cNum.nameLines.Calib_Height);
+            read.Calib_Height = checkEmptyDouble(lines, ind);
+            ind = Convert.ToInt32(cNum.nameLines.Ratio_Width);
+            read.Ratio_Width = checkEmptyDouble(lines, ind);
+            ind = Convert.ToInt32(cNum.nameLines.Ratio_Height);
+            read.Ratio_Height = checkEmptyDouble(lines, ind);
+        }
         public static void saveCamData(Rectangle _rect, Point _Start, Point _Stop)
         {
             frameConfig newData = new frameConfig();
@@ -115,7 +233,6 @@ namespace DE1T4_Project
                 File.WriteAllLines(savePath, Readlines);
             }
         }
-
         public static Rectangle readCamData()
         {
             Rectangle returnrect = new Rectangle();
@@ -147,7 +264,6 @@ namespace DE1T4_Project
 
             return returnrect;
         }
-
         public static ImgSet readInforImgData(int set)
         {
             ImgSet retResult = new ImgSet();
@@ -177,7 +293,6 @@ namespace DE1T4_Project
 
             return retResult;
         }
-
         public static void saveInforImgData(cNum.numSet para, int set, int value)
         {
             string[] Readlines = File.ReadAllLines(savePath);
@@ -185,7 +300,6 @@ namespace DE1T4_Project
             Readlines[ind] = Convert.ToString(value);
             File.WriteAllLines(savePath, Readlines);
         }
-
         public static void saveInforImgData(cNum.numSet para, int set, double value)
         {
             string[] Readlines = File.ReadAllLines(savePath);
@@ -193,7 +307,6 @@ namespace DE1T4_Project
             Readlines[ind] = Convert.ToString(value);
             File.WriteAllLines(savePath, Readlines);
         }
-
         public static void saveInforImgData(cNum.numSet para, int set, string name)
         {
             string[] Readlines = File.ReadAllLines(savePath);
@@ -201,7 +314,6 @@ namespace DE1T4_Project
             Readlines[ind] = name;
             File.WriteAllLines(savePath, Readlines);
         }
-
         public static void saveInforImgData(cNum.numSet para, int set, Color saveColor)
         {
             // read txt & fine index
@@ -214,7 +326,6 @@ namespace DE1T4_Project
             Readlines[ind] = saveString;
             File.WriteAllLines(savePath, Readlines);
         }
-
         public static int checkEmptyInt(string[] emptyCheck, int index)
         {
             int result;
@@ -228,7 +339,6 @@ namespace DE1T4_Project
             }
             return 0;
         }
-
         public static double checkEmptyDouble(string[] emptyCheck, int index)
         {
             double result;
@@ -242,7 +352,6 @@ namespace DE1T4_Project
             }
             return 0;
         }
-
         public static string checkEmptyString(string[] emptyCheck, int index)
         {
             string result;
@@ -256,7 +365,6 @@ namespace DE1T4_Project
             }
             return "Color " + Convert.ToString(index);
         }
-
         public static Int32 checkEmptyInt32(string[] emptyCheck, int index)
         {
             Int32 result;
@@ -274,9 +382,6 @@ namespace DE1T4_Project
             }
             return Convert.ToInt32(Color.FromArgb(Convert.ToInt32(Color.Red)));
         }
-
-        private const int NumOfPara = 11;
-        private const int StartIndex = 8;
         public static int calcSetInd(cNum.numSet inf, int nSet)
         {
             // index = start + inf + nSet * NumOfPara
@@ -285,42 +390,6 @@ namespace DE1T4_Project
             return _re;
         }
     }
-
-
-    public class settingCam
-    {
-        public static Rectangle rect;
-        public static Point StartLocation;
-        public static Point EndLcation;
-        public static bool IsMouseDown = false;
-        public static bool updateFrame = false;
-        public static bool IsConFig = false;
-        public static Mat set_Frame;
-        public static double fps;
-    }
-
-    public class Cam_S
-    {
-        public static int Index;
-        public static string Name;
-        public static bool captureInProgress = false;
-        public static bool Dispose = false;
-        public static CameraStruct.CamList[] List;
-        public static int Set;
-        public static ImgSet[] imgSet;
-    }
-
-    public class ImgSet
-    {
-        public string name { get; set; }
-        public int shape { get; set; }
-        public double area_max { get; set; }
-        public double area_min { get; set; }
-        public Int32 Lable_Color { get; set; }
-        public Hsv Max { get; set; }
-        public Hsv Min { get; set; }
-    }
-
 
     public class CameraStruct
     {

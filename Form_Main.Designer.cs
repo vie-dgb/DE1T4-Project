@@ -54,10 +54,15 @@ namespace DE1T4_Project
             this.lb_con_Speed = new System.Windows.Forms.Label();
             this.sw_con_Run = new MetroSet_UI.Controls.MetroSetSwitch();
             this.PLC_grbox = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_plc_connect = new System.Windows.Forms.Button();
             this.lb_plc_ip = new System.Windows.Forms.Label();
             this.tbx_plc_ip = new System.Windows.Forms.TextBox();
             this.camera_grbox = new System.Windows.Forms.GroupBox();
+            this.link_img_getArea = new System.Windows.Forms.LinkLabel();
+            this.lb_img_area = new System.Windows.Forms.Label();
+            this.label25 = new System.Windows.Forms.Label();
+            this.sw_img_gray = new MetroSet_UI.Controls.MetroSetSwitch();
             this.btn_cam_setting = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbb_Camlist = new System.Windows.Forms.ComboBox();
@@ -86,9 +91,7 @@ namespace DE1T4_Project
             this.tbx_mov_Y = new System.Windows.Forms.TextBox();
             this.tbx_mov_X = new System.Windows.Forms.TextBox();
             this.imageProcess_grbox = new System.Windows.Forms.GroupBox();
-            this.btn_img_colorLB = new System.Windows.Forms.Button();
-            this.link_img_getArea = new System.Windows.Forms.LinkLabel();
-            this.lb_img_area = new System.Windows.Forms.Label();
+            this.link_img_LB_color = new System.Windows.Forms.LinkLabel();
             this.label22 = new System.Windows.Forms.Label();
             this.label21 = new System.Windows.Forms.Label();
             this.tbx_img_Area_min = new System.Windows.Forms.TextBox();
@@ -121,22 +124,67 @@ namespace DE1T4_Project
             this.label9 = new System.Windows.Forms.Label();
             this.scbar_HueMax = new System.Windows.Forms.HScrollBar();
             this.color_lable = new System.Windows.Forms.ColorDialog();
-            this.sw_img_gray = new MetroSet_UI.Controls.MetroSetSwitch();
-            this.label25 = new System.Windows.Forms.Label();
-            this.metroSetSwitch1 = new MetroSet_UI.Controls.MetroSetSwitch();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            this.lb_typ3_count = new System.Windows.Forms.Label();
+            this.link_typ3_clear = new System.Windows.Forms.LinkLabel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.label39 = new System.Windows.Forms.Label();
+            this.tbx_typ3_coor_z = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.tbx_typ3_coor_y = new System.Windows.Forms.TextBox();
+            this.tbx_typ3_coor_x = new System.Windows.Forms.TextBox();
+            this.tbx_auto_TL_X = new System.Windows.Forms.TextBox();
+            this.label24 = new System.Windows.Forms.Label();
+            this.tbx_auto_TL_Y = new System.Windows.Forms.TextBox();
+            this.label26 = new System.Windows.Forms.Label();
+            this.label28 = new System.Windows.Forms.Label();
+            this.tbx_auto_offsetX = new System.Windows.Forms.TextBox();
+            this.tbx_auto_offsetY = new System.Windows.Forms.TextBox();
+            this.label29 = new System.Windows.Forms.Label();
+            this.tbx_auto_offsetZ = new System.Windows.Forms.TextBox();
+            this.label30 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.tbx_auto_ZPlace = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.tbx_auto_ZPick = new System.Windows.Forms.TextBox();
             this.label23 = new System.Windows.Forms.Label();
+            this.btn_auto_OnOff = new System.Windows.Forms.Button();
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
+            this.lb_typ2_count = new System.Windows.Forms.Label();
+            this.link_typ2_clear = new System.Windows.Forms.LinkLabel();
+            this.label31 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.label33 = new System.Windows.Forms.Label();
+            this.tbx_typ2_coor_z = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tbx_typ2_coor_y = new System.Windows.Forms.TextBox();
+            this.tbx_typ2_coor_x = new System.Windows.Forms.TextBox();
+            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.lb_typ1_count = new System.Windows.Forms.Label();
+            this.link_typ1_clear = new System.Windows.Forms.LinkLabel();
+            this.label41 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
+            this.label43 = new System.Windows.Forms.Label();
+            this.tbx_typ1_coor_z = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.tbx_typ1_coor_y = new System.Windows.Forms.TextBox();
+            this.tbx_typ1_coor_x = new System.Windows.Forms.TextBox();
             this.ToolHead_grbox.SuspendLayout();
             this.position_grbox.SuspendLayout();
             this.Conveyor_grbox.SuspendLayout();
             this.PLC_grbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.camera_grbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).BeginInit();
             this.movement_grbox.SuspendLayout();
             this.imageProcess_grbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).BeginInit();
+            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox3.SuspendLayout();
+            this.groupBox4.SuspendLayout();
             this.SuspendLayout();
             // 
             // ToolHead_grbox
@@ -149,9 +197,9 @@ namespace DE1T4_Project
             this.ToolHead_grbox.Controls.Add(this.sw_th_Vaccum);
             this.ToolHead_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.ToolHead_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.ToolHead_grbox.Location = new System.Drawing.Point(614, 12);
+            this.ToolHead_grbox.Location = new System.Drawing.Point(553, 12);
             this.ToolHead_grbox.Name = "ToolHead_grbox";
-            this.ToolHead_grbox.Size = new System.Drawing.Size(150, 180);
+            this.ToolHead_grbox.Size = new System.Drawing.Size(155, 180);
             this.ToolHead_grbox.TabIndex = 6;
             this.ToolHead_grbox.TabStop = false;
             this.ToolHead_grbox.Text = "ToolHead";
@@ -243,7 +291,7 @@ namespace DE1T4_Project
             this.position_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.position_grbox.Location = new System.Drawing.Point(288, 12);
             this.position_grbox.Name = "position_grbox";
-            this.position_grbox.Size = new System.Drawing.Size(320, 180);
+            this.position_grbox.Size = new System.Drawing.Size(259, 180);
             this.position_grbox.TabIndex = 7;
             this.position_grbox.TabStop = false;
             this.position_grbox.Text = "Position";
@@ -333,7 +381,7 @@ namespace DE1T4_Project
             this.Conveyor_grbox.Controls.Add(this.sw_con_Run);
             this.Conveyor_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Conveyor_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.Conveyor_grbox.Location = new System.Drawing.Point(770, 12);
+            this.Conveyor_grbox.Location = new System.Drawing.Point(714, 12);
             this.Conveyor_grbox.Name = "Conveyor_grbox";
             this.Conveyor_grbox.Size = new System.Drawing.Size(260, 180);
             this.Conveyor_grbox.TabIndex = 7;
@@ -397,7 +445,7 @@ namespace DE1T4_Project
             this.tbx_con_speed.Name = "tbx_con_speed";
             this.tbx_con_speed.Size = new System.Drawing.Size(73, 27);
             this.tbx_con_speed.TabIndex = 12;
-            this.tbx_con_speed.TextChanged += new System.EventHandler(this.tbx_con_speed_TextChanged);
+            this.tbx_con_speed.Leave += new System.EventHandler(this.tbx_con_speed_Leave);
             // 
             // lb_con_Speed
             // 
@@ -439,6 +487,7 @@ namespace DE1T4_Project
             // 
             this.PLC_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.PLC_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.PLC_grbox.Controls.Add(this.pictureBox1);
             this.PLC_grbox.Controls.Add(this.btn_plc_connect);
             this.PLC_grbox.Controls.Add(this.lb_plc_ip);
             this.PLC_grbox.Controls.Add(this.tbx_plc_ip);
@@ -451,12 +500,22 @@ namespace DE1T4_Project
             this.PLC_grbox.TabStop = false;
             this.PLC_grbox.Text = "Robot connect";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DE1T4_Project.Properties.Resources.Layer_2IUH;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 82);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            // 
             // btn_plc_connect
             // 
             this.btn_plc_connect.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_plc_connect.Location = new System.Drawing.Point(59, 111);
+            this.btn_plc_connect.Location = new System.Drawing.Point(114, 107);
             this.btn_plc_connect.Name = "btn_plc_connect";
-            this.btn_plc_connect.Size = new System.Drawing.Size(165, 45);
+            this.btn_plc_connect.Size = new System.Drawing.Size(125, 45);
             this.btn_plc_connect.TabIndex = 12;
             this.btn_plc_connect.Text = "Connect";
             this.btn_plc_connect.UseVisualStyleBackColor = true;
@@ -484,6 +543,8 @@ namespace DE1T4_Project
             // 
             this.camera_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.camera_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.camera_grbox.Controls.Add(this.link_img_getArea);
+            this.camera_grbox.Controls.Add(this.lb_img_area);
             this.camera_grbox.Controls.Add(this.label25);
             this.camera_grbox.Controls.Add(this.sw_img_gray);
             this.camera_grbox.Controls.Add(this.btn_cam_setting);
@@ -500,6 +561,63 @@ namespace DE1T4_Project
             this.camera_grbox.TabIndex = 8;
             this.camera_grbox.TabStop = false;
             this.camera_grbox.Text = "Camera";
+            // 
+            // link_img_getArea
+            // 
+            this.link_img_getArea.AutoSize = true;
+            this.link_img_getArea.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_img_getArea.Location = new System.Drawing.Point(363, 500);
+            this.link_img_getArea.Name = "link_img_getArea";
+            this.link_img_getArea.Size = new System.Drawing.Size(83, 23);
+            this.link_img_getArea.TabIndex = 65;
+            this.link_img_getArea.TabStop = true;
+            this.link_img_getArea.Text = "Get Area";
+            this.link_img_getArea.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_img_getArea_LinkClicked_1);
+            // 
+            // lb_img_area
+            // 
+            this.lb_img_area.AutoSize = true;
+            this.lb_img_area.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_img_area.Location = new System.Drawing.Point(452, 500);
+            this.lb_img_area.Name = "lb_img_area";
+            this.lb_img_area.Size = new System.Drawing.Size(34, 23);
+            this.lb_img_area.TabIndex = 64;
+            this.lb_img_area.Text = "##";
+            // 
+            // label25
+            // 
+            this.label25.AutoSize = true;
+            this.label25.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label25.Location = new System.Drawing.Point(172, 499);
+            this.label25.Name = "label25";
+            this.label25.Size = new System.Drawing.Size(107, 23);
+            this.label25.TabIndex = 63;
+            this.label25.Text = "Gray Image";
+            // 
+            // sw_img_gray
+            // 
+            this.sw_img_gray.BackColor = System.Drawing.Color.Transparent;
+            this.sw_img_gray.BackgroundColor = System.Drawing.Color.Empty;
+            this.sw_img_gray.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
+            this.sw_img_gray.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sw_img_gray.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
+            this.sw_img_gray.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.sw_img_gray.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.sw_img_gray.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
+            this.sw_img_gray.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
+            this.sw_img_gray.IsDerivedStyle = true;
+            this.sw_img_gray.Location = new System.Drawing.Point(285, 500);
+            this.sw_img_gray.Name = "sw_img_gray";
+            this.sw_img_gray.Size = new System.Drawing.Size(58, 22);
+            this.sw_img_gray.Style = MetroSet_UI.Enums.Style.Light;
+            this.sw_img_gray.StyleManager = null;
+            this.sw_img_gray.Switched = false;
+            this.sw_img_gray.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
+            this.sw_img_gray.TabIndex = 62;
+            this.sw_img_gray.Text = "metroSetSwitch1";
+            this.sw_img_gray.ThemeAuthor = "Narwin";
+            this.sw_img_gray.ThemeName = "MetroLite";
+            this.sw_img_gray.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
             // 
             // btn_cam_setting
             // 
@@ -574,7 +692,7 @@ namespace DE1T4_Project
             // btn_mov_Ymin
             // 
             this.btn_mov_Ymin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Ymin.Location = new System.Drawing.Point(96, 104);
+            this.btn_mov_Ymin.Location = new System.Drawing.Point(93, 86);
             this.btn_mov_Ymin.Name = "btn_mov_Ymin";
             this.btn_mov_Ymin.Size = new System.Drawing.Size(68, 35);
             this.btn_mov_Ymin.TabIndex = 0;
@@ -585,7 +703,7 @@ namespace DE1T4_Project
             // btn_mov_Yplus
             // 
             this.btn_mov_Yplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Yplus.Location = new System.Drawing.Point(96, 53);
+            this.btn_mov_Yplus.Location = new System.Drawing.Point(93, 35);
             this.btn_mov_Yplus.Name = "btn_mov_Yplus";
             this.btn_mov_Yplus.Size = new System.Drawing.Size(68, 35);
             this.btn_mov_Yplus.TabIndex = 1;
@@ -596,7 +714,7 @@ namespace DE1T4_Project
             // btn_mov_Xplus
             // 
             this.btn_mov_Xplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Xplus.Location = new System.Drawing.Point(22, 53);
+            this.btn_mov_Xplus.Location = new System.Drawing.Point(19, 35);
             this.btn_mov_Xplus.Name = "btn_mov_Xplus";
             this.btn_mov_Xplus.Size = new System.Drawing.Size(68, 35);
             this.btn_mov_Xplus.TabIndex = 2;
@@ -607,7 +725,7 @@ namespace DE1T4_Project
             // btn_mov_Xmin
             // 
             this.btn_mov_Xmin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Xmin.Location = new System.Drawing.Point(22, 104);
+            this.btn_mov_Xmin.Location = new System.Drawing.Point(19, 86);
             this.btn_mov_Xmin.Name = "btn_mov_Xmin";
             this.btn_mov_Xmin.Size = new System.Drawing.Size(68, 35);
             this.btn_mov_Xmin.TabIndex = 3;
@@ -618,7 +736,7 @@ namespace DE1T4_Project
             // btn_mov_Zmin
             // 
             this.btn_mov_Zmin.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Zmin.Location = new System.Drawing.Point(170, 104);
+            this.btn_mov_Zmin.Location = new System.Drawing.Point(167, 86);
             this.btn_mov_Zmin.Name = "btn_mov_Zmin";
             this.btn_mov_Zmin.Size = new System.Drawing.Size(68, 35);
             this.btn_mov_Zmin.TabIndex = 4;
@@ -629,7 +747,7 @@ namespace DE1T4_Project
             // btn_mov_Zplus
             // 
             this.btn_mov_Zplus.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_mov_Zplus.Location = new System.Drawing.Point(170, 53);
+            this.btn_mov_Zplus.Location = new System.Drawing.Point(167, 35);
             this.btn_mov_Zplus.Name = "btn_mov_Zplus";
             this.btn_mov_Zplus.Size = new System.Drawing.Size(68, 35);
             this.btn_mov_Zplus.TabIndex = 5;
@@ -641,7 +759,7 @@ namespace DE1T4_Project
             // 
             this.lb_mov_division.AutoSize = true;
             this.lb_mov_division.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mov_division.Location = new System.Drawing.Point(244, 57);
+            this.lb_mov_division.Location = new System.Drawing.Point(241, 39);
             this.lb_mov_division.Name = "lb_mov_division";
             this.lb_mov_division.Size = new System.Drawing.Size(82, 23);
             this.lb_mov_division.TabIndex = 19;
@@ -651,7 +769,7 @@ namespace DE1T4_Project
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(416, 57);
+            this.label3.Location = new System.Drawing.Point(413, 39);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(44, 23);
             this.label3.TabIndex = 20;
@@ -660,11 +778,11 @@ namespace DE1T4_Project
             // tbx_mov_division
             // 
             this.tbx_mov_division.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_division.Location = new System.Drawing.Point(332, 54);
+            this.tbx_mov_division.Location = new System.Drawing.Point(329, 36);
             this.tbx_mov_division.Name = "tbx_mov_division";
             this.tbx_mov_division.Size = new System.Drawing.Size(78, 27);
             this.tbx_mov_division.TabIndex = 21;
-            this.tbx_mov_division.TextChanged += new System.EventHandler(this.tbx_mov_division_TextChanged);
+            this.tbx_mov_division.Leave += new System.EventHandler(this.tbx_mov_division_Leave);
             // 
             // movement_grbox
             // 
@@ -691,9 +809,9 @@ namespace DE1T4_Project
             this.movement_grbox.Controls.Add(this.btn_mov_Ymin);
             this.movement_grbox.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.movement_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.movement_grbox.Location = new System.Drawing.Point(1036, 12);
+            this.movement_grbox.Location = new System.Drawing.Point(980, 12);
             this.movement_grbox.Name = "movement_grbox";
-            this.movement_grbox.Size = new System.Drawing.Size(484, 270);
+            this.movement_grbox.Size = new System.Drawing.Size(540, 180);
             this.movement_grbox.TabIndex = 4;
             this.movement_grbox.TabStop = false;
             this.movement_grbox.Text = "Movement";
@@ -702,7 +820,7 @@ namespace DE1T4_Project
             // 
             this.lb_mov_mmps.AutoSize = true;
             this.lb_mov_mmps.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mov_mmps.Location = new System.Drawing.Point(416, 112);
+            this.lb_mov_mmps.Location = new System.Drawing.Point(413, 94);
             this.lb_mov_mmps.Name = "lb_mov_mmps";
             this.lb_mov_mmps.Size = new System.Drawing.Size(63, 23);
             this.lb_mov_mmps.TabIndex = 35;
@@ -712,7 +830,7 @@ namespace DE1T4_Project
             // 
             this.lb_mov_velocity.AutoSize = true;
             this.lb_mov_velocity.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_mov_velocity.Location = new System.Drawing.Point(247, 112);
+            this.lb_mov_velocity.Location = new System.Drawing.Point(244, 94);
             this.lb_mov_velocity.Name = "lb_mov_velocity";
             this.lb_mov_velocity.Size = new System.Drawing.Size(79, 23);
             this.lb_mov_velocity.TabIndex = 34;
@@ -721,15 +839,16 @@ namespace DE1T4_Project
             // tbx_mov_velocity
             // 
             this.tbx_mov_velocity.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_velocity.Location = new System.Drawing.Point(332, 110);
+            this.tbx_mov_velocity.Location = new System.Drawing.Point(329, 92);
             this.tbx_mov_velocity.Name = "tbx_mov_velocity";
             this.tbx_mov_velocity.Size = new System.Drawing.Size(78, 27);
             this.tbx_mov_velocity.TabIndex = 33;
+            this.tbx_mov_velocity.Leave += new System.EventHandler(this.tbx_mov_velocity_Leave);
             // 
             // btn_Mov_Move
             // 
             this.btn_Mov_Move.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_Mov_Move.Location = new System.Drawing.Point(30, 209);
+            this.btn_Mov_Move.Location = new System.Drawing.Point(411, 132);
             this.btn_Mov_Move.Name = "btn_Mov_Move";
             this.btn_Mov_Move.Size = new System.Drawing.Size(123, 40);
             this.btn_Mov_Move.TabIndex = 32;
@@ -741,7 +860,7 @@ namespace DE1T4_Project
             // 
             this.label6.AutoSize = true;
             this.label6.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label6.Location = new System.Drawing.Point(312, 165);
+            this.label6.Location = new System.Drawing.Point(277, 140);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(31, 28);
             this.label6.TabIndex = 31;
@@ -751,7 +870,7 @@ namespace DE1T4_Project
             // 
             this.label7.AutoSize = true;
             this.label7.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label7.Location = new System.Drawing.Point(169, 165);
+            this.label7.Location = new System.Drawing.Point(151, 140);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(31, 28);
             this.label7.TabIndex = 30;
@@ -761,7 +880,7 @@ namespace DE1T4_Project
             // 
             this.label8.AutoSize = true;
             this.label8.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(25, 165);
+            this.label8.Location = new System.Drawing.Point(18, 140);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(32, 28);
             this.label8.TabIndex = 29;
@@ -770,34 +889,32 @@ namespace DE1T4_Project
             // tbx_mov_Z
             // 
             this.tbx_mov_Z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_Z.Location = new System.Drawing.Point(349, 165);
+            this.tbx_mov_Z.Location = new System.Drawing.Point(314, 140);
             this.tbx_mov_Z.Name = "tbx_mov_Z";
-            this.tbx_mov_Z.Size = new System.Drawing.Size(80, 27);
+            this.tbx_mov_Z.Size = new System.Drawing.Size(60, 27);
             this.tbx_mov_Z.TabIndex = 28;
             // 
             // tbx_mov_Y
             // 
             this.tbx_mov_Y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_Y.Location = new System.Drawing.Point(206, 165);
+            this.tbx_mov_Y.Location = new System.Drawing.Point(188, 140);
             this.tbx_mov_Y.Name = "tbx_mov_Y";
-            this.tbx_mov_Y.Size = new System.Drawing.Size(80, 27);
+            this.tbx_mov_Y.Size = new System.Drawing.Size(60, 27);
             this.tbx_mov_Y.TabIndex = 27;
             // 
             // tbx_mov_X
             // 
             this.tbx_mov_X.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_mov_X.Location = new System.Drawing.Point(63, 165);
+            this.tbx_mov_X.Location = new System.Drawing.Point(56, 140);
             this.tbx_mov_X.Name = "tbx_mov_X";
-            this.tbx_mov_X.Size = new System.Drawing.Size(80, 27);
+            this.tbx_mov_X.Size = new System.Drawing.Size(60, 27);
             this.tbx_mov_X.TabIndex = 26;
             // 
             // imageProcess_grbox
             // 
             this.imageProcess_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.imageProcess_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.imageProcess_grbox.Controls.Add(this.btn_img_colorLB);
-            this.imageProcess_grbox.Controls.Add(this.link_img_getArea);
-            this.imageProcess_grbox.Controls.Add(this.lb_img_area);
+            this.imageProcess_grbox.Controls.Add(this.link_img_LB_color);
             this.imageProcess_grbox.Controls.Add(this.label22);
             this.imageProcess_grbox.Controls.Add(this.label21);
             this.imageProcess_grbox.Controls.Add(this.tbx_img_Area_min);
@@ -833,50 +950,28 @@ namespace DE1T4_Project
             this.imageProcess_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.imageProcess_grbox.Location = new System.Drawing.Point(553, 198);
             this.imageProcess_grbox.Name = "imageProcess_grbox";
-            this.imageProcess_grbox.Size = new System.Drawing.Size(477, 573);
+            this.imageProcess_grbox.Size = new System.Drawing.Size(421, 573);
             this.imageProcess_grbox.TabIndex = 36;
             this.imageProcess_grbox.TabStop = false;
             this.imageProcess_grbox.Text = "Image";
             // 
-            // btn_img_colorLB
+            // link_img_LB_color
             // 
-            this.btn_img_colorLB.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btn_img_colorLB.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_img_colorLB.Location = new System.Drawing.Point(376, 41);
-            this.btn_img_colorLB.Name = "btn_img_colorLB";
-            this.btn_img_colorLB.Size = new System.Drawing.Size(95, 27);
-            this.btn_img_colorLB.TabIndex = 65;
-            this.btn_img_colorLB.Text = "LB Color";
-            this.btn_img_colorLB.UseVisualStyleBackColor = true;
-            this.btn_img_colorLB.Click += new System.EventHandler(this.btn_img_colorLB_Click);
-            // 
-            // link_img_getArea
-            // 
-            this.link_img_getArea.AutoSize = true;
-            this.link_img_getArea.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_img_getArea.Location = new System.Drawing.Point(241, 103);
-            this.link_img_getArea.Name = "link_img_getArea";
-            this.link_img_getArea.Size = new System.Drawing.Size(83, 23);
-            this.link_img_getArea.TabIndex = 62;
-            this.link_img_getArea.TabStop = true;
-            this.link_img_getArea.Text = "Get Area";
-            this.link_img_getArea.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_img_getArea_LinkClicked);
-            // 
-            // lb_img_area
-            // 
-            this.lb_img_area.AutoSize = true;
-            this.lb_img_area.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_img_area.Location = new System.Drawing.Point(330, 103);
-            this.lb_img_area.Name = "lb_img_area";
-            this.lb_img_area.Size = new System.Drawing.Size(34, 23);
-            this.lb_img_area.TabIndex = 61;
-            this.lb_img_area.Text = "##";
+            this.link_img_LB_color.AutoSize = true;
+            this.link_img_LB_color.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_img_LB_color.Location = new System.Drawing.Point(325, 45);
+            this.link_img_LB_color.Name = "link_img_LB_color";
+            this.link_img_LB_color.Size = new System.Drawing.Size(83, 23);
+            this.link_img_LB_color.TabIndex = 66;
+            this.link_img_LB_color.TabStop = true;
+            this.link_img_LB_color.Text = "LB Color";
+            this.link_img_LB_color.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_img_LB_color_LinkClicked);
             // 
             // label22
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(232, 152);
+            this.label22.Location = new System.Drawing.Point(223, 152);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(88, 23);
             this.label22.TabIndex = 60;
@@ -895,7 +990,7 @@ namespace DE1T4_Project
             // tbx_img_Area_min
             // 
             this.tbx_img_Area_min.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Area_min.Location = new System.Drawing.Point(326, 148);
+            this.tbx_img_Area_min.Location = new System.Drawing.Point(317, 148);
             this.tbx_img_Area_min.Name = "tbx_img_Area_min";
             this.tbx_img_Area_min.Size = new System.Drawing.Size(90, 27);
             this.tbx_img_Area_min.TabIndex = 58;
@@ -959,7 +1054,7 @@ namespace DE1T4_Project
             0,
             0});
             this.num_img_set.Name = "num_img_set";
-            this.num_img_set.Size = new System.Drawing.Size(54, 31);
+            this.num_img_set.Size = new System.Drawing.Size(45, 31);
             this.num_img_set.TabIndex = 52;
             this.num_img_set.Value = new decimal(new int[] {
             1,
@@ -971,9 +1066,9 @@ namespace DE1T4_Project
             // tbx_img_Name
             // 
             this.tbx_img_Name.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Name.Location = new System.Drawing.Point(190, 41);
+            this.tbx_img_Name.Location = new System.Drawing.Point(184, 41);
             this.tbx_img_Name.Name = "tbx_img_Name";
-            this.tbx_img_Name.Size = new System.Drawing.Size(180, 27);
+            this.tbx_img_Name.Size = new System.Drawing.Size(135, 27);
             this.tbx_img_Name.TabIndex = 51;
             this.tbx_img_Name.TextChanged += new System.EventHandler(this.tbx_img_Name_TextChanged);
             // 
@@ -981,7 +1076,7 @@ namespace DE1T4_Project
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(125, 45);
+            this.label17.Location = new System.Drawing.Point(119, 45);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(61, 23);
             this.label17.TabIndex = 50;
@@ -1203,90 +1298,501 @@ namespace DE1T4_Project
             this.scbar_HueMax.Value = 1;
             this.scbar_HueMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMax_Scroll);
             // 
-            // sw_img_gray
+            // groupBox2
             // 
-            this.sw_img_gray.BackColor = System.Drawing.Color.Transparent;
-            this.sw_img_gray.BackgroundColor = System.Drawing.Color.Empty;
-            this.sw_img_gray.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
-            this.sw_img_gray.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sw_img_gray.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
-            this.sw_img_gray.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.sw_img_gray.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
-            this.sw_img_gray.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.sw_img_gray.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
-            this.sw_img_gray.IsDerivedStyle = true;
-            this.sw_img_gray.Location = new System.Drawing.Point(329, 500);
-            this.sw_img_gray.Name = "sw_img_gray";
-            this.sw_img_gray.Size = new System.Drawing.Size(58, 22);
-            this.sw_img_gray.Style = MetroSet_UI.Enums.Style.Light;
-            this.sw_img_gray.StyleManager = null;
-            this.sw_img_gray.Switched = false;
-            this.sw_img_gray.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-            this.sw_img_gray.TabIndex = 62;
-            this.sw_img_gray.Text = "metroSetSwitch1";
-            this.sw_img_gray.ThemeAuthor = "Narwin";
-            this.sw_img_gray.ThemeName = "MetroLite";
-            this.sw_img_gray.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.groupBox2.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox2.Controls.Add(this.lb_typ3_count);
+            this.groupBox2.Controls.Add(this.link_typ3_clear);
+            this.groupBox2.Controls.Add(this.label37);
+            this.groupBox2.Controls.Add(this.label38);
+            this.groupBox2.Controls.Add(this.label39);
+            this.groupBox2.Controls.Add(this.tbx_typ3_coor_z);
+            this.groupBox2.Controls.Add(this.label40);
+            this.groupBox2.Controls.Add(this.tbx_typ3_coor_y);
+            this.groupBox2.Controls.Add(this.tbx_typ3_coor_x);
+            this.groupBox2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox2.Location = new System.Drawing.Point(980, 651);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(540, 120);
+            this.groupBox2.TabIndex = 38;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Type 3";
             // 
-            // label25
+            // lb_typ3_count
             // 
-            this.label25.AutoSize = true;
-            this.label25.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(216, 499);
-            this.label25.Name = "label25";
-            this.label25.Size = new System.Drawing.Size(107, 23);
-            this.label25.TabIndex = 63;
-            this.label25.Text = "Gray Image";
+            this.lb_typ3_count.AutoSize = true;
+            this.lb_typ3_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_typ3_count.Location = new System.Drawing.Point(98, 41);
+            this.lb_typ3_count.Name = "lb_typ3_count";
+            this.lb_typ3_count.Size = new System.Drawing.Size(72, 28);
+            this.lb_typ3_count.TabIndex = 82;
+            this.lb_typ3_count.Text = "####";
             // 
-            // metroSetSwitch1
+            // link_typ3_clear
             // 
-            this.metroSetSwitch1.BackColor = System.Drawing.Color.Transparent;
-            this.metroSetSwitch1.BackgroundColor = System.Drawing.Color.Empty;
-            this.metroSetSwitch1.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(165)))), ((int)(((byte)(159)))), ((int)(((byte)(147)))));
-            this.metroSetSwitch1.CheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetSwitch1.CheckState = MetroSet_UI.Enums.CheckState.Unchecked;
-            this.metroSetSwitch1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.metroSetSwitch1.DisabledBorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
-            this.metroSetSwitch1.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
-            this.metroSetSwitch1.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
-            this.metroSetSwitch1.IsDerivedStyle = true;
-            this.metroSetSwitch1.Location = new System.Drawing.Point(95, 61);
-            this.metroSetSwitch1.Name = "metroSetSwitch1";
-            this.metroSetSwitch1.Size = new System.Drawing.Size(58, 22);
-            this.metroSetSwitch1.Style = MetroSet_UI.Enums.Style.Light;
-            this.metroSetSwitch1.StyleManager = null;
-            this.metroSetSwitch1.Switched = false;
-            this.metroSetSwitch1.SymbolColor = System.Drawing.Color.FromArgb(((int)(((byte)(92)))), ((int)(((byte)(92)))), ((int)(((byte)(92)))));
-            this.metroSetSwitch1.TabIndex = 56;
-            this.metroSetSwitch1.Text = "sw_auto_enable";
-            this.metroSetSwitch1.ThemeAuthor = "Narwin";
-            this.metroSetSwitch1.ThemeName = "MetroLite";
-            this.metroSetSwitch1.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
+            this.link_typ3_clear.AutoSize = true;
+            this.link_typ3_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_typ3_clear.Location = new System.Drawing.Point(209, 41);
+            this.link_typ3_clear.Name = "link_typ3_clear";
+            this.link_typ3_clear.Size = new System.Drawing.Size(67, 28);
+            this.link_typ3_clear.TabIndex = 81;
+            this.link_typ3_clear.TabStop = true;
+            this.link_typ3_clear.Text = "Clear";
+            this.link_typ3_clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_typ3_clear_LinkClicked);
+            // 
+            // label37
+            // 
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(14, 41);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(73, 28);
+            this.label37.TabIndex = 79;
+            this.label37.Text = "Count";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(15, 83);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(220, 23);
+            this.label38.TabIndex = 78;
+            this.label38.Text = "Place coordinates(X-Y-Z)";
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(396, 83);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(17, 23);
+            this.label39.TabIndex = 77;
+            this.label39.Text = "-";
+            // 
+            // tbx_typ3_coor_z
+            // 
+            this.tbx_typ3_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ3_coor_z.Location = new System.Drawing.Point(419, 81);
+            this.tbx_typ3_coor_z.Name = "tbx_typ3_coor_z";
+            this.tbx_typ3_coor_z.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ3_coor_z.TabIndex = 76;
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(307, 83);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(17, 23);
+            this.label40.TabIndex = 75;
+            this.label40.Text = "-";
+            // 
+            // tbx_typ3_coor_y
+            // 
+            this.tbx_typ3_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ3_coor_y.Location = new System.Drawing.Point(330, 81);
+            this.tbx_typ3_coor_y.Name = "tbx_typ3_coor_y";
+            this.tbx_typ3_coor_y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ3_coor_y.TabIndex = 74;
+            // 
+            // tbx_typ3_coor_x
+            // 
+            this.tbx_typ3_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ3_coor_x.Location = new System.Drawing.Point(241, 81);
+            this.tbx_typ3_coor_x.Name = "tbx_typ3_coor_x";
+            this.tbx_typ3_coor_x.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ3_coor_x.TabIndex = 73;
+            // 
+            // tbx_auto_TL_X
+            // 
+            this.tbx_auto_TL_X.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_TL_X.Location = new System.Drawing.Point(204, 46);
+            this.tbx_auto_TL_X.Name = "tbx_auto_TL_X";
+            this.tbx_auto_TL_X.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_TL_X.TabIndex = 59;
+            this.tbx_auto_TL_X.Leave += new System.EventHandler(this.tbx_auto_TL_X_Leave);
+            // 
+            // label24
+            // 
+            this.label24.AutoSize = true;
+            this.label24.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label24.Location = new System.Drawing.Point(15, 48);
+            this.label24.Name = "label24";
+            this.label24.Size = new System.Drawing.Size(183, 23);
+            this.label24.TabIndex = 61;
+            this.label24.Text = "Camera coordinates";
+            // 
+            // tbx_auto_TL_Y
+            // 
+            this.tbx_auto_TL_Y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_TL_Y.Location = new System.Drawing.Point(293, 46);
+            this.tbx_auto_TL_Y.Name = "tbx_auto_TL_Y";
+            this.tbx_auto_TL_Y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_TL_Y.TabIndex = 63;
+            this.tbx_auto_TL_Y.Leave += new System.EventHandler(this.tbx_auto_TL_Y_Leave);
+            // 
+            // label26
+            // 
+            this.label26.AutoSize = true;
+            this.label26.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label26.Location = new System.Drawing.Point(270, 48);
+            this.label26.Name = "label26";
+            this.label26.Size = new System.Drawing.Size(17, 23);
+            this.label26.TabIndex = 64;
+            this.label26.Text = "-";
+            // 
+            // label28
+            // 
+            this.label28.AutoSize = true;
+            this.label28.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label28.Location = new System.Drawing.Point(19, 98);
+            this.label28.Name = "label28";
+            this.label28.Size = new System.Drawing.Size(127, 23);
+            this.label28.TabIndex = 66;
+            this.label28.Text = "Offset (X-Y-Z )";
+            // 
+            // tbx_auto_offsetX
+            // 
+            this.tbx_auto_offsetX.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_offsetX.Location = new System.Drawing.Point(152, 96);
+            this.tbx_auto_offsetX.Name = "tbx_auto_offsetX";
+            this.tbx_auto_offsetX.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_offsetX.TabIndex = 67;
+            this.tbx_auto_offsetX.Leave += new System.EventHandler(this.tbx_auto_offsetX_Leave);
+            // 
+            // tbx_auto_offsetY
+            // 
+            this.tbx_auto_offsetY.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_offsetY.Location = new System.Drawing.Point(241, 96);
+            this.tbx_auto_offsetY.Name = "tbx_auto_offsetY";
+            this.tbx_auto_offsetY.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_offsetY.TabIndex = 68;
+            this.tbx_auto_offsetY.Leave += new System.EventHandler(this.tbx_auto_offsetY_Leave);
+            // 
+            // label29
+            // 
+            this.label29.AutoSize = true;
+            this.label29.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label29.Location = new System.Drawing.Point(218, 98);
+            this.label29.Name = "label29";
+            this.label29.Size = new System.Drawing.Size(17, 23);
+            this.label29.TabIndex = 69;
+            this.label29.Text = "-";
+            // 
+            // tbx_auto_offsetZ
+            // 
+            this.tbx_auto_offsetZ.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_offsetZ.Location = new System.Drawing.Point(327, 96);
+            this.tbx_auto_offsetZ.Name = "tbx_auto_offsetZ";
+            this.tbx_auto_offsetZ.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_offsetZ.TabIndex = 70;
+            this.tbx_auto_offsetZ.Leave += new System.EventHandler(this.tbx_auto_offsetZ_Leave);
+            // 
+            // label30
+            // 
+            this.label30.AutoSize = true;
+            this.label30.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label30.Location = new System.Drawing.Point(307, 98);
+            this.label30.Name = "label30";
+            this.label30.Size = new System.Drawing.Size(17, 23);
+            this.label30.TabIndex = 71;
+            this.label30.Text = "-";
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.tbx_auto_ZPlace);
+            this.groupBox1.Controls.Add(this.label45);
+            this.groupBox1.Controls.Add(this.tbx_auto_ZPick);
             this.groupBox1.Controls.Add(this.label23);
-            this.groupBox1.Controls.Add(this.metroSetSwitch1);
+            this.groupBox1.Controls.Add(this.btn_auto_OnOff);
+            this.groupBox1.Controls.Add(this.label30);
+            this.groupBox1.Controls.Add(this.tbx_auto_offsetZ);
+            this.groupBox1.Controls.Add(this.label29);
+            this.groupBox1.Controls.Add(this.tbx_auto_offsetY);
+            this.groupBox1.Controls.Add(this.tbx_auto_offsetX);
+            this.groupBox1.Controls.Add(this.label28);
+            this.groupBox1.Controls.Add(this.label26);
+            this.groupBox1.Controls.Add(this.tbx_auto_TL_Y);
+            this.groupBox1.Controls.Add(this.label24);
+            this.groupBox1.Controls.Add(this.tbx_auto_TL_X);
             this.groupBox1.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox1.Location = new System.Drawing.Point(1036, 288);
+            this.groupBox1.Location = new System.Drawing.Point(980, 198);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(484, 483);
+            this.groupBox1.Size = new System.Drawing.Size(540, 195);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto Mode";
             // 
+            // tbx_auto_ZPlace
+            // 
+            this.tbx_auto_ZPlace.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_ZPlace.Location = new System.Drawing.Point(398, 146);
+            this.tbx_auto_ZPlace.Name = "tbx_auto_ZPlace";
+            this.tbx_auto_ZPlace.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_ZPlace.TabIndex = 76;
+            this.tbx_auto_ZPlace.TextChanged += new System.EventHandler(this.tbx_auto_ZPlace_TextChanged);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(245, 148);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(147, 23);
+            this.label45.TabIndex = 75;
+            this.label45.Text = "Z Place distance";
+            // 
+            // tbx_auto_ZPick
+            // 
+            this.tbx_auto_ZPick.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_ZPick.Location = new System.Drawing.Point(163, 146);
+            this.tbx_auto_ZPick.Name = "tbx_auto_ZPick";
+            this.tbx_auto_ZPick.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_ZPick.TabIndex = 74;
+            this.tbx_auto_ZPick.Leave += new System.EventHandler(this.tbx_auto_ZPick_Leave);
+            // 
             // label23
             // 
             this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(17, 55);
+            this.label23.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(19, 148);
             this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(61, 28);
-            this.label23.TabIndex = 57;
-            this.label23.Text = "Auto";
+            this.label23.Size = new System.Drawing.Size(138, 23);
+            this.label23.TabIndex = 73;
+            this.label23.Text = "Z Pick distance";
+            // 
+            // btn_auto_OnOff
+            // 
+            this.btn_auto_OnOff.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_auto_OnOff.Location = new System.Drawing.Point(409, 9);
+            this.btn_auto_OnOff.Name = "btn_auto_OnOff";
+            this.btn_auto_OnOff.Size = new System.Drawing.Size(125, 68);
+            this.btn_auto_OnOff.TabIndex = 72;
+            this.btn_auto_OnOff.Text = "Connect";
+            this.btn_auto_OnOff.UseVisualStyleBackColor = true;
+            this.btn_auto_OnOff.Click += new System.EventHandler(this.btn_auto_OnOff_Click);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox3.Controls.Add(this.lb_typ2_count);
+            this.groupBox3.Controls.Add(this.link_typ2_clear);
+            this.groupBox3.Controls.Add(this.label31);
+            this.groupBox3.Controls.Add(this.label32);
+            this.groupBox3.Controls.Add(this.label33);
+            this.groupBox3.Controls.Add(this.tbx_typ2_coor_z);
+            this.groupBox3.Controls.Add(this.label34);
+            this.groupBox3.Controls.Add(this.tbx_typ2_coor_y);
+            this.groupBox3.Controls.Add(this.tbx_typ2_coor_x);
+            this.groupBox3.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox3.Location = new System.Drawing.Point(980, 525);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(540, 120);
+            this.groupBox3.TabIndex = 39;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Type 2";
+            // 
+            // lb_typ2_count
+            // 
+            this.lb_typ2_count.AutoSize = true;
+            this.lb_typ2_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_typ2_count.Location = new System.Drawing.Point(98, 44);
+            this.lb_typ2_count.Name = "lb_typ2_count";
+            this.lb_typ2_count.Size = new System.Drawing.Size(72, 28);
+            this.lb_typ2_count.TabIndex = 82;
+            this.lb_typ2_count.Text = "####";
+            // 
+            // link_typ2_clear
+            // 
+            this.link_typ2_clear.AutoSize = true;
+            this.link_typ2_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_typ2_clear.Location = new System.Drawing.Point(209, 44);
+            this.link_typ2_clear.Name = "link_typ2_clear";
+            this.link_typ2_clear.Size = new System.Drawing.Size(67, 28);
+            this.link_typ2_clear.TabIndex = 81;
+            this.link_typ2_clear.TabStop = true;
+            this.link_typ2_clear.Text = "Clear";
+            this.link_typ2_clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_typ2_clear_LinkClicked);
+            // 
+            // label31
+            // 
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(14, 44);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(73, 28);
+            this.label31.TabIndex = 79;
+            this.label31.Text = "Count";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(15, 84);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(220, 23);
+            this.label32.TabIndex = 78;
+            this.label32.Text = "Place coordinates(X-Y-Z)";
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(396, 84);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(17, 23);
+            this.label33.TabIndex = 77;
+            this.label33.Text = "-";
+            // 
+            // tbx_typ2_coor_z
+            // 
+            this.tbx_typ2_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ2_coor_z.Location = new System.Drawing.Point(419, 82);
+            this.tbx_typ2_coor_z.Name = "tbx_typ2_coor_z";
+            this.tbx_typ2_coor_z.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ2_coor_z.TabIndex = 76;
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(307, 84);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(17, 23);
+            this.label34.TabIndex = 75;
+            this.label34.Text = "-";
+            // 
+            // tbx_typ2_coor_y
+            // 
+            this.tbx_typ2_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ2_coor_y.Location = new System.Drawing.Point(330, 82);
+            this.tbx_typ2_coor_y.Name = "tbx_typ2_coor_y";
+            this.tbx_typ2_coor_y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ2_coor_y.TabIndex = 74;
+            // 
+            // tbx_typ2_coor_x
+            // 
+            this.tbx_typ2_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ2_coor_x.Location = new System.Drawing.Point(241, 82);
+            this.tbx_typ2_coor_x.Name = "tbx_typ2_coor_x";
+            this.tbx_typ2_coor_x.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ2_coor_x.TabIndex = 73;
+            // 
+            // groupBox4
+            // 
+            this.groupBox4.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox4.Controls.Add(this.lb_typ1_count);
+            this.groupBox4.Controls.Add(this.link_typ1_clear);
+            this.groupBox4.Controls.Add(this.label41);
+            this.groupBox4.Controls.Add(this.label42);
+            this.groupBox4.Controls.Add(this.label43);
+            this.groupBox4.Controls.Add(this.tbx_typ1_coor_z);
+            this.groupBox4.Controls.Add(this.label44);
+            this.groupBox4.Controls.Add(this.tbx_typ1_coor_y);
+            this.groupBox4.Controls.Add(this.tbx_typ1_coor_x);
+            this.groupBox4.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox4.Location = new System.Drawing.Point(980, 399);
+            this.groupBox4.Name = "groupBox4";
+            this.groupBox4.Size = new System.Drawing.Size(540, 120);
+            this.groupBox4.TabIndex = 40;
+            this.groupBox4.TabStop = false;
+            this.groupBox4.Text = "Type 1";
+            // 
+            // lb_typ1_count
+            // 
+            this.lb_typ1_count.AutoSize = true;
+            this.lb_typ1_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_typ1_count.Location = new System.Drawing.Point(98, 42);
+            this.lb_typ1_count.Name = "lb_typ1_count";
+            this.lb_typ1_count.Size = new System.Drawing.Size(72, 28);
+            this.lb_typ1_count.TabIndex = 82;
+            this.lb_typ1_count.Text = "####";
+            // 
+            // link_typ1_clear
+            // 
+            this.link_typ1_clear.AutoSize = true;
+            this.link_typ1_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_typ1_clear.Location = new System.Drawing.Point(209, 42);
+            this.link_typ1_clear.Name = "link_typ1_clear";
+            this.link_typ1_clear.Size = new System.Drawing.Size(67, 28);
+            this.link_typ1_clear.TabIndex = 81;
+            this.link_typ1_clear.TabStop = true;
+            this.link_typ1_clear.Text = "Clear";
+            this.link_typ1_clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_typ1_clear_LinkClicked);
+            // 
+            // label41
+            // 
+            this.label41.AutoSize = true;
+            this.label41.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label41.Location = new System.Drawing.Point(14, 42);
+            this.label41.Name = "label41";
+            this.label41.Size = new System.Drawing.Size(73, 28);
+            this.label41.TabIndex = 79;
+            this.label41.Text = "Count";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(15, 81);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(220, 23);
+            this.label42.TabIndex = 78;
+            this.label42.Text = "Place coordinates(X-Y-Z)";
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(396, 81);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(17, 23);
+            this.label43.TabIndex = 77;
+            this.label43.Text = "-";
+            // 
+            // tbx_typ1_coor_z
+            // 
+            this.tbx_typ1_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ1_coor_z.Location = new System.Drawing.Point(419, 79);
+            this.tbx_typ1_coor_z.Name = "tbx_typ1_coor_z";
+            this.tbx_typ1_coor_z.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ1_coor_z.TabIndex = 76;
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(307, 81);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(17, 23);
+            this.label44.TabIndex = 75;
+            this.label44.Text = "-";
+            // 
+            // tbx_typ1_coor_y
+            // 
+            this.tbx_typ1_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ1_coor_y.Location = new System.Drawing.Point(330, 79);
+            this.tbx_typ1_coor_y.Name = "tbx_typ1_coor_y";
+            this.tbx_typ1_coor_y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ1_coor_y.TabIndex = 74;
+            // 
+            // tbx_typ1_coor_x
+            // 
+            this.tbx_typ1_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ1_coor_x.Location = new System.Drawing.Point(241, 79);
+            this.tbx_typ1_coor_x.Name = "tbx_typ1_coor_x";
+            this.tbx_typ1_coor_x.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ1_coor_x.TabIndex = 73;
             // 
             // Form_Main
             // 
@@ -1294,6 +1800,9 @@ namespace DE1T4_Project
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1532, 783);
+            this.Controls.Add(this.groupBox4);
+            this.Controls.Add(this.groupBox3);
+            this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imageProcess_grbox);
             this.Controls.Add(this.camera_grbox);
@@ -1315,6 +1824,7 @@ namespace DE1T4_Project
             this.Conveyor_grbox.PerformLayout();
             this.PLC_grbox.ResumeLayout(false);
             this.PLC_grbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.camera_grbox.ResumeLayout(false);
             this.camera_grbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).EndInit();
@@ -1324,8 +1834,14 @@ namespace DE1T4_Project
             this.imageProcess_grbox.ResumeLayout(false);
             this.imageProcess_grbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).EndInit();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
+            this.groupBox4.ResumeLayout(false);
+            this.groupBox4.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -1417,15 +1933,59 @@ namespace DE1T4_Project
         private System.Windows.Forms.TextBox tbx_img_Area_max;
         private System.Windows.Forms.Label label22;
         private System.Windows.Forms.Label label21;
-        private System.Windows.Forms.Label lb_img_area;
-        private System.Windows.Forms.LinkLabel link_img_getArea;
         private System.Windows.Forms.ColorDialog color_lable;
-        private System.Windows.Forms.Button btn_img_colorLB;
         private System.Windows.Forms.Label label25;
         private MetroSet_UI.Controls.MetroSetSwitch sw_img_gray;
-        private MetroSet_UI.Controls.MetroSetSwitch metroSetSwitch1;
+        private System.Windows.Forms.LinkLabel link_img_LB_color;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.Label lb_typ3_count;
+        private System.Windows.Forms.LinkLabel link_typ3_clear;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.TextBox tbx_typ3_coor_z;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox tbx_typ3_coor_y;
+        private System.Windows.Forms.TextBox tbx_typ3_coor_x;
+        private System.Windows.Forms.TextBox tbx_auto_TL_X;
+        private System.Windows.Forms.Label label24;
+        private System.Windows.Forms.TextBox tbx_auto_TL_Y;
+        private System.Windows.Forms.Label label26;
+        private System.Windows.Forms.Label label28;
+        private System.Windows.Forms.TextBox tbx_auto_offsetX;
+        private System.Windows.Forms.TextBox tbx_auto_offsetY;
+        private System.Windows.Forms.Label label29;
+        private System.Windows.Forms.TextBox tbx_auto_offsetZ;
+        private System.Windows.Forms.Label label30;
         private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox3;
+        private System.Windows.Forms.Label lb_typ2_count;
+        private System.Windows.Forms.LinkLabel link_typ2_clear;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.TextBox tbx_typ2_coor_z;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox tbx_typ2_coor_y;
+        private System.Windows.Forms.TextBox tbx_typ2_coor_x;
+        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.Label lb_typ1_count;
+        private System.Windows.Forms.LinkLabel link_typ1_clear;
+        private System.Windows.Forms.Label label41;
+        private System.Windows.Forms.Label label42;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.TextBox tbx_typ1_coor_z;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox tbx_typ1_coor_y;
+        private System.Windows.Forms.TextBox tbx_typ1_coor_x;
+        private System.Windows.Forms.Button btn_auto_OnOff;
         private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox tbx_auto_ZPlace;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox tbx_auto_ZPick;
+        private System.Windows.Forms.LinkLabel link_img_getArea;
+        private System.Windows.Forms.Label lb_img_area;
     }
 }
 

@@ -14,3 +14,5 @@ All library use in form:
 		+ Emgu.CV.UI - Ver: 4.5.5.4823.
 		+ SharpDX.MediaFoundation - Ver: 4.2.0.
 		+ DirectShowLib - ver: 1.0.0.
+
+move elapsed - 120 ms

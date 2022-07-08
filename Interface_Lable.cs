@@ -16,36 +16,37 @@ namespace DE1T4_Project
         public const string Cam_Stop_Btn = "Stop Camera";
         public const string PLC_Connect_Btn = "Connect";
         public const string PLC_Dis_Btn = "Disconnect";
+        public const string AutoMode_On_Btn = "ON Automode";
+        public const string AutoMode_Off_Btn = "Off Automode";
 
         public static void set_cam_btn_status(ref Button Cambtn, bool flag)
         {
-            if (flag)
-            {
-                Cambtn.Text = Itf_Lb.Cam_Stop_Btn;
-                Cambtn.BackColor = Color.DodgerBlue;
-                Cambtn.ForeColor = Color.White;
-            }
-            else
-            {
-                Cambtn.Text = Itf_Lb.Cam_Start_Btn;
-                Cambtn.BackColor = Color.White;
-                Cambtn.ForeColor = Color.Black;
-            }
+            setButtonStatusItf(ref Cambtn, flag, Itf_Lb.Cam_Start_Btn, Itf_Lb.Cam_Stop_Btn);
         }
 
-        public static void set_plc_btn_status(ref Button Cambtn, bool flag)
+        public static void set_plc_btn_status(ref Button PLCbtn, bool flag)
+        {
+            setButtonStatusItf(ref PLCbtn, flag, Itf_Lb.PLC_Connect_Btn, Itf_Lb.PLC_Dis_Btn);
+        }
+
+        public static void set_automode_btn_status(ref Button PLCbtn, bool flag)
+        {
+            setButtonStatusItf(ref PLCbtn, flag, Itf_Lb.AutoMode_On_Btn, Itf_Lb.AutoMode_Off_Btn);
+        }
+
+        public static void setButtonStatusItf(ref Button btn, bool flag, string OnString, string OffString)
         {
             if (flag)
             {
-                Cambtn.Text = Itf_Lb.PLC_Dis_Btn;
-                Cambtn.BackColor = Color.DodgerBlue;
-                Cambtn.ForeColor = Color.White; 
+                btn.Text = OffString;
+                btn.BackColor = Color.DodgerBlue;
+                btn.ForeColor = Color.White;
             }
             else
             {
-                Cambtn.Text = Itf_Lb.PLC_Connect_Btn;
-                Cambtn.BackColor = Color.White;
-                Cambtn.ForeColor = Color.Black;
+                btn.Text = OnString;
+                btn.BackColor = Color.White;
+                btn.ForeColor = Color.Black;
             }
         }
     }

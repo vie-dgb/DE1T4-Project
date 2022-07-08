@@ -134,6 +134,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Project Information.txt" />
+    <None Include="Resources\Image1.bmp" />
+    <None Include="Resources\Layer 2IUH.png" />
+    <None Include="Resources\Logo_IUH.png" />
     <Content Include="saveFrame.txt" />
     <None Include="Resources\Asset 1.png" />
     <None Include="Resources\non-tick.png" />
