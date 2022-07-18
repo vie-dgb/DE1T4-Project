@@ -7,6 +7,7 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.IO;
 using System.Windows.Forms;
 using Emgu.CV;
 using Emgu.CV.CvEnum;
@@ -37,6 +38,24 @@ namespace DE1T4_Project
         // form load
         private void Form_Main_Load(object sender, EventArgs e)
         {
+            Introduces _introduces = new Introduces();
+            _introduces.ShowDialog();
+
+            bool pathExists = File.Exists(accessData.savePath);
+            while (!pathExists)
+            {
+                OpenFileDialog pathdialog = new OpenFileDialog();
+                if (pathdialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fullPath = pathdialog.FileName;
+                    string fileName = pathdialog.SafeFileName;
+                    accessData.savePath = fullPath.Replace(fileName, "") + fileName;
+                }
+
+                pathExists = File.Exists(accessData.savePath);
+            }
+                
+
             // init camera list and choose normal camera have index 0
             refreshCamList();
             for (int i = 0; i < cbb_Camlist.Items.Count; i++)
@@ -68,9 +87,6 @@ namespace DE1T4_Project
             Itf_Lb.set_plc_btn_status(ref btn_plc_connect, false);
             Itf_Lb.set_cam_btn_status(ref btn_cam_connect, false);
             Itf_Lb.set_automode_btn_status(ref btn_auto_OnOff, false);
-
-            Introduces _introduces = new Introduces();
-            _introduces.ShowDialog();
         }
 
         private void pictureBox1_Click(object sender, EventArgs e)
@@ -1130,10 +1146,6 @@ namespace DE1T4_Project
                 }
             }
         }
-
-
-
-
         #endregion Automode
 
         private void btn_objQueueView_Click_1(object sender, EventArgs e)
@@ -1143,6 +1155,23 @@ namespace DE1T4_Project
                 Form_Object_Infor formViewQueue = new Form_Object_Infor();
                 Form_Status.viewQueue = true;
                 formViewQueue.Show();
+            }
+        }
+
+        private void link_selectPath_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            bool pathExists = false;
+            while (!pathExists)
+            {
+                OpenFileDialog pathdialog = new OpenFileDialog();
+                if (pathdialog.ShowDialog() == DialogResult.OK)
+                {
+                    string fullPath = pathdialog.FileName;
+                    string fileName = pathdialog.SafeFileName;
+                    accessData.savePath = fullPath.Replace(fileName, "") + fileName;
+                }
+
+                pathExists = File.Exists(accessData.savePath);
             }
         }
     }

@@ -137,6 +137,7 @@ namespace DE1T4_Project
         private const int NumOfPara = 11;
         private const int StartIndex = 14;
         public static string savePath = "D:\\Study\\Graduation Project\\Main folder\\App & Firmware\\App\\DE1T4 Project\\saveFrame.txt";
+        //public static string savePath = "saveFrame.txt";
         public const int NUMOFSET = 3;
         public static void saveTLPos(ref Calib save, double X, double Y)
         {

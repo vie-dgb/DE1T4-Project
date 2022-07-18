@@ -43,6 +43,7 @@ namespace DE1T4_Project
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_pos_home = new System.Windows.Forms.Button();
             this.Conveyor_grbox = new System.Windows.Forms.GroupBox();
             this.lb_con_mmps_v = new System.Windows.Forms.Label();
             this.lb_con_accSpeed = new System.Windows.Forms.Label();
@@ -53,10 +54,12 @@ namespace DE1T4_Project
             this.lb_con_Speed = new System.Windows.Forms.Label();
             this.sw_con_Run = new MetroSet_UI.Controls.MetroSetSwitch();
             this.PLC_grbox = new System.Windows.Forms.GroupBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_plc_connect = new System.Windows.Forms.Button();
             this.lb_plc_ip = new System.Windows.Forms.Label();
             this.tbx_plc_ip = new System.Windows.Forms.TextBox();
             this.camera_grbox = new System.Windows.Forms.GroupBox();
+            this.link_selectPath = new System.Windows.Forms.LinkLabel();
             this.btn_camsetup = new System.Windows.Forms.Button();
             this.link_img_getArea = new System.Windows.Forms.LinkLabel();
             this.lb_img_area = new System.Windows.Forms.Label();
@@ -66,6 +69,8 @@ namespace DE1T4_Project
             this.label1 = new System.Windows.Forms.Label();
             this.cbb_Camlist = new System.Windows.Forms.ComboBox();
             this.btn_cam_connect = new System.Windows.Forms.Button();
+            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
+            this.picbox_offCam = new System.Windows.Forms.PictureBox();
             this.cyclicRead = new System.Windows.Forms.Timer(this.components);
             this.btn_mov_Ymin = new System.Windows.Forms.Button();
             this.btn_mov_Yplus = new System.Windows.Forms.Button();
@@ -155,6 +160,7 @@ namespace DE1T4_Project
             this.label39 = new System.Windows.Forms.Label();
             this.label38 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btn_objQueueView = new System.Windows.Forms.Button();
             this.label27 = new System.Windows.Forms.Label();
             this.tbx_y_limit_low = new System.Windows.Forms.TextBox();
             this.label46 = new System.Windows.Forms.Label();
@@ -170,24 +176,19 @@ namespace DE1T4_Project
             this.lb_typ2_count = new System.Windows.Forms.Label();
             this.link_typ2_clear = new System.Windows.Forms.LinkLabel();
             this.label31 = new System.Windows.Forms.Label();
-            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
-            this.picbox_offCam = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.btn_pos_home = new System.Windows.Forms.Button();
-            this.btn_objQueueView = new System.Windows.Forms.Button();
             this.ToolHead_grbox.SuspendLayout();
             this.position_grbox.SuspendLayout();
             this.Conveyor_grbox.SuspendLayout();
             this.PLC_grbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.camera_grbox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).BeginInit();
             this.movement_grbox.SuspendLayout();
             this.imageProcess_grbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.groupBox5.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ToolHead_grbox
@@ -359,6 +360,17 @@ namespace DE1T4_Project
             this.label2.TabIndex = 16;
             this.label2.Text = "X:";
             // 
+            // btn_pos_home
+            // 
+            this.btn_pos_home.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pos_home.BackgroundImage")));
+            this.btn_pos_home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_pos_home.Location = new System.Drawing.Point(26, 55);
+            this.btn_pos_home.Name = "btn_pos_home";
+            this.btn_pos_home.Size = new System.Drawing.Size(80, 80);
+            this.btn_pos_home.TabIndex = 0;
+            this.btn_pos_home.UseVisualStyleBackColor = true;
+            this.btn_pos_home.Click += new System.EventHandler(this.btn_pos_home_Click);
+            // 
             // Conveyor_grbox
             // 
             this.Conveyor_grbox.BackColor = System.Drawing.Color.Gainsboro;
@@ -492,6 +504,17 @@ namespace DE1T4_Project
             this.PLC_grbox.TabStop = false;
             this.PLC_grbox.Text = "Robot connect";
             // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DE1T4_Project.Properties.Resources.Layer_2IUH;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 82);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
             // btn_plc_connect
             // 
             this.btn_plc_connect.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -525,6 +548,7 @@ namespace DE1T4_Project
             // 
             this.camera_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.camera_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.camera_grbox.Controls.Add(this.link_selectPath);
             this.camera_grbox.Controls.Add(this.btn_camsetup);
             this.camera_grbox.Controls.Add(this.link_img_getArea);
             this.camera_grbox.Controls.Add(this.lb_img_area);
@@ -544,6 +568,18 @@ namespace DE1T4_Project
             this.camera_grbox.TabIndex = 8;
             this.camera_grbox.TabStop = false;
             this.camera_grbox.Text = "Camera";
+            // 
+            // link_selectPath
+            // 
+            this.link_selectPath.AutoSize = true;
+            this.link_selectPath.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_selectPath.Location = new System.Drawing.Point(6, 536);
+            this.link_selectPath.Name = "link_selectPath";
+            this.link_selectPath.Size = new System.Drawing.Size(156, 23);
+            this.link_selectPath.TabIndex = 67;
+            this.link_selectPath.TabStop = true;
+            this.link_selectPath.Text = "Select File Config";
+            this.link_selectPath.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_selectPath_LinkClicked);
             // 
             // btn_camsetup
             // 
@@ -657,6 +693,27 @@ namespace DE1T4_Project
             this.btn_cam_connect.Text = "Connect";
             this.btn_cam_connect.UseVisualStyleBackColor = true;
             this.btn_cam_connect.Click += new System.EventHandler(this.btn_cam_connect_Click);
+            // 
+            // imgBox_crop
+            // 
+            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
+            this.imgBox_crop.Name = "imgBox_crop";
+            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
+            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgBox_crop.TabIndex = 18;
+            this.imgBox_crop.TabStop = false;
+            this.imgBox_crop.Visible = false;
+            // 
+            // picbox_offCam
+            // 
+            this.picbox_offCam.Image = global::DE1T4_Project.Properties.Resources.offCam;
+            this.picbox_offCam.Location = new System.Drawing.Point(6, 87);
+            this.picbox_offCam.Name = "picbox_offCam";
+            this.picbox_offCam.Size = new System.Drawing.Size(512, 384);
+            this.picbox_offCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picbox_offCam.TabIndex = 17;
+            this.picbox_offCam.TabStop = false;
             // 
             // cyclicRead
             // 
@@ -1638,6 +1695,17 @@ namespace DE1T4_Project
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Auto Mode Parameter";
             // 
+            // btn_objQueueView
+            // 
+            this.btn_objQueueView.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_objQueueView.Location = new System.Drawing.Point(19, 331);
+            this.btn_objQueueView.Name = "btn_objQueueView";
+            this.btn_objQueueView.Size = new System.Drawing.Size(125, 40);
+            this.btn_objQueueView.TabIndex = 107;
+            this.btn_objQueueView.Text = "View Queue";
+            this.btn_objQueueView.UseVisualStyleBackColor = true;
+            this.btn_objQueueView.Click += new System.EventHandler(this.btn_objQueueView_Click_1);
+            // 
             // label27
             // 
             this.label27.AutoSize = true;
@@ -1807,60 +1875,6 @@ namespace DE1T4_Project
             this.label31.TabIndex = 83;
             this.label31.Text = "Type 2";
             // 
-            // imgBox_crop
-            // 
-            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
-            this.imgBox_crop.Name = "imgBox_crop";
-            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
-            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgBox_crop.TabIndex = 18;
-            this.imgBox_crop.TabStop = false;
-            this.imgBox_crop.Visible = false;
-            // 
-            // picbox_offCam
-            // 
-            this.picbox_offCam.Image = global::DE1T4_Project.Properties.Resources.offCam;
-            this.picbox_offCam.Location = new System.Drawing.Point(6, 87);
-            this.picbox_offCam.Name = "picbox_offCam";
-            this.picbox_offCam.Size = new System.Drawing.Size(512, 384);
-            this.picbox_offCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picbox_offCam.TabIndex = 17;
-            this.picbox_offCam.TabStop = false;
-            // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DE1T4_Project.Properties.Resources.Layer_2IUH;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 82);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
-            // 
-            // btn_pos_home
-            // 
-            this.btn_pos_home.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pos_home.BackgroundImage")));
-            this.btn_pos_home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_pos_home.Location = new System.Drawing.Point(26, 55);
-            this.btn_pos_home.Name = "btn_pos_home";
-            this.btn_pos_home.Size = new System.Drawing.Size(80, 80);
-            this.btn_pos_home.TabIndex = 0;
-            this.btn_pos_home.UseVisualStyleBackColor = true;
-            this.btn_pos_home.Click += new System.EventHandler(this.btn_pos_home_Click);
-            // 
-            // btn_objQueueView
-            // 
-            this.btn_objQueueView.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_objQueueView.Location = new System.Drawing.Point(19, 331);
-            this.btn_objQueueView.Name = "btn_objQueueView";
-            this.btn_objQueueView.Size = new System.Drawing.Size(125, 40);
-            this.btn_objQueueView.TabIndex = 107;
-            this.btn_objQueueView.Text = "View Queue";
-            this.btn_objQueueView.UseVisualStyleBackColor = true;
-            this.btn_objQueueView.Click += new System.EventHandler(this.btn_objQueueView_Click_1);
-            // 
             // Form_Main
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Inherit;
@@ -1889,8 +1903,11 @@ namespace DE1T4_Project
             this.Conveyor_grbox.PerformLayout();
             this.PLC_grbox.ResumeLayout(false);
             this.PLC_grbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.camera_grbox.ResumeLayout(false);
             this.camera_grbox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).EndInit();
             this.movement_grbox.ResumeLayout(false);
             this.movement_grbox.PerformLayout();
             this.imageProcess_grbox.ResumeLayout(false);
@@ -1900,9 +1917,6 @@ namespace DE1T4_Project
             this.groupBox1.PerformLayout();
             this.groupBox5.ResumeLayout(false);
             this.groupBox5.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -2052,6 +2066,7 @@ namespace DE1T4_Project
         private System.Windows.Forms.Button btn_camsetup;
         private System.Windows.Forms.Label label27;
         private System.Windows.Forms.Button btn_objQueueView;
+        private System.Windows.Forms.LinkLabel link_selectPath;
     }
 }
 
