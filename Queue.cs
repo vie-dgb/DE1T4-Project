@@ -28,6 +28,7 @@ namespace DE1T4_Project
         public static List<ObElement> queue = new List<ObElement>();
         public static int ObjInd_InCam;
         public static bool doneOneInQueue = false;
+        public static bool changeQueue = false;
         public static ObElement saveTmpObj(cNum.shp shapes, int _type, int Location_X, int Location_Y,
             double Coor_X, double Coor_Y, double area)
         {
@@ -49,6 +50,7 @@ namespace DE1T4_Project
             addObj.timeStamp = Stopwatch.StartNew();
             queue.Add(addObj);
             ObjInd_InCam = queue.Count - 1;
+            changeQueue = true;
         }
 
         public static bool CompareObject(ObElement main, ObElement check)
@@ -57,8 +59,8 @@ namespace DE1T4_Project
             if (main.shapes == check.shapes) cnt++;
             if ((main.x > (check.x - 2))
                 && (main.x < (check.x + 2))) cnt++;
-            if ((main.area > (check.area - 15000))
-                && (main.area < (check.area + 15000))) cnt++;
+            if ((main.area > (check.area - 1500))
+                && (main.area < (check.area + 1500))) cnt++;
             if (cnt == 3) return true;
             else return false;
         }

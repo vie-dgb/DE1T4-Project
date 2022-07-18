@@ -181,7 +181,6 @@ namespace DE1T4_Project
             this.tb_ratio_Height.Name = "tb_ratio_Height";
             this.tb_ratio_Height.Size = new System.Drawing.Size(75, 27);
             this.tb_ratio_Height.TabIndex = 71;
-            this.tb_ratio_Height.Leave += new System.EventHandler(this.tb_ratio_Height_Leave);
             // 
             // label4
             // 
@@ -210,7 +209,6 @@ namespace DE1T4_Project
             this.tb_ratio_Width.Name = "tb_ratio_Width";
             this.tb_ratio_Width.Size = new System.Drawing.Size(75, 27);
             this.tb_ratio_Width.TabIndex = 68;
-            this.tb_ratio_Width.Leave += new System.EventHandler(this.tb_ratio_Width_Leave);
             // 
             // lb_get_ratio
             // 

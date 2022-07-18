@@ -21,11 +21,11 @@ namespace DE1T4_Project
     public partial class Form_Main : Form
     {
         // cam
-        public VideoCapture CamProcess;
         public Mat _frame;
         // plc
         private Plc DeltaPLC = null;
         private ErrorCode errCode;
+        private bool readCount = false;
         // image process
         private double tmpArea;
         // auto mode
@@ -69,10 +69,18 @@ namespace DE1T4_Project
             Itf_Lb.set_cam_btn_status(ref btn_cam_connect, false);
             Itf_Lb.set_automode_btn_status(ref btn_auto_OnOff, false);
 
+            Introduces _introduces = new Introduces();
+            _introduces.ShowDialog();
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+            Introduces _introduces = new Introduces();
+            _introduces.ShowDialog();
         }
 
         //-----------Camera----------------//
-    #region Camera
+        #region Camera
         #region Camera Event
         // update list camera
         private void cbb_Camlist_DropDown(object sender, EventArgs e)
@@ -117,12 +125,13 @@ namespace DE1T4_Project
                 imgBox_crop.Visible = true;
                 picbox_offCam.Visible = false;
                 // check connect - refresh button
-                if (CamProcess.IsOpened)
+                if (Cam_S.CamProcess.IsOpened)
                 {
                     Itf_Lb.set_cam_btn_status(ref btn_cam_connect, true);
                 }
                 // enable setting camera button
-                btn_cam_setting.Enabled = true;
+                btn_frame_setting.Enabled = true;
+                btn_camsetup.Enabled = true;
             }
             else
             {
@@ -133,7 +142,8 @@ namespace DE1T4_Project
                 // refresh button
                 Itf_Lb.set_cam_btn_status(ref btn_cam_connect, false);
                 // disable setting camera button
-                btn_cam_setting.Enabled = false;
+                btn_frame_setting.Enabled = false;
+                btn_camsetup.Enabled = false;
             }
         }
         // start capture
@@ -144,8 +154,8 @@ namespace DE1T4_Project
             {
                 try
                 {
-                    CamProcess = new VideoCapture(Cam_S.Index);
-                    CamProcess.ImageGrabbed += ProcessFrame;
+                    Cam_S.CamProcess = new VideoCapture(Cam_S.Index);
+                    Cam_S.CamProcess.ImageGrabbed += ProcessFrame;
                 }
                 catch (NullReferenceException excpt)
                 {
@@ -154,12 +164,12 @@ namespace DE1T4_Project
                 _frame = new Mat();
             }
             // start & call handler
-            if (CamProcess != null)
+            if (Cam_S.CamProcess != null)
             {
                 if (!Cam_S.captureInProgress)
                 {
                     //start the capture
-                    CamProcess.Start();
+                    Cam_S.CamProcess.Start();
                     Cam_S.captureInProgress = true;
                     cbb_Camlist.Enabled = false;
                 }
@@ -168,9 +178,9 @@ namespace DE1T4_Project
         // event handler
         private void ProcessFrame(object sender, EventArgs arg)
         {
-            if (CamProcess != null && CamProcess.Ptr != IntPtr.Zero)
+            if (Cam_S.CamProcess != null && Cam_S.CamProcess.Ptr != IntPtr.Zero)
             {
-                CamProcess.Read(_frame);
+                Cam_S.CamProcess.Read(_frame);
                 // save for crop image
                 Image<Bgr, byte> _imgFrame = new Image<Bgr, byte>(_frame.Width, _frame.Height);
                 _imgFrame = _frame.ToImage<Bgr, byte>();
@@ -204,30 +214,40 @@ namespace DE1T4_Project
             // 10fps => 100ms/frame
             // 5 fps => 200ms/frame
             // delay = fpsneedtime - normalfpstime
-            CvInvoke.WaitKey(60);
+            //CvInvoke.WaitKey(60);
         }
         // stop capture
         private void Camera_Disable()
         {
-            if (CamProcess != null)
+            if (Cam_S.CamProcess != null)
             {
                 if (Cam_S.captureInProgress)
                 {
                     //stop the capture
-                    CamProcess.Dispose();
+                    Cam_S.CamProcess.Dispose();
                     Cam_S.captureInProgress = false;
                     cbb_Camlist.Enabled = true;
                 }
             }
         }
-        // camera config
+        // camera frame config
         private void btn_cam_setting_Click(object sender, EventArgs e)
         {
             Form_CamSetting _camSet = new Form_CamSetting();
             settingCam.IsConFig = true;
             settingCam.set_Frame = new Mat();
-            settingCam.fps = CamProcess.Get(Emgu.CV.CvEnum.CapProp.Fps);
+            settingCam.fps = Cam_S.CamProcess.Get(Emgu.CV.CvEnum.CapProp.Fps);
             _camSet.ShowDialog();
+        }
+        // camera image config
+        private void btn_camsetup_Click(object sender, EventArgs e)
+        {
+            if (!Form_Status.CamSetting)
+            {
+                Form_CamConfig formCamConfig = new Form_CamConfig();
+                Form_Status.CamSetting = true;
+                formCamConfig.Show();
+            }
         }
         #endregion
         #region image process
@@ -254,14 +274,9 @@ namespace DE1T4_Project
                 // convert hsv to binary with range limit
                 Image<Gray, byte> grayImg = hsvImg.InRange(lowRange, highRange);
                 // opening
-                //grayImg = grayImg.Erode(2);
-                //grayImg = grayImg.Dilate(2);
-
                 var element = CvInvoke.GetStructuringElement(Emgu.CV.CvEnum.ElementShape.Ellipse,
                 new Size(8, 8), new Point(-1, -1));
 
-                CvInvoke.MorphologyEx(grayImg, grayImg, Emgu.CV.CvEnum.MorphOp.Close, element,
-                    new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(1.0));
                 CvInvoke.MorphologyEx(grayImg, grayImg, Emgu.CV.CvEnum.MorphOp.Open, element,
                     new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(1.0));
                 #endregion convert image
@@ -275,7 +290,7 @@ namespace DE1T4_Project
                 // check every single countour founded
                 for (int i = 0; i < contours.Size; i++)
                 {
-                     ObElement tmpObj = new ObElement();
+                    ObElement tmpObj = new ObElement();
                     bool drawCenter = false;
                     double pemir = CvInvoke.ArcLength(contours[i], true);
                     VectorOfPoint approx = new VectorOfPoint();
@@ -284,7 +299,6 @@ namespace DE1T4_Project
                     
                     // find center
                     Moments moments = CvInvoke.Moments(contours[i]);
-                    double area = moments.M00 * 2;
 
                     // claculate center coordinates of countour
                     int x = (int)(moments.M10 / moments.M00);
@@ -295,7 +309,8 @@ namespace DE1T4_Project
                     coorY = Math.Round(coorY, 0);
 
                     // get countour area
-                    tmpArea = CvInvoke.ContourArea(approx, false);
+                    double area = CvInvoke.ContourArea(approx, false);
+                    tmpArea = area;
 
                     // detect shapes
                     // if contour has 3 vertices => triangles
@@ -317,11 +332,11 @@ namespace DE1T4_Project
                                 if (approx.Size > 6) 
                                 {
                                     // draw circles
-                                    //_result = returnCircles(_result, contours, i);
-                                    //int radius = (int)((double)(Math.Sqrt(tmpArea / Math.PI)));
-                                    //CvInvoke.Circle(_result, new Point(x, y), 2, new Bgr(Color.Red).MCvScalar, 2);
-                                    CvInvoke.DrawContours(_result, contours, i, 
-                                        new Bgr(contourColor).MCvScalar,3);
+                                    //CvInvoke.DrawContours(_result, contours, i,
+                                    //    new Bgr(contourColor).MCvScalar, 3);
+                                    CircleF CirCles = CvInvoke.MinEnclosingCircle(approx);
+                                    CvInvoke.Circle(_result, new Point(x, y), (int)CirCles.Radius, 
+                                        new Bgr(contourColor).MCvScalar, 2);
                                     drawCenter = true;
                                 }
                                 #endregion
@@ -407,30 +422,36 @@ namespace DE1T4_Project
             Image<Hsv, byte> hsvImg = new Image<Hsv, byte>(inputImg.Width, inputImg.Height);
             CvInvoke.CvtColor(inputImg, hsvImg, ColorConversion.Bgr2Hsv);
             // smooth image with gaussian blur
-            //CvInvoke.GaussianBlur(hsvImg, hsvImg, new Size(5, 5), 1);
-
+            CvInvoke.GaussianBlur(hsvImg, hsvImg, new Size(5, 5), 1);
             // convert hsv to binary with range limit
             Image<Gray, byte> imgtemp = hsvImg.InRange(_low, _high);
+            // opening
             var element = CvInvoke.GetStructuringElement(Emgu.CV.CvEnum.ElementShape.Ellipse,
                 new Size(8, 8), new Point(-1, -1));
-            //CvInvoke.MorphologyEx(imgtemp, imgtemp, Emgu.CV.CvEnum.MorphOp.Close, element,
-            //    new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(1.0));
-            //CvInvoke.MorphologyEx(imgtemp, imgtemp, Emgu.CV.CvEnum.MorphOp.Open, element,
-            //    new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(1.0));
-            CvInvoke.MorphologyEx(imgtemp, imgtemp, Emgu.CV.CvEnum.MorphOp.Close, element,
-                new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(1.0));
+
             CvInvoke.MorphologyEx(imgtemp, imgtemp, Emgu.CV.CvEnum.MorphOp.Open, element,
                 new Point(-1, -1), 1, Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(1.0));
 
-            //imgtemp = imgtemp.Erode(2);
-            //CvInvoke.Dilate(imgtemp, imgtemp, element, new Point(-1, -1), 2, 
-            //    Emgu.CV.CvEnum.BorderType.Default, new MCvScalar(0, 0, 0));
+            // find countours
+            VectorOfVectorOfPoint contours = new VectorOfVectorOfPoint();
+            Mat n = new Mat();
+            CvInvoke.FindContours(imgtemp, contours, n, Emgu.CV.CvEnum.RetrType.Ccomp,
+                Emgu.CV.CvEnum.ChainApproxMethod.ChainApproxSimple);
 
-            //imgtemp = imgtemp.Erode(2);
-            //imgtemp = imgtemp.Dilate(2);
+            // check every single countour founded
+            for (int i = 0; i < contours.Size; i++)
+            {
+                double pemir = CvInvoke.ArcLength(contours[i], true);
+                VectorOfPoint approx = new VectorOfPoint();
+                // epsilon in the range of 1 - 5 % of the original contour perimeter.
+                CvInvoke.ApproxPolyDP(contours[i], approx, 0.04 * pemir, true);
 
+                // get countour area
+                tmpArea = CvInvoke.ContourArea(approx, false);
+            }
             return imgtemp;
         }
+
         private void link_img_getArea_LinkClicked_1(object sender, LinkLabelLinkClickedEventArgs e)
         {
             lb_img_area.Text = tmpArea.ToString();
@@ -465,6 +486,7 @@ namespace DE1T4_Project
                             PLC.IsConnect = !PLC.IsConnect;
                         }
                         // enables cyclic read
+                        readCount = true;
                         cyclicRead.Enabled = true;
                         cyclicRead.Interval = 1000;
                         cyclicRead.Start();
@@ -502,7 +524,7 @@ namespace DE1T4_Project
         private void tbx_mov_velocity_Leave(object sender, EventArgs e)
         {
             short speed = Convert.ToInt16(tbx_mov_velocity.Text);
-            if ((speed >= 200) && (speed <= 500))
+            if ((speed >= 200) && (speed <= 1200))
             {
                 PLC.ChangeEESpeed(ref DeltaPLC, speed);
             }
@@ -573,7 +595,7 @@ namespace DE1T4_Project
         private void tbx_con_speed_Leave(object sender, EventArgs e)
         {
             double speed = Convert.ToDouble(tbx_con_speed.Text);
-            if ((speed > 10) && (speed <= 50))
+            if ((speed > 10) && (speed <= 70))
             {
                 PLC.ChangeConveyorSpeed(ref DeltaPLC, speed);
             }
@@ -606,11 +628,32 @@ namespace DE1T4_Project
                     if (sw_con_Run.Switched)
                     {
                         PLC.ReadConveyorSpeed(ref DeltaPLC);
-                        lb_con_accSpeed.Text = PLC.Conveyor_Velocity.ToString();
+                        lb_con_accSpeed.Text = Math.Round(PLC.Conveyor_Velocity).ToString();
+                    }
+                    // read count
+                    if (readCount)
+                    {
+                        PLC.Read_PnP_Count(ref DeltaPLC);
+                        lb_typ1_count.Text = PLC.Count_Type_1.ToString();
+                        lb_typ2_count.Text = PLC.Count_Type_2.ToString();
+                        lb_typ3_count.Text = PLC.Count_Type_3.ToString();
+                        readCount = false;
                     }
                     // read necessary data when connect 
                     if (PLC.Read_Init)
                     {
+                        #region read for switch
+                        bool readTmp = false;
+                        PLC.ReadParameterBit(ref DeltaPLC, ref readTmp, PLC_Addr.Vaccum);
+                        sw_th_Vaccum.Switched = readTmp;
+
+                        PLC.ReadParameterBit(ref DeltaPLC, ref readTmp, PLC_Addr.Valve);
+                        sw_th_Valve.Switched = readTmp;
+
+                        PLC.ReadParameterBit(ref DeltaPLC, ref readTmp, PLC_Addr.Conveyor);
+                        sw_con_Run.Switched = readTmp;
+                        #endregion read for switch
+
                         #region read EESpeed, division, conveyor setpoint & show
                         PLC.ReadParameterShort(ref DeltaPLC, ref PLC.EESpeed, PLC_Addr.EESpeed);
                         PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Division, PLC_Addr.Division);
@@ -640,15 +683,19 @@ namespace DE1T4_Project
                         tbx_typ3_coor_z.Text = PLC.PnP_Typ3_Coor.Z.ToString();
                         #endregion
 
-                        #region read offset, z distance & show
+                        #region read offset, z distance, y limit & show
                         PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Z_Pick, PLC_Addr.PickDown);
                         PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Z_Place, PLC_Addr.PlaceDown);
+                        PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Y_Pick_Limit_High, PLC_Addr.Y_Pick_Limit_High);
+                        PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Y_Pick_Limit_Low, PLC_Addr.Y_Pick_Limit_Low);
                         PLC.Read_PnP_Offset(ref DeltaPLC);
                         tbx_auto_offsetX.Text = PLC.PnP_Offset.X.ToString();
                         tbx_auto_offsetY.Text = PLC.PnP_Offset.Y.ToString();
                         tbx_auto_offsetZ.Text = PLC.PnP_Offset.Z.ToString();
                         tbx_auto_ZPick.Text = PLC.Z_Pick.ToString();
                         tbx_auto_ZPlace.Text = PLC.Z_Place.ToString();
+                        tbx_y_limit_high.Text = PLC.Y_Pick_Limit_High.ToString();
+                        tbx_y_limit_low.Text = PLC.Y_Pick_Limit_Low.ToString();
                         #endregion
 
                         #region read count value & show
@@ -883,64 +930,130 @@ namespace DE1T4_Project
         }
         private void tbx_auto_offsetX_Leave(object sender, EventArgs e)
         {
-            double tmp = Convert.ToDouble(tbx_auto_offsetX.Text);
-            PLC.Write_Double(ref DeltaPLC, PLC_Addr.PNP_Offset_X, tmp);
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_auto_offsetX.Text, PLC_Addr.PNP_Offset_X);
         }
-
         private void tbx_auto_offsetY_Leave(object sender, EventArgs e)
         {
-            double tmp = Convert.ToDouble(tbx_auto_offsetY.Text);
-            PLC.Write_Double(ref DeltaPLC, PLC_Addr.PNP_Offset_Y, tmp);
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_auto_offsetY.Text, PLC_Addr.PNP_Offset_Y);
         }
-
         private void tbx_auto_offsetZ_Leave(object sender, EventArgs e)
         {
-            double tmp = Convert.ToDouble(tbx_auto_offsetZ.Text);
-            PLC.Write_Double(ref DeltaPLC, PLC_Addr.PNP_Offset_Z, tmp);
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_auto_offsetZ.Text, PLC_Addr.PNP_Offset_Z);
         }
         private void tbx_auto_ZPick_Leave(object sender, EventArgs e)
         {
-            double tmp = Convert.ToDouble(tbx_auto_ZPick.Text);
-            PLC.Write_Double(ref DeltaPLC, PLC_Addr.PickDown, tmp);
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_auto_ZPick.Text, PLC_Addr.PickDown);
         }
-        private void tbx_auto_ZPlace_TextChanged(object sender, EventArgs e)
+        private void tbx_auto_ZPlace_Leave(object sender, EventArgs e)
         {
-            double tmp = Convert.ToDouble(tbx_auto_ZPlace.Text);
-            PLC.Write_Double(ref DeltaPLC, PLC_Addr.PlaceDown, tmp);
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_auto_ZPlace.Text, PLC_Addr.PlaceDown);
         }
-        private void link_typ1_clear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void tbx_typ1_coor_x_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ1_coor_x.Text, PLC_Addr.PlacePos_1_X);
+        }
+        private void tbx_typ1_coor_y_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ1_coor_y.Text, PLC_Addr.PlacePos_1_Y);
+        }
+        private void tbx_typ1_coor_z_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ1_coor_z.Text, PLC_Addr.PlacePos_1_Z);
+        }
+        private void tbx_typ2_coor_x_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ2_coor_x.Text, PLC_Addr.PlacePos_2_X);
+        }
+        private void tbx_typ2_coor_y_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ2_coor_y.Text, PLC_Addr.PlacePos_2_Y);
+        }
+        private void tbx_typ2_coor_z_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ2_coor_z.Text, PLC_Addr.PlacePos_2_Z);
+        }
+        private void tbx_typ3_coor_x_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ3_coor_x.Text, PLC_Addr.PlacePos_3_X);
+        }
+        private void tbx_typ3_coor_y_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ3_coor_y.Text, PLC_Addr.PlacePos_3_Y);
+        }
+        private void tbx_typ3_coor_z_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_typ3_coor_z.Text, PLC_Addr.PlacePos_3_Z);
+        }
+        private void tbx_y_limit_high_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_y_limit_high.Text, PLC_Addr.Y_Pick_Limit_High);
+            PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Y_Pick_Limit_High, PLC_Addr.Y_Pick_Limit_High);
+        }
+        private void tbx_y_limit_low_Leave(object sender, EventArgs e)
+        {
+            PLC.Convert_N_Write_Double(ref DeltaPLC, tbx_y_limit_low.Text, PLC_Addr.Y_Pick_Limit_Low);
+            PLC.ReadParameterDouble(ref DeltaPLC, ref PLC.Y_Pick_Limit_Low, PLC_Addr.Y_Pick_Limit_Low);
+        }
+        private void link_typ1_clear_LinkClicked(object sender, EventArgs e)
         {
             short tmp = (short)0;
-            PLC.Write_Short(ref DeltaPLC, PLC_Addr.TargetCount_1, tmp);
+            PLC.WriteShort(ref DeltaPLC, PLC_Addr.TargetCount_1, tmp);
             PLC.ReadParameterShort(ref DeltaPLC, ref PLC.Count_Type_1, PLC_Addr.TargetCount_1);
             lb_typ1_count.Text = PLC.Count_Type_1.ToString();
         }
-        private void link_typ2_clear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void link_typ2_clear_LinkClicked(object sender, EventArgs e)
         {
             short tmp = (short)0;
-            PLC.Write_Short(ref DeltaPLC, PLC_Addr.TargetCount_2, tmp);
+            PLC.WriteShort(ref DeltaPLC, PLC_Addr.TargetCount_2, tmp);
             PLC.ReadParameterShort(ref DeltaPLC, ref PLC.Count_Type_2, PLC_Addr.TargetCount_2);
             lb_typ2_count.Text = PLC.Count_Type_2.ToString();
         }
-        private void link_typ3_clear_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        private void link_typ3_clear_LinkClicked(object sender, EventArgs e)
         {
             short tmp = (short)0;
-            PLC.Write_Short(ref DeltaPLC, PLC_Addr.TargetCount_3, tmp);
+            PLC.WriteShort(ref DeltaPLC, PLC_Addr.TargetCount_3, tmp);
             PLC.ReadParameterShort(ref DeltaPLC, ref PLC.Count_Type_3, PLC_Addr.TargetCount_3);
             lb_typ3_count.Text = PLC.Count_Type_3.ToString();
         }
-        #endregion
+        private void link_clear_all_LinkClicked(object sender, LinkLabelLinkClickedEventArgs e)
+        {
+            short tmp = (short)0;
+            PLC.WriteShort(ref DeltaPLC, PLC_Addr.TargetCount_1, tmp);
+            PLC.WriteShort(ref DeltaPLC, PLC_Addr.TargetCount_2, tmp);
+            PLC.WriteShort(ref DeltaPLC, PLC_Addr.TargetCount_3, tmp);
+
+            PLC.ReadParameterShort(ref DeltaPLC, ref PLC.Count_Type_1, PLC_Addr.TargetCount_1);
+            PLC.ReadParameterShort(ref DeltaPLC, ref PLC.Count_Type_2, PLC_Addr.TargetCount_2);
+            PLC.ReadParameterShort(ref DeltaPLC, ref PLC.Count_Type_3, PLC_Addr.TargetCount_3);
+
+            lb_typ1_count.Text = PLC.Count_Type_1.ToString();
+            lb_typ2_count.Text = PLC.Count_Type_2.ToString();
+            lb_typ3_count.Text = PLC.Count_Type_3.ToString();
+        }
 
         Timer AutoModeTimer = new Timer { Interval = 100 };
         private void btn_auto_OnOff_Click(object sender, EventArgs e)
         {
             if (!OnAutoMode)
             {
+                if (!PLC.IsConnect)
+                {
+                    MessageBox.Show("PLC not connected", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                if (!Cam_S.captureInProgress)
+                {
+                    MessageBox.Show("Camera not opening", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    return;
+                }
+                
                 Itf_Lb.set_automode_btn_status(ref btn_auto_OnOff, true);
                 this.SetAutoModeButtonEnable(false);
 
                 ObQueue.queue.Clear();
                 PLC.Pnp_Start(ref DeltaPLC);
+                changeSWInAutoMode();
+
                 AutoModeTimer.Tick += new System.EventHandler(AutoModeTimerHandler);
                 AutoModeTimer.Start();
 
@@ -949,7 +1062,8 @@ namespace DE1T4_Project
             else
             {
                 AutoModeTimer.Stop();
-
+                PLC.Pnp_Stop(ref DeltaPLC);
+                changeSWInAutoMode();
                 Itf_Lb.set_automode_btn_status(ref btn_auto_OnOff, false);
                 this.SetAutoModeButtonEnable(true);
                 OnAutoMode = !OnAutoMode;
@@ -958,12 +1072,36 @@ namespace DE1T4_Project
         // enable of disable button, textbox,.. when automode on or off 
         private void SetAutoModeButtonEnable(bool status)
         {
-            //tbx_plc_ip.Enabled = status;
-        }
+            imageProcess_grbox.Enabled = status;
+            movement_grbox.Enabled = status;
 
+            btn_pos_home.Enabled = status;
+
+            sw_th_Vaccum.Enabled = status;
+            sw_th_Valve.Enabled = status;
+
+            sw_con_Run.Enabled = status;
+            tbx_con_speed.Enabled = status;
+        }
+        private void changeSWInAutoMode()
+        {
+            bool readTmp = false;
+            PLC.ReadParameterBit(ref DeltaPLC, ref readTmp, PLC_Addr.Vaccum);
+            sw_th_Vaccum.Switched = readTmp;
+            PLC.ReadParameterBit(ref DeltaPLC, ref readTmp, PLC_Addr.Conveyor);
+            sw_con_Run.Switched = readTmp;
+        }
+        #endregion
+
+        // auto mode timer handler
         public void AutoModeTimerHandler(object source, EventArgs e)
         {
-            bool readbool = PLC.read_Singles_Bit(ref DeltaPLC, PLC_Addr.PNP_Busy);
+            // check connected still alive & read busy bit
+            bool readbool = false;
+            if (!PLC.ReadParameterBit(ref DeltaPLC, ref readbool, PLC_Addr.PNP_Busy))
+                return;
+            readCount = true;
+            // if not busy pick any object, send pick parameter & run
             if (!readbool)
             {
                 // cyclic check object
@@ -971,13 +1109,10 @@ namespace DE1T4_Project
                 {
                     for (int i = 0; i < ObQueue.queue.Count; i++)
                     {
-                        //double Tstamp = ObQueue.queue[i].timeStamp.Elapsed.TotalSeconds;
-                        //double tmp = Tstamp - ObQueue.queue[i].oldTimeStamp;
-                        //ObQueue.queue[i].oldTimeStamp = Tstamp;
-                        //ObQueue.queue[i].CurrentY -= (tmp * (double)PLC.Conveyor_Velocity);
                         double tmp = ObQueue.queue[i].timeStamp.Elapsed.TotalSeconds;
                         ObQueue.queue[i].CurrentY = ObQueue.queue[i].CoorY - (tmp * (double)PLC.Conveyor_Set_Velocity);
-                        if (ObQueue.queue[i].CurrentY <= 80)
+                        if( (ObQueue.queue[i].CurrentY <= PLC.Y_Pick_Limit_High) &&
+                            (ObQueue.queue[i].CurrentY >= PLC.Y_Pick_Limit_Low))
                         {
                             DeltaPosition tmpPos = new DeltaPosition();
                             short indTarget = Convert.ToInt16(ObQueue.queue[i].typeObject);
@@ -987,15 +1122,28 @@ namespace DE1T4_Project
                             PLC.PnP_Pick(ref DeltaPLC, tmpPos, indTarget);
                             //PLC.Conveyor(ref DeltaPLC, 0);
                             ObQueue.queue.RemoveAt(i);
+                            ObQueue.changeQueue = true;
                             ObQueue.ObjInd_InCam = ObQueue.queue.Count - 1;
+                            return;
                         }
-                        return;
                     }
                 }
             }
         }
 
 
+
+
         #endregion Automode
+
+        private void btn_objQueueView_Click_1(object sender, EventArgs e)
+        {
+            if (!Form_Status.viewQueue)
+            {
+                Form_Object_Infor formViewQueue = new Form_Object_Infor();
+                Form_Status.viewQueue = true;
+                formViewQueue.Show();
+            }
+        }
     }
 }

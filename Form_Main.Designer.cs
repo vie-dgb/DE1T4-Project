@@ -43,7 +43,6 @@ namespace DE1T4_Project
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.btn_pos_home = new System.Windows.Forms.Button();
             this.Conveyor_grbox = new System.Windows.Forms.GroupBox();
             this.lb_con_mmps_v = new System.Windows.Forms.Label();
             this.lb_con_accSpeed = new System.Windows.Forms.Label();
@@ -54,21 +53,19 @@ namespace DE1T4_Project
             this.lb_con_Speed = new System.Windows.Forms.Label();
             this.sw_con_Run = new MetroSet_UI.Controls.MetroSetSwitch();
             this.PLC_grbox = new System.Windows.Forms.GroupBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.btn_plc_connect = new System.Windows.Forms.Button();
             this.lb_plc_ip = new System.Windows.Forms.Label();
             this.tbx_plc_ip = new System.Windows.Forms.TextBox();
             this.camera_grbox = new System.Windows.Forms.GroupBox();
+            this.btn_camsetup = new System.Windows.Forms.Button();
             this.link_img_getArea = new System.Windows.Forms.LinkLabel();
             this.lb_img_area = new System.Windows.Forms.Label();
             this.label25 = new System.Windows.Forms.Label();
             this.sw_img_gray = new MetroSet_UI.Controls.MetroSetSwitch();
-            this.btn_cam_setting = new System.Windows.Forms.Button();
+            this.btn_frame_setting = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.cbb_Camlist = new System.Windows.Forms.ComboBox();
             this.btn_cam_connect = new System.Windows.Forms.Button();
-            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
-            this.picbox_offCam = new System.Windows.Forms.PictureBox();
             this.cyclicRead = new System.Windows.Forms.Timer(this.components);
             this.btn_mov_Ymin = new System.Windows.Forms.Button();
             this.btn_mov_Yplus = new System.Windows.Forms.Button();
@@ -124,16 +121,6 @@ namespace DE1T4_Project
             this.label9 = new System.Windows.Forms.Label();
             this.scbar_HueMax = new System.Windows.Forms.HScrollBar();
             this.color_lable = new System.Windows.Forms.ColorDialog();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.lb_typ3_count = new System.Windows.Forms.Label();
-            this.link_typ3_clear = new System.Windows.Forms.LinkLabel();
-            this.label37 = new System.Windows.Forms.Label();
-            this.label38 = new System.Windows.Forms.Label();
-            this.label39 = new System.Windows.Forms.Label();
-            this.tbx_typ3_coor_z = new System.Windows.Forms.TextBox();
-            this.label40 = new System.Windows.Forms.Label();
-            this.tbx_typ3_coor_y = new System.Windows.Forms.TextBox();
-            this.tbx_typ3_coor_x = new System.Windows.Forms.TextBox();
             this.tbx_auto_TL_X = new System.Windows.Forms.TextBox();
             this.label24 = new System.Windows.Forms.Label();
             this.tbx_auto_TL_Y = new System.Windows.Forms.TextBox();
@@ -144,47 +131,63 @@ namespace DE1T4_Project
             this.label29 = new System.Windows.Forms.Label();
             this.tbx_auto_offsetZ = new System.Windows.Forms.TextBox();
             this.label30 = new System.Windows.Forms.Label();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.tbx_auto_ZPlace = new System.Windows.Forms.TextBox();
-            this.label45 = new System.Windows.Forms.Label();
-            this.tbx_auto_ZPick = new System.Windows.Forms.TextBox();
-            this.label23 = new System.Windows.Forms.Label();
             this.btn_auto_OnOff = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.lb_typ2_count = new System.Windows.Forms.Label();
-            this.link_typ2_clear = new System.Windows.Forms.LinkLabel();
-            this.label31 = new System.Windows.Forms.Label();
-            this.label32 = new System.Windows.Forms.Label();
-            this.label33 = new System.Windows.Forms.Label();
-            this.tbx_typ2_coor_z = new System.Windows.Forms.TextBox();
-            this.label34 = new System.Windows.Forms.Label();
-            this.tbx_typ2_coor_y = new System.Windows.Forms.TextBox();
+            this.label23 = new System.Windows.Forms.Label();
+            this.tbx_auto_ZPick = new System.Windows.Forms.TextBox();
+            this.label45 = new System.Windows.Forms.Label();
+            this.tbx_auto_ZPlace = new System.Windows.Forms.TextBox();
+            this.tbx_typ1_coor_x = new System.Windows.Forms.TextBox();
+            this.tbx_typ1_coor_y = new System.Windows.Forms.TextBox();
+            this.label44 = new System.Windows.Forms.Label();
+            this.tbx_typ1_coor_z = new System.Windows.Forms.TextBox();
+            this.label43 = new System.Windows.Forms.Label();
+            this.label42 = new System.Windows.Forms.Label();
             this.tbx_typ2_coor_x = new System.Windows.Forms.TextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
+            this.tbx_typ2_coor_y = new System.Windows.Forms.TextBox();
+            this.label34 = new System.Windows.Forms.Label();
+            this.tbx_typ2_coor_z = new System.Windows.Forms.TextBox();
+            this.label33 = new System.Windows.Forms.Label();
+            this.label32 = new System.Windows.Forms.Label();
+            this.tbx_typ3_coor_x = new System.Windows.Forms.TextBox();
+            this.tbx_typ3_coor_y = new System.Windows.Forms.TextBox();
+            this.label40 = new System.Windows.Forms.Label();
+            this.tbx_typ3_coor_z = new System.Windows.Forms.TextBox();
+            this.label39 = new System.Windows.Forms.Label();
+            this.label38 = new System.Windows.Forms.Label();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label27 = new System.Windows.Forms.Label();
+            this.tbx_y_limit_low = new System.Windows.Forms.TextBox();
+            this.label46 = new System.Windows.Forms.Label();
+            this.tbx_y_limit_high = new System.Windows.Forms.TextBox();
+            this.groupBox5 = new System.Windows.Forms.GroupBox();
+            this.link_clear_all = new System.Windows.Forms.LinkLabel();
             this.lb_typ1_count = new System.Windows.Forms.Label();
             this.link_typ1_clear = new System.Windows.Forms.LinkLabel();
             this.label41 = new System.Windows.Forms.Label();
-            this.label42 = new System.Windows.Forms.Label();
-            this.label43 = new System.Windows.Forms.Label();
-            this.tbx_typ1_coor_z = new System.Windows.Forms.TextBox();
-            this.label44 = new System.Windows.Forms.Label();
-            this.tbx_typ1_coor_y = new System.Windows.Forms.TextBox();
-            this.tbx_typ1_coor_x = new System.Windows.Forms.TextBox();
+            this.lb_typ3_count = new System.Windows.Forms.Label();
+            this.link_typ3_clear = new System.Windows.Forms.LinkLabel();
+            this.label37 = new System.Windows.Forms.Label();
+            this.lb_typ2_count = new System.Windows.Forms.Label();
+            this.link_typ2_clear = new System.Windows.Forms.LinkLabel();
+            this.label31 = new System.Windows.Forms.Label();
+            this.imgBox_crop = new Emgu.CV.UI.ImageBox();
+            this.picbox_offCam = new System.Windows.Forms.PictureBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.btn_pos_home = new System.Windows.Forms.Button();
+            this.btn_objQueueView = new System.Windows.Forms.Button();
             this.ToolHead_grbox.SuspendLayout();
             this.position_grbox.SuspendLayout();
             this.Conveyor_grbox.SuspendLayout();
             this.PLC_grbox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.camera_grbox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).BeginInit();
             this.movement_grbox.SuspendLayout();
             this.imageProcess_grbox.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.groupBox1.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            this.groupBox4.SuspendLayout();
+            this.groupBox5.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // ToolHead_grbox
@@ -300,7 +303,7 @@ namespace DE1T4_Project
             // 
             this.lb_Pos_Z.AutoSize = true;
             this.lb_Pos_Z.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Pos_Z.Location = new System.Drawing.Point(197, 111);
+            this.lb_Pos_Z.Location = new System.Drawing.Point(184, 111);
             this.lb_Pos_Z.Name = "lb_Pos_Z";
             this.lb_Pos_Z.Size = new System.Drawing.Size(42, 28);
             this.lb_Pos_Z.TabIndex = 21;
@@ -310,7 +313,7 @@ namespace DE1T4_Project
             // 
             this.lb_Pos_Y.AutoSize = true;
             this.lb_Pos_Y.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Pos_Y.Location = new System.Drawing.Point(197, 75);
+            this.lb_Pos_Y.Location = new System.Drawing.Point(184, 75);
             this.lb_Pos_Y.Name = "lb_Pos_Y";
             this.lb_Pos_Y.Size = new System.Drawing.Size(42, 28);
             this.lb_Pos_Y.TabIndex = 20;
@@ -320,7 +323,7 @@ namespace DE1T4_Project
             // 
             this.lb_Pos_X.AutoSize = true;
             this.lb_Pos_X.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_Pos_X.Location = new System.Drawing.Point(197, 41);
+            this.lb_Pos_X.Location = new System.Drawing.Point(184, 41);
             this.lb_Pos_X.Name = "lb_Pos_X";
             this.lb_Pos_X.Size = new System.Drawing.Size(42, 28);
             this.lb_Pos_X.TabIndex = 19;
@@ -330,7 +333,7 @@ namespace DE1T4_Project
             // 
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(159, 111);
+            this.label5.Location = new System.Drawing.Point(146, 111);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(31, 28);
             this.label5.TabIndex = 18;
@@ -340,7 +343,7 @@ namespace DE1T4_Project
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(159, 75);
+            this.label4.Location = new System.Drawing.Point(146, 75);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(31, 28);
             this.label4.TabIndex = 17;
@@ -350,22 +353,11 @@ namespace DE1T4_Project
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(159, 39);
+            this.label2.Location = new System.Drawing.Point(146, 39);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(32, 28);
             this.label2.TabIndex = 16;
             this.label2.Text = "X:";
-            // 
-            // btn_pos_home
-            // 
-            this.btn_pos_home.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pos_home.BackgroundImage")));
-            this.btn_pos_home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btn_pos_home.Location = new System.Drawing.Point(26, 55);
-            this.btn_pos_home.Name = "btn_pos_home";
-            this.btn_pos_home.Size = new System.Drawing.Size(80, 80);
-            this.btn_pos_home.TabIndex = 0;
-            this.btn_pos_home.UseVisualStyleBackColor = true;
-            this.btn_pos_home.Click += new System.EventHandler(this.btn_pos_home_Click);
             // 
             // Conveyor_grbox
             // 
@@ -500,16 +492,6 @@ namespace DE1T4_Project
             this.PLC_grbox.TabStop = false;
             this.PLC_grbox.Text = "Robot connect";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = global::DE1T4_Project.Properties.Resources.Layer_2IUH;
-            this.pictureBox1.Location = new System.Drawing.Point(10, 82);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.pictureBox1.TabIndex = 13;
-            this.pictureBox1.TabStop = false;
-            // 
             // btn_plc_connect
             // 
             this.btn_plc_connect.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -543,11 +525,12 @@ namespace DE1T4_Project
             // 
             this.camera_grbox.BackColor = System.Drawing.Color.Gainsboro;
             this.camera_grbox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.camera_grbox.Controls.Add(this.btn_camsetup);
             this.camera_grbox.Controls.Add(this.link_img_getArea);
             this.camera_grbox.Controls.Add(this.lb_img_area);
             this.camera_grbox.Controls.Add(this.label25);
             this.camera_grbox.Controls.Add(this.sw_img_gray);
-            this.camera_grbox.Controls.Add(this.btn_cam_setting);
+            this.camera_grbox.Controls.Add(this.btn_frame_setting);
             this.camera_grbox.Controls.Add(this.label1);
             this.camera_grbox.Controls.Add(this.cbb_Camlist);
             this.camera_grbox.Controls.Add(this.btn_cam_connect);
@@ -562,11 +545,23 @@ namespace DE1T4_Project
             this.camera_grbox.TabStop = false;
             this.camera_grbox.Text = "Camera";
             // 
+            // btn_camsetup
+            // 
+            this.btn_camsetup.Enabled = false;
+            this.btn_camsetup.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_camsetup.Location = new System.Drawing.Point(162, 485);
+            this.btn_camsetup.Name = "btn_camsetup";
+            this.btn_camsetup.Size = new System.Drawing.Size(150, 40);
+            this.btn_camsetup.TabIndex = 66;
+            this.btn_camsetup.Text = "Camera Setting";
+            this.btn_camsetup.UseVisualStyleBackColor = true;
+            this.btn_camsetup.Click += new System.EventHandler(this.btn_camsetup_Click);
+            // 
             // link_img_getArea
             // 
             this.link_img_getArea.AutoSize = true;
             this.link_img_getArea.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_img_getArea.Location = new System.Drawing.Point(363, 500);
+            this.link_img_getArea.Location = new System.Drawing.Point(318, 536);
             this.link_img_getArea.Name = "link_img_getArea";
             this.link_img_getArea.Size = new System.Drawing.Size(83, 23);
             this.link_img_getArea.TabIndex = 65;
@@ -578,7 +573,7 @@ namespace DE1T4_Project
             // 
             this.lb_img_area.AutoSize = true;
             this.lb_img_area.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_img_area.Location = new System.Drawing.Point(452, 500);
+            this.lb_img_area.Location = new System.Drawing.Point(407, 536);
             this.lb_img_area.Name = "lb_img_area";
             this.lb_img_area.Size = new System.Drawing.Size(34, 23);
             this.lb_img_area.TabIndex = 64;
@@ -588,7 +583,7 @@ namespace DE1T4_Project
             // 
             this.label25.AutoSize = true;
             this.label25.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label25.Location = new System.Drawing.Point(172, 499);
+            this.label25.Location = new System.Drawing.Point(318, 492);
             this.label25.Name = "label25";
             this.label25.Size = new System.Drawing.Size(107, 23);
             this.label25.TabIndex = 63;
@@ -606,7 +601,7 @@ namespace DE1T4_Project
             this.sw_img_gray.DisabledCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(100)))), ((int)(((byte)(65)))), ((int)(((byte)(177)))), ((int)(((byte)(225)))));
             this.sw_img_gray.DisabledUnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))), ((int)(((byte)(205)))));
             this.sw_img_gray.IsDerivedStyle = true;
-            this.sw_img_gray.Location = new System.Drawing.Point(285, 500);
+            this.sw_img_gray.Location = new System.Drawing.Point(431, 493);
             this.sw_img_gray.Name = "sw_img_gray";
             this.sw_img_gray.Size = new System.Drawing.Size(58, 22);
             this.sw_img_gray.Style = MetroSet_UI.Enums.Style.Light;
@@ -619,17 +614,17 @@ namespace DE1T4_Project
             this.sw_img_gray.ThemeName = "MetroLite";
             this.sw_img_gray.UnCheckColor = System.Drawing.Color.FromArgb(((int)(((byte)(155)))), ((int)(((byte)(155)))), ((int)(((byte)(155)))));
             // 
-            // btn_cam_setting
+            // btn_frame_setting
             // 
-            this.btn_cam_setting.Enabled = false;
-            this.btn_cam_setting.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_cam_setting.Location = new System.Drawing.Point(6, 489);
-            this.btn_cam_setting.Name = "btn_cam_setting";
-            this.btn_cam_setting.Size = new System.Drawing.Size(150, 40);
-            this.btn_cam_setting.TabIndex = 16;
-            this.btn_cam_setting.Text = "Setting Camera";
-            this.btn_cam_setting.UseVisualStyleBackColor = true;
-            this.btn_cam_setting.Click += new System.EventHandler(this.btn_cam_setting_Click);
+            this.btn_frame_setting.Enabled = false;
+            this.btn_frame_setting.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_frame_setting.Location = new System.Drawing.Point(6, 485);
+            this.btn_frame_setting.Name = "btn_frame_setting";
+            this.btn_frame_setting.Size = new System.Drawing.Size(150, 40);
+            this.btn_frame_setting.TabIndex = 16;
+            this.btn_frame_setting.Text = "Frame Setting";
+            this.btn_frame_setting.UseVisualStyleBackColor = true;
+            this.btn_frame_setting.Click += new System.EventHandler(this.btn_cam_setting_Click);
             // 
             // label1
             // 
@@ -662,27 +657,6 @@ namespace DE1T4_Project
             this.btn_cam_connect.Text = "Connect";
             this.btn_cam_connect.UseVisualStyleBackColor = true;
             this.btn_cam_connect.Click += new System.EventHandler(this.btn_cam_connect_Click);
-            // 
-            // imgBox_crop
-            // 
-            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
-            this.imgBox_crop.Name = "imgBox_crop";
-            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
-            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.imgBox_crop.TabIndex = 18;
-            this.imgBox_crop.TabStop = false;
-            this.imgBox_crop.Visible = false;
-            // 
-            // picbox_offCam
-            // 
-            this.picbox_offCam.Image = global::DE1T4_Project.Properties.Resources.offCam;
-            this.picbox_offCam.Location = new System.Drawing.Point(6, 87);
-            this.picbox_offCam.Name = "picbox_offCam";
-            this.picbox_offCam.Size = new System.Drawing.Size(512, 384);
-            this.picbox_offCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.picbox_offCam.TabIndex = 17;
-            this.picbox_offCam.TabStop = false;
             // 
             // cyclicRead
             // 
@@ -950,7 +924,7 @@ namespace DE1T4_Project
             this.imageProcess_grbox.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.imageProcess_grbox.Location = new System.Drawing.Point(553, 198);
             this.imageProcess_grbox.Name = "imageProcess_grbox";
-            this.imageProcess_grbox.Size = new System.Drawing.Size(421, 573);
+            this.imageProcess_grbox.Size = new System.Drawing.Size(360, 573);
             this.imageProcess_grbox.TabIndex = 36;
             this.imageProcess_grbox.TabStop = false;
             this.imageProcess_grbox.Text = "Image";
@@ -959,7 +933,7 @@ namespace DE1T4_Project
             // 
             this.link_img_LB_color.AutoSize = true;
             this.link_img_LB_color.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_img_LB_color.Location = new System.Drawing.Point(325, 45);
+            this.link_img_LB_color.Location = new System.Drawing.Point(245, 103);
             this.link_img_LB_color.Name = "link_img_LB_color";
             this.link_img_LB_color.Size = new System.Drawing.Size(83, 23);
             this.link_img_LB_color.TabIndex = 66;
@@ -971,7 +945,7 @@ namespace DE1T4_Project
             // 
             this.label22.AutoSize = true;
             this.label22.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label22.Location = new System.Drawing.Point(223, 152);
+            this.label22.Location = new System.Drawing.Point(182, 152);
             this.label22.Name = "label22";
             this.label22.Size = new System.Drawing.Size(88, 23);
             this.label22.TabIndex = 60;
@@ -981,7 +955,7 @@ namespace DE1T4_Project
             // 
             this.label21.AutoSize = true;
             this.label21.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label21.Location = new System.Drawing.Point(15, 152);
+            this.label21.Location = new System.Drawing.Point(8, 152);
             this.label21.Name = "label21";
             this.label21.Size = new System.Drawing.Size(91, 23);
             this.label21.TabIndex = 59;
@@ -990,18 +964,18 @@ namespace DE1T4_Project
             // tbx_img_Area_min
             // 
             this.tbx_img_Area_min.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Area_min.Location = new System.Drawing.Point(317, 148);
+            this.tbx_img_Area_min.Location = new System.Drawing.Point(276, 148);
             this.tbx_img_Area_min.Name = "tbx_img_Area_min";
-            this.tbx_img_Area_min.Size = new System.Drawing.Size(90, 27);
+            this.tbx_img_Area_min.Size = new System.Drawing.Size(70, 27);
             this.tbx_img_Area_min.TabIndex = 58;
             this.tbx_img_Area_min.Leave += new System.EventHandler(this.tbx_img_Area_min_Leave);
             // 
             // tbx_img_Area_max
             // 
             this.tbx_img_Area_max.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Area_max.Location = new System.Drawing.Point(112, 148);
+            this.tbx_img_Area_max.Location = new System.Drawing.Point(105, 148);
             this.tbx_img_Area_max.Name = "tbx_img_Area_max";
-            this.tbx_img_Area_max.Size = new System.Drawing.Size(90, 27);
+            this.tbx_img_Area_max.Size = new System.Drawing.Size(70, 27);
             this.tbx_img_Area_max.TabIndex = 57;
             this.tbx_img_Area_max.Leave += new System.EventHandler(this.tbx_img_Area_max_Leave);
             // 
@@ -1035,14 +1009,14 @@ namespace DE1T4_Project
             this.label18.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label18.Location = new System.Drawing.Point(15, 45);
             this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(37, 23);
+            this.label18.Size = new System.Drawing.Size(53, 23);
             this.label18.TabIndex = 53;
-            this.label18.Text = "Set";
+            this.label18.Text = "Type";
             // 
             // num_img_set
             // 
             this.num_img_set.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.num_img_set.Location = new System.Drawing.Point(58, 40);
+            this.num_img_set.Location = new System.Drawing.Point(69, 39);
             this.num_img_set.Maximum = new decimal(new int[] {
             3,
             0,
@@ -1054,7 +1028,7 @@ namespace DE1T4_Project
             0,
             0});
             this.num_img_set.Name = "num_img_set";
-            this.num_img_set.Size = new System.Drawing.Size(45, 31);
+            this.num_img_set.Size = new System.Drawing.Size(37, 31);
             this.num_img_set.TabIndex = 52;
             this.num_img_set.Value = new decimal(new int[] {
             1,
@@ -1066,9 +1040,9 @@ namespace DE1T4_Project
             // tbx_img_Name
             // 
             this.tbx_img_Name.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_img_Name.Location = new System.Drawing.Point(184, 41);
+            this.tbx_img_Name.Location = new System.Drawing.Point(190, 41);
             this.tbx_img_Name.Name = "tbx_img_Name";
-            this.tbx_img_Name.Size = new System.Drawing.Size(135, 27);
+            this.tbx_img_Name.Size = new System.Drawing.Size(116, 27);
             this.tbx_img_Name.TabIndex = 51;
             this.tbx_img_Name.TextChanged += new System.EventHandler(this.tbx_img_Name_TextChanged);
             // 
@@ -1076,7 +1050,7 @@ namespace DE1T4_Project
             // 
             this.label17.AutoSize = true;
             this.label17.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label17.Location = new System.Drawing.Point(119, 45);
+            this.label17.Location = new System.Drawing.Point(125, 45);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(61, 23);
             this.label17.TabIndex = 50;
@@ -1125,10 +1099,10 @@ namespace DE1T4_Project
             // scbar_ValMin
             // 
             this.scbar_ValMin.LargeChange = 1;
-            this.scbar_ValMin.Location = new System.Drawing.Point(63, 528);
+            this.scbar_ValMin.Location = new System.Drawing.Point(63, 536);
             this.scbar_ValMin.Maximum = 255;
             this.scbar_ValMin.Name = "scbar_ValMin";
-            this.scbar_ValMin.Size = new System.Drawing.Size(220, 28);
+            this.scbar_ValMin.Size = new System.Drawing.Size(220, 20);
             this.scbar_ValMin.TabIndex = 45;
             this.scbar_ValMin.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_ValMin_Scroll);
             // 
@@ -1145,11 +1119,11 @@ namespace DE1T4_Project
             // scbar_ValMax
             // 
             this.scbar_ValMax.LargeChange = 1;
-            this.scbar_ValMax.Location = new System.Drawing.Point(63, 484);
+            this.scbar_ValMax.Location = new System.Drawing.Point(63, 492);
             this.scbar_ValMax.Maximum = 255;
             this.scbar_ValMax.Minimum = 1;
             this.scbar_ValMax.Name = "scbar_ValMax";
-            this.scbar_ValMax.Size = new System.Drawing.Size(220, 28);
+            this.scbar_ValMax.Size = new System.Drawing.Size(220, 20);
             this.scbar_ValMax.TabIndex = 43;
             this.scbar_ValMax.Value = 1;
             this.scbar_ValMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_ValMax_Scroll);
@@ -1197,10 +1171,10 @@ namespace DE1T4_Project
             // scbar_SatMin
             // 
             this.scbar_SatMin.LargeChange = 1;
-            this.scbar_SatMin.Location = new System.Drawing.Point(63, 401);
+            this.scbar_SatMin.Location = new System.Drawing.Point(63, 409);
             this.scbar_SatMin.Maximum = 255;
             this.scbar_SatMin.Name = "scbar_SatMin";
-            this.scbar_SatMin.Size = new System.Drawing.Size(220, 28);
+            this.scbar_SatMin.Size = new System.Drawing.Size(220, 20);
             this.scbar_SatMin.TabIndex = 38;
             this.scbar_SatMin.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_SatMin_Scroll);
             // 
@@ -1217,11 +1191,11 @@ namespace DE1T4_Project
             // scbar_SatMax
             // 
             this.scbar_SatMax.LargeChange = 1;
-            this.scbar_SatMax.Location = new System.Drawing.Point(63, 357);
+            this.scbar_SatMax.Location = new System.Drawing.Point(63, 365);
             this.scbar_SatMax.Maximum = 255;
             this.scbar_SatMax.Minimum = 1;
             this.scbar_SatMax.Name = "scbar_SatMax";
-            this.scbar_SatMax.Size = new System.Drawing.Size(220, 28);
+            this.scbar_SatMax.Size = new System.Drawing.Size(220, 20);
             this.scbar_SatMax.TabIndex = 36;
             this.scbar_SatMax.Value = 1;
             this.scbar_SatMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_SatMax_Scroll);
@@ -1269,10 +1243,10 @@ namespace DE1T4_Project
             // scbar_HueMin
             // 
             this.scbar_HueMin.LargeChange = 1;
-            this.scbar_HueMin.Location = new System.Drawing.Point(63, 272);
+            this.scbar_HueMin.Location = new System.Drawing.Point(63, 280);
             this.scbar_HueMin.Maximum = 255;
             this.scbar_HueMin.Name = "scbar_HueMin";
-            this.scbar_HueMin.Size = new System.Drawing.Size(220, 28);
+            this.scbar_HueMin.Size = new System.Drawing.Size(220, 20);
             this.scbar_HueMin.TabIndex = 31;
             this.scbar_HueMin.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMin_Scroll);
             // 
@@ -1289,122 +1263,14 @@ namespace DE1T4_Project
             // scbar_HueMax
             // 
             this.scbar_HueMax.LargeChange = 1;
-            this.scbar_HueMax.Location = new System.Drawing.Point(63, 228);
+            this.scbar_HueMax.Location = new System.Drawing.Point(63, 236);
             this.scbar_HueMax.Maximum = 255;
             this.scbar_HueMax.Minimum = 1;
             this.scbar_HueMax.Name = "scbar_HueMax";
-            this.scbar_HueMax.Size = new System.Drawing.Size(220, 28);
+            this.scbar_HueMax.Size = new System.Drawing.Size(220, 20);
             this.scbar_HueMax.TabIndex = 0;
             this.scbar_HueMax.Value = 1;
             this.scbar_HueMax.Scroll += new System.Windows.Forms.ScrollEventHandler(this.scbar_HueMax_Scroll);
-            // 
-            // groupBox2
-            // 
-            this.groupBox2.BackColor = System.Drawing.Color.Gainsboro;
-            this.groupBox2.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox2.Controls.Add(this.lb_typ3_count);
-            this.groupBox2.Controls.Add(this.link_typ3_clear);
-            this.groupBox2.Controls.Add(this.label37);
-            this.groupBox2.Controls.Add(this.label38);
-            this.groupBox2.Controls.Add(this.label39);
-            this.groupBox2.Controls.Add(this.tbx_typ3_coor_z);
-            this.groupBox2.Controls.Add(this.label40);
-            this.groupBox2.Controls.Add(this.tbx_typ3_coor_y);
-            this.groupBox2.Controls.Add(this.tbx_typ3_coor_x);
-            this.groupBox2.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox2.Location = new System.Drawing.Point(980, 651);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(540, 120);
-            this.groupBox2.TabIndex = 38;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Type 3";
-            // 
-            // lb_typ3_count
-            // 
-            this.lb_typ3_count.AutoSize = true;
-            this.lb_typ3_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_typ3_count.Location = new System.Drawing.Point(98, 41);
-            this.lb_typ3_count.Name = "lb_typ3_count";
-            this.lb_typ3_count.Size = new System.Drawing.Size(72, 28);
-            this.lb_typ3_count.TabIndex = 82;
-            this.lb_typ3_count.Text = "####";
-            // 
-            // link_typ3_clear
-            // 
-            this.link_typ3_clear.AutoSize = true;
-            this.link_typ3_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_typ3_clear.Location = new System.Drawing.Point(209, 41);
-            this.link_typ3_clear.Name = "link_typ3_clear";
-            this.link_typ3_clear.Size = new System.Drawing.Size(67, 28);
-            this.link_typ3_clear.TabIndex = 81;
-            this.link_typ3_clear.TabStop = true;
-            this.link_typ3_clear.Text = "Clear";
-            this.link_typ3_clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_typ3_clear_LinkClicked);
-            // 
-            // label37
-            // 
-            this.label37.AutoSize = true;
-            this.label37.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label37.Location = new System.Drawing.Point(14, 41);
-            this.label37.Name = "label37";
-            this.label37.Size = new System.Drawing.Size(73, 28);
-            this.label37.TabIndex = 79;
-            this.label37.Text = "Count";
-            // 
-            // label38
-            // 
-            this.label38.AutoSize = true;
-            this.label38.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label38.Location = new System.Drawing.Point(15, 83);
-            this.label38.Name = "label38";
-            this.label38.Size = new System.Drawing.Size(220, 23);
-            this.label38.TabIndex = 78;
-            this.label38.Text = "Place coordinates(X-Y-Z)";
-            // 
-            // label39
-            // 
-            this.label39.AutoSize = true;
-            this.label39.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label39.Location = new System.Drawing.Point(396, 83);
-            this.label39.Name = "label39";
-            this.label39.Size = new System.Drawing.Size(17, 23);
-            this.label39.TabIndex = 77;
-            this.label39.Text = "-";
-            // 
-            // tbx_typ3_coor_z
-            // 
-            this.tbx_typ3_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ3_coor_z.Location = new System.Drawing.Point(419, 81);
-            this.tbx_typ3_coor_z.Name = "tbx_typ3_coor_z";
-            this.tbx_typ3_coor_z.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ3_coor_z.TabIndex = 76;
-            // 
-            // label40
-            // 
-            this.label40.AutoSize = true;
-            this.label40.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label40.Location = new System.Drawing.Point(307, 83);
-            this.label40.Name = "label40";
-            this.label40.Size = new System.Drawing.Size(17, 23);
-            this.label40.TabIndex = 75;
-            this.label40.Text = "-";
-            // 
-            // tbx_typ3_coor_y
-            // 
-            this.tbx_typ3_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ3_coor_y.Location = new System.Drawing.Point(330, 81);
-            this.tbx_typ3_coor_y.Name = "tbx_typ3_coor_y";
-            this.tbx_typ3_coor_y.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ3_coor_y.TabIndex = 74;
-            // 
-            // tbx_typ3_coor_x
-            // 
-            this.tbx_typ3_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ3_coor_x.Location = new System.Drawing.Point(241, 81);
-            this.tbx_typ3_coor_x.Name = "tbx_typ3_coor_x";
-            this.tbx_typ3_coor_x.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ3_coor_x.TabIndex = 73;
             // 
             // tbx_auto_TL_X
             // 
@@ -1448,7 +1314,7 @@ namespace DE1T4_Project
             // 
             this.label28.AutoSize = true;
             this.label28.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label28.Location = new System.Drawing.Point(19, 98);
+            this.label28.Location = new System.Drawing.Point(19, 89);
             this.label28.Name = "label28";
             this.label28.Size = new System.Drawing.Size(127, 23);
             this.label28.TabIndex = 66;
@@ -1457,7 +1323,7 @@ namespace DE1T4_Project
             // tbx_auto_offsetX
             // 
             this.tbx_auto_offsetX.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_auto_offsetX.Location = new System.Drawing.Point(152, 96);
+            this.tbx_auto_offsetX.Location = new System.Drawing.Point(162, 85);
             this.tbx_auto_offsetX.Name = "tbx_auto_offsetX";
             this.tbx_auto_offsetX.Size = new System.Drawing.Size(60, 27);
             this.tbx_auto_offsetX.TabIndex = 67;
@@ -1466,7 +1332,7 @@ namespace DE1T4_Project
             // tbx_auto_offsetY
             // 
             this.tbx_auto_offsetY.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_auto_offsetY.Location = new System.Drawing.Point(241, 96);
+            this.tbx_auto_offsetY.Location = new System.Drawing.Point(251, 85);
             this.tbx_auto_offsetY.Name = "tbx_auto_offsetY";
             this.tbx_auto_offsetY.Size = new System.Drawing.Size(60, 27);
             this.tbx_auto_offsetY.TabIndex = 68;
@@ -1476,7 +1342,7 @@ namespace DE1T4_Project
             // 
             this.label29.AutoSize = true;
             this.label29.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label29.Location = new System.Drawing.Point(218, 98);
+            this.label29.Location = new System.Drawing.Point(228, 87);
             this.label29.Name = "label29";
             this.label29.Size = new System.Drawing.Size(17, 23);
             this.label29.TabIndex = 69;
@@ -1485,7 +1351,7 @@ namespace DE1T4_Project
             // tbx_auto_offsetZ
             // 
             this.tbx_auto_offsetZ.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_auto_offsetZ.Location = new System.Drawing.Point(327, 96);
+            this.tbx_auto_offsetZ.Location = new System.Drawing.Point(337, 85);
             this.tbx_auto_offsetZ.Name = "tbx_auto_offsetZ";
             this.tbx_auto_offsetZ.Size = new System.Drawing.Size(60, 27);
             this.tbx_auto_offsetZ.TabIndex = 70;
@@ -1495,16 +1361,259 @@ namespace DE1T4_Project
             // 
             this.label30.AutoSize = true;
             this.label30.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label30.Location = new System.Drawing.Point(307, 98);
+            this.label30.Location = new System.Drawing.Point(317, 87);
             this.label30.Name = "label30";
             this.label30.Size = new System.Drawing.Size(17, 23);
             this.label30.TabIndex = 71;
             this.label30.Text = "-";
             // 
+            // btn_auto_OnOff
+            // 
+            this.btn_auto_OnOff.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_auto_OnOff.Location = new System.Drawing.Point(446, 14);
+            this.btn_auto_OnOff.Name = "btn_auto_OnOff";
+            this.btn_auto_OnOff.Size = new System.Drawing.Size(125, 68);
+            this.btn_auto_OnOff.TabIndex = 72;
+            this.btn_auto_OnOff.Text = "Connect";
+            this.btn_auto_OnOff.UseVisualStyleBackColor = true;
+            this.btn_auto_OnOff.Click += new System.EventHandler(this.btn_auto_OnOff_Click);
+            // 
+            // label23
+            // 
+            this.label23.AutoSize = true;
+            this.label23.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label23.Location = new System.Drawing.Point(19, 130);
+            this.label23.Name = "label23";
+            this.label23.Size = new System.Drawing.Size(138, 23);
+            this.label23.TabIndex = 73;
+            this.label23.Text = "Z Pick distance";
+            // 
+            // tbx_auto_ZPick
+            // 
+            this.tbx_auto_ZPick.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_ZPick.Location = new System.Drawing.Point(163, 126);
+            this.tbx_auto_ZPick.Name = "tbx_auto_ZPick";
+            this.tbx_auto_ZPick.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_ZPick.TabIndex = 74;
+            this.tbx_auto_ZPick.Leave += new System.EventHandler(this.tbx_auto_ZPick_Leave);
+            // 
+            // label45
+            // 
+            this.label45.AutoSize = true;
+            this.label45.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label45.Location = new System.Drawing.Point(245, 128);
+            this.label45.Name = "label45";
+            this.label45.Size = new System.Drawing.Size(147, 23);
+            this.label45.TabIndex = 75;
+            this.label45.Text = "Z Place distance";
+            // 
+            // tbx_auto_ZPlace
+            // 
+            this.tbx_auto_ZPlace.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_auto_ZPlace.Location = new System.Drawing.Point(398, 126);
+            this.tbx_auto_ZPlace.Name = "tbx_auto_ZPlace";
+            this.tbx_auto_ZPlace.Size = new System.Drawing.Size(60, 27);
+            this.tbx_auto_ZPlace.TabIndex = 76;
+            this.tbx_auto_ZPlace.Leave += new System.EventHandler(this.tbx_auto_ZPlace_Leave);
+            // 
+            // tbx_typ1_coor_x
+            // 
+            this.tbx_typ1_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ1_coor_x.Location = new System.Drawing.Point(163, 167);
+            this.tbx_typ1_coor_x.Name = "tbx_typ1_coor_x";
+            this.tbx_typ1_coor_x.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ1_coor_x.TabIndex = 79;
+            this.tbx_typ1_coor_x.Leave += new System.EventHandler(this.tbx_typ1_coor_x_Leave);
+            // 
+            // tbx_typ1_coor_y
+            // 
+            this.tbx_typ1_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ1_coor_y.Location = new System.Drawing.Point(252, 167);
+            this.tbx_typ1_coor_y.Name = "tbx_typ1_coor_y";
+            this.tbx_typ1_coor_y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ1_coor_y.TabIndex = 80;
+            this.tbx_typ1_coor_y.Leave += new System.EventHandler(this.tbx_typ1_coor_y_Leave);
+            // 
+            // label44
+            // 
+            this.label44.AutoSize = true;
+            this.label44.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label44.Location = new System.Drawing.Point(229, 169);
+            this.label44.Name = "label44";
+            this.label44.Size = new System.Drawing.Size(17, 23);
+            this.label44.TabIndex = 81;
+            this.label44.Text = "-";
+            // 
+            // tbx_typ1_coor_z
+            // 
+            this.tbx_typ1_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ1_coor_z.Location = new System.Drawing.Point(341, 167);
+            this.tbx_typ1_coor_z.Name = "tbx_typ1_coor_z";
+            this.tbx_typ1_coor_z.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ1_coor_z.TabIndex = 82;
+            this.tbx_typ1_coor_z.Leave += new System.EventHandler(this.tbx_typ1_coor_z_Leave);
+            // 
+            // label43
+            // 
+            this.label43.AutoSize = true;
+            this.label43.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label43.Location = new System.Drawing.Point(318, 169);
+            this.label43.Name = "label43";
+            this.label43.Size = new System.Drawing.Size(17, 23);
+            this.label43.TabIndex = 83;
+            this.label43.Text = "-";
+            // 
+            // label42
+            // 
+            this.label42.AutoSize = true;
+            this.label42.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label42.Location = new System.Drawing.Point(19, 171);
+            this.label42.Name = "label42";
+            this.label42.Size = new System.Drawing.Size(112, 23);
+            this.label42.TabIndex = 84;
+            this.label42.Text = "Place type 1";
+            // 
+            // tbx_typ2_coor_x
+            // 
+            this.tbx_typ2_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ2_coor_x.Location = new System.Drawing.Point(163, 208);
+            this.tbx_typ2_coor_x.Name = "tbx_typ2_coor_x";
+            this.tbx_typ2_coor_x.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ2_coor_x.TabIndex = 85;
+            this.tbx_typ2_coor_x.Leave += new System.EventHandler(this.tbx_typ2_coor_x_Leave);
+            // 
+            // tbx_typ2_coor_y
+            // 
+            this.tbx_typ2_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ2_coor_y.Location = new System.Drawing.Point(252, 208);
+            this.tbx_typ2_coor_y.Name = "tbx_typ2_coor_y";
+            this.tbx_typ2_coor_y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ2_coor_y.TabIndex = 86;
+            this.tbx_typ2_coor_y.Leave += new System.EventHandler(this.tbx_typ2_coor_y_Leave);
+            // 
+            // label34
+            // 
+            this.label34.AutoSize = true;
+            this.label34.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label34.Location = new System.Drawing.Point(229, 210);
+            this.label34.Name = "label34";
+            this.label34.Size = new System.Drawing.Size(17, 23);
+            this.label34.TabIndex = 87;
+            this.label34.Text = "-";
+            // 
+            // tbx_typ2_coor_z
+            // 
+            this.tbx_typ2_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ2_coor_z.Location = new System.Drawing.Point(341, 208);
+            this.tbx_typ2_coor_z.Name = "tbx_typ2_coor_z";
+            this.tbx_typ2_coor_z.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ2_coor_z.TabIndex = 88;
+            this.tbx_typ2_coor_z.Leave += new System.EventHandler(this.tbx_typ2_coor_z_Leave);
+            // 
+            // label33
+            // 
+            this.label33.AutoSize = true;
+            this.label33.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label33.Location = new System.Drawing.Point(318, 210);
+            this.label33.Name = "label33";
+            this.label33.Size = new System.Drawing.Size(17, 23);
+            this.label33.TabIndex = 89;
+            this.label33.Text = "-";
+            // 
+            // label32
+            // 
+            this.label32.AutoSize = true;
+            this.label32.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label32.Location = new System.Drawing.Point(19, 212);
+            this.label32.Name = "label32";
+            this.label32.Size = new System.Drawing.Size(112, 23);
+            this.label32.TabIndex = 90;
+            this.label32.Text = "Place type 2";
+            // 
+            // tbx_typ3_coor_x
+            // 
+            this.tbx_typ3_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ3_coor_x.Location = new System.Drawing.Point(163, 249);
+            this.tbx_typ3_coor_x.Name = "tbx_typ3_coor_x";
+            this.tbx_typ3_coor_x.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ3_coor_x.TabIndex = 91;
+            this.tbx_typ3_coor_x.Leave += new System.EventHandler(this.tbx_typ3_coor_x_Leave);
+            // 
+            // tbx_typ3_coor_y
+            // 
+            this.tbx_typ3_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ3_coor_y.Location = new System.Drawing.Point(252, 249);
+            this.tbx_typ3_coor_y.Name = "tbx_typ3_coor_y";
+            this.tbx_typ3_coor_y.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ3_coor_y.TabIndex = 92;
+            this.tbx_typ3_coor_y.Leave += new System.EventHandler(this.tbx_typ3_coor_y_Leave);
+            // 
+            // label40
+            // 
+            this.label40.AutoSize = true;
+            this.label40.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label40.Location = new System.Drawing.Point(229, 251);
+            this.label40.Name = "label40";
+            this.label40.Size = new System.Drawing.Size(17, 23);
+            this.label40.TabIndex = 93;
+            this.label40.Text = "-";
+            // 
+            // tbx_typ3_coor_z
+            // 
+            this.tbx_typ3_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_typ3_coor_z.Location = new System.Drawing.Point(341, 249);
+            this.tbx_typ3_coor_z.Name = "tbx_typ3_coor_z";
+            this.tbx_typ3_coor_z.Size = new System.Drawing.Size(60, 27);
+            this.tbx_typ3_coor_z.TabIndex = 94;
+            this.tbx_typ3_coor_z.Leave += new System.EventHandler(this.tbx_typ3_coor_z_Leave);
+            // 
+            // label39
+            // 
+            this.label39.AutoSize = true;
+            this.label39.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label39.Location = new System.Drawing.Point(318, 251);
+            this.label39.Name = "label39";
+            this.label39.Size = new System.Drawing.Size(17, 23);
+            this.label39.TabIndex = 95;
+            this.label39.Text = "-";
+            // 
+            // label38
+            // 
+            this.label38.AutoSize = true;
+            this.label38.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label38.Location = new System.Drawing.Point(19, 253);
+            this.label38.Name = "label38";
+            this.label38.Size = new System.Drawing.Size(112, 23);
+            this.label38.TabIndex = 96;
+            this.label38.Text = "Place type 3";
+            // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.Gainsboro;
             this.groupBox1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox1.Controls.Add(this.btn_objQueueView);
+            this.groupBox1.Controls.Add(this.label27);
+            this.groupBox1.Controls.Add(this.tbx_y_limit_low);
+            this.groupBox1.Controls.Add(this.label46);
+            this.groupBox1.Controls.Add(this.tbx_y_limit_high);
+            this.groupBox1.Controls.Add(this.label38);
+            this.groupBox1.Controls.Add(this.label39);
+            this.groupBox1.Controls.Add(this.tbx_typ3_coor_z);
+            this.groupBox1.Controls.Add(this.label40);
+            this.groupBox1.Controls.Add(this.tbx_typ3_coor_y);
+            this.groupBox1.Controls.Add(this.tbx_typ3_coor_x);
+            this.groupBox1.Controls.Add(this.label32);
+            this.groupBox1.Controls.Add(this.label33);
+            this.groupBox1.Controls.Add(this.tbx_typ2_coor_z);
+            this.groupBox1.Controls.Add(this.label34);
+            this.groupBox1.Controls.Add(this.tbx_typ2_coor_y);
+            this.groupBox1.Controls.Add(this.tbx_typ2_coor_x);
+            this.groupBox1.Controls.Add(this.label42);
+            this.groupBox1.Controls.Add(this.label43);
+            this.groupBox1.Controls.Add(this.tbx_typ1_coor_z);
+            this.groupBox1.Controls.Add(this.label44);
+            this.groupBox1.Controls.Add(this.tbx_typ1_coor_y);
+            this.groupBox1.Controls.Add(this.tbx_typ1_coor_x);
             this.groupBox1.Controls.Add(this.tbx_auto_ZPlace);
             this.groupBox1.Controls.Add(this.label45);
             this.groupBox1.Controls.Add(this.tbx_auto_ZPick);
@@ -1522,277 +1631,235 @@ namespace DE1T4_Project
             this.groupBox1.Controls.Add(this.tbx_auto_TL_X);
             this.groupBox1.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.groupBox1.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox1.Location = new System.Drawing.Point(980, 198);
+            this.groupBox1.Location = new System.Drawing.Point(919, 339);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(540, 195);
+            this.groupBox1.Size = new System.Drawing.Size(601, 432);
             this.groupBox1.TabIndex = 37;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Auto Mode";
+            this.groupBox1.Text = "Auto Mode Parameter";
             // 
-            // tbx_auto_ZPlace
+            // label27
             // 
-            this.tbx_auto_ZPlace.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_auto_ZPlace.Location = new System.Drawing.Point(398, 146);
-            this.tbx_auto_ZPlace.Name = "tbx_auto_ZPlace";
-            this.tbx_auto_ZPlace.Size = new System.Drawing.Size(60, 27);
-            this.tbx_auto_ZPlace.TabIndex = 76;
-            this.tbx_auto_ZPlace.TextChanged += new System.EventHandler(this.tbx_auto_ZPlace_TextChanged);
+            this.label27.AutoSize = true;
+            this.label27.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label27.Location = new System.Drawing.Point(229, 290);
+            this.label27.Name = "label27";
+            this.label27.Size = new System.Drawing.Size(17, 23);
+            this.label27.TabIndex = 106;
+            this.label27.Text = "-";
             // 
-            // label45
+            // tbx_y_limit_low
             // 
-            this.label45.AutoSize = true;
-            this.label45.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label45.Location = new System.Drawing.Point(245, 148);
-            this.label45.Name = "label45";
-            this.label45.Size = new System.Drawing.Size(147, 23);
-            this.label45.TabIndex = 75;
-            this.label45.Text = "Z Place distance";
+            this.tbx_y_limit_low.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_y_limit_low.Location = new System.Drawing.Point(252, 286);
+            this.tbx_y_limit_low.Name = "tbx_y_limit_low";
+            this.tbx_y_limit_low.Size = new System.Drawing.Size(60, 27);
+            this.tbx_y_limit_low.TabIndex = 105;
+            this.tbx_y_limit_low.Leave += new System.EventHandler(this.tbx_y_limit_low_Leave);
             // 
-            // tbx_auto_ZPick
+            // label46
             // 
-            this.tbx_auto_ZPick.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_auto_ZPick.Location = new System.Drawing.Point(163, 146);
-            this.tbx_auto_ZPick.Name = "tbx_auto_ZPick";
-            this.tbx_auto_ZPick.Size = new System.Drawing.Size(60, 27);
-            this.tbx_auto_ZPick.TabIndex = 74;
-            this.tbx_auto_ZPick.Leave += new System.EventHandler(this.tbx_auto_ZPick_Leave);
+            this.label46.AutoSize = true;
+            this.label46.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label46.Location = new System.Drawing.Point(19, 291);
+            this.label46.Name = "label46";
+            this.label46.Size = new System.Drawing.Size(106, 23);
+            this.label46.TabIndex = 104;
+            this.label46.Text = "Y pick limit";
             // 
-            // label23
+            // tbx_y_limit_high
             // 
-            this.label23.AutoSize = true;
-            this.label23.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label23.Location = new System.Drawing.Point(19, 148);
-            this.label23.Name = "label23";
-            this.label23.Size = new System.Drawing.Size(138, 23);
-            this.label23.TabIndex = 73;
-            this.label23.Text = "Z Pick distance";
+            this.tbx_y_limit_high.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.tbx_y_limit_high.Location = new System.Drawing.Point(163, 286);
+            this.tbx_y_limit_high.Name = "tbx_y_limit_high";
+            this.tbx_y_limit_high.Size = new System.Drawing.Size(60, 27);
+            this.tbx_y_limit_high.TabIndex = 103;
+            this.tbx_y_limit_high.Leave += new System.EventHandler(this.tbx_y_limit_high_Leave);
             // 
-            // btn_auto_OnOff
+            // groupBox5
             // 
-            this.btn_auto_OnOff.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_auto_OnOff.Location = new System.Drawing.Point(409, 9);
-            this.btn_auto_OnOff.Name = "btn_auto_OnOff";
-            this.btn_auto_OnOff.Size = new System.Drawing.Size(125, 68);
-            this.btn_auto_OnOff.TabIndex = 72;
-            this.btn_auto_OnOff.Text = "Connect";
-            this.btn_auto_OnOff.UseVisualStyleBackColor = true;
-            this.btn_auto_OnOff.Click += new System.EventHandler(this.btn_auto_OnOff_Click);
+            this.groupBox5.BackColor = System.Drawing.Color.Gainsboro;
+            this.groupBox5.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.groupBox5.Controls.Add(this.link_clear_all);
+            this.groupBox5.Controls.Add(this.lb_typ1_count);
+            this.groupBox5.Controls.Add(this.link_typ1_clear);
+            this.groupBox5.Controls.Add(this.label41);
+            this.groupBox5.Controls.Add(this.lb_typ3_count);
+            this.groupBox5.Controls.Add(this.link_typ3_clear);
+            this.groupBox5.Controls.Add(this.label37);
+            this.groupBox5.Controls.Add(this.lb_typ2_count);
+            this.groupBox5.Controls.Add(this.link_typ2_clear);
+            this.groupBox5.Controls.Add(this.label31);
+            this.groupBox5.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.groupBox5.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.groupBox5.Location = new System.Drawing.Point(919, 198);
+            this.groupBox5.Name = "groupBox5";
+            this.groupBox5.Size = new System.Drawing.Size(601, 135);
+            this.groupBox5.TabIndex = 42;
+            this.groupBox5.TabStop = false;
+            this.groupBox5.Text = "Sort Count";
             // 
-            // groupBox3
+            // link_clear_all
             // 
-            this.groupBox3.BackColor = System.Drawing.Color.Gainsboro;
-            this.groupBox3.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox3.Controls.Add(this.lb_typ2_count);
-            this.groupBox3.Controls.Add(this.link_typ2_clear);
-            this.groupBox3.Controls.Add(this.label31);
-            this.groupBox3.Controls.Add(this.label32);
-            this.groupBox3.Controls.Add(this.label33);
-            this.groupBox3.Controls.Add(this.tbx_typ2_coor_z);
-            this.groupBox3.Controls.Add(this.label34);
-            this.groupBox3.Controls.Add(this.tbx_typ2_coor_y);
-            this.groupBox3.Controls.Add(this.tbx_typ2_coor_x);
-            this.groupBox3.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox3.Location = new System.Drawing.Point(980, 525);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(540, 120);
-            this.groupBox3.TabIndex = 39;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Type 2";
-            // 
-            // lb_typ2_count
-            // 
-            this.lb_typ2_count.AutoSize = true;
-            this.lb_typ2_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_typ2_count.Location = new System.Drawing.Point(98, 44);
-            this.lb_typ2_count.Name = "lb_typ2_count";
-            this.lb_typ2_count.Size = new System.Drawing.Size(72, 28);
-            this.lb_typ2_count.TabIndex = 82;
-            this.lb_typ2_count.Text = "####";
-            // 
-            // link_typ2_clear
-            // 
-            this.link_typ2_clear.AutoSize = true;
-            this.link_typ2_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_typ2_clear.Location = new System.Drawing.Point(209, 44);
-            this.link_typ2_clear.Name = "link_typ2_clear";
-            this.link_typ2_clear.Size = new System.Drawing.Size(67, 28);
-            this.link_typ2_clear.TabIndex = 81;
-            this.link_typ2_clear.TabStop = true;
-            this.link_typ2_clear.Text = "Clear";
-            this.link_typ2_clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_typ2_clear_LinkClicked);
-            // 
-            // label31
-            // 
-            this.label31.AutoSize = true;
-            this.label31.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label31.Location = new System.Drawing.Point(14, 44);
-            this.label31.Name = "label31";
-            this.label31.Size = new System.Drawing.Size(73, 28);
-            this.label31.TabIndex = 79;
-            this.label31.Text = "Count";
-            // 
-            // label32
-            // 
-            this.label32.AutoSize = true;
-            this.label32.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label32.Location = new System.Drawing.Point(15, 84);
-            this.label32.Name = "label32";
-            this.label32.Size = new System.Drawing.Size(220, 23);
-            this.label32.TabIndex = 78;
-            this.label32.Text = "Place coordinates(X-Y-Z)";
-            // 
-            // label33
-            // 
-            this.label33.AutoSize = true;
-            this.label33.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label33.Location = new System.Drawing.Point(396, 84);
-            this.label33.Name = "label33";
-            this.label33.Size = new System.Drawing.Size(17, 23);
-            this.label33.TabIndex = 77;
-            this.label33.Text = "-";
-            // 
-            // tbx_typ2_coor_z
-            // 
-            this.tbx_typ2_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ2_coor_z.Location = new System.Drawing.Point(419, 82);
-            this.tbx_typ2_coor_z.Name = "tbx_typ2_coor_z";
-            this.tbx_typ2_coor_z.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ2_coor_z.TabIndex = 76;
-            // 
-            // label34
-            // 
-            this.label34.AutoSize = true;
-            this.label34.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label34.Location = new System.Drawing.Point(307, 84);
-            this.label34.Name = "label34";
-            this.label34.Size = new System.Drawing.Size(17, 23);
-            this.label34.TabIndex = 75;
-            this.label34.Text = "-";
-            // 
-            // tbx_typ2_coor_y
-            // 
-            this.tbx_typ2_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ2_coor_y.Location = new System.Drawing.Point(330, 82);
-            this.tbx_typ2_coor_y.Name = "tbx_typ2_coor_y";
-            this.tbx_typ2_coor_y.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ2_coor_y.TabIndex = 74;
-            // 
-            // tbx_typ2_coor_x
-            // 
-            this.tbx_typ2_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ2_coor_x.Location = new System.Drawing.Point(241, 82);
-            this.tbx_typ2_coor_x.Name = "tbx_typ2_coor_x";
-            this.tbx_typ2_coor_x.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ2_coor_x.TabIndex = 73;
-            // 
-            // groupBox4
-            // 
-            this.groupBox4.BackColor = System.Drawing.Color.Gainsboro;
-            this.groupBox4.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.groupBox4.Controls.Add(this.lb_typ1_count);
-            this.groupBox4.Controls.Add(this.link_typ1_clear);
-            this.groupBox4.Controls.Add(this.label41);
-            this.groupBox4.Controls.Add(this.label42);
-            this.groupBox4.Controls.Add(this.label43);
-            this.groupBox4.Controls.Add(this.tbx_typ1_coor_z);
-            this.groupBox4.Controls.Add(this.label44);
-            this.groupBox4.Controls.Add(this.tbx_typ1_coor_y);
-            this.groupBox4.Controls.Add(this.tbx_typ1_coor_x);
-            this.groupBox4.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
-            this.groupBox4.Location = new System.Drawing.Point(980, 399);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(540, 120);
-            this.groupBox4.TabIndex = 40;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Type 1";
+            this.link_clear_all.AutoSize = true;
+            this.link_clear_all.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_clear_all.Location = new System.Drawing.Point(304, 35);
+            this.link_clear_all.Name = "link_clear_all";
+            this.link_clear_all.Size = new System.Drawing.Size(101, 28);
+            this.link_clear_all.TabIndex = 92;
+            this.link_clear_all.TabStop = true;
+            this.link_clear_all.Text = "Clear All";
+            this.link_clear_all.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_clear_all_LinkClicked);
             // 
             // lb_typ1_count
             // 
             this.lb_typ1_count.AutoSize = true;
             this.lb_typ1_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_typ1_count.Location = new System.Drawing.Point(98, 42);
+            this.lb_typ1_count.Location = new System.Drawing.Point(115, 37);
             this.lb_typ1_count.Name = "lb_typ1_count";
             this.lb_typ1_count.Size = new System.Drawing.Size(72, 28);
-            this.lb_typ1_count.TabIndex = 82;
+            this.lb_typ1_count.TabIndex = 91;
             this.lb_typ1_count.Text = "####";
             // 
             // link_typ1_clear
             // 
             this.link_typ1_clear.AutoSize = true;
             this.link_typ1_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.link_typ1_clear.Location = new System.Drawing.Point(209, 42);
+            this.link_typ1_clear.Location = new System.Drawing.Point(212, 35);
             this.link_typ1_clear.Name = "link_typ1_clear";
             this.link_typ1_clear.Size = new System.Drawing.Size(67, 28);
-            this.link_typ1_clear.TabIndex = 81;
+            this.link_typ1_clear.TabIndex = 90;
             this.link_typ1_clear.TabStop = true;
             this.link_typ1_clear.Text = "Clear";
-            this.link_typ1_clear.LinkClicked += new System.Windows.Forms.LinkLabelLinkClickedEventHandler(this.link_typ1_clear_LinkClicked);
+            this.link_typ1_clear.Click += new System.EventHandler(this.link_typ1_clear_LinkClicked);
             // 
             // label41
             // 
             this.label41.AutoSize = true;
             this.label41.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label41.Location = new System.Drawing.Point(14, 42);
+            this.label41.Location = new System.Drawing.Point(18, 35);
             this.label41.Name = "label41";
-            this.label41.Size = new System.Drawing.Size(73, 28);
-            this.label41.TabIndex = 79;
-            this.label41.Text = "Count";
+            this.label41.Size = new System.Drawing.Size(80, 28);
+            this.label41.TabIndex = 89;
+            this.label41.Text = "Type 1";
             // 
-            // label42
+            // lb_typ3_count
             // 
-            this.label42.AutoSize = true;
-            this.label42.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label42.Location = new System.Drawing.Point(15, 81);
-            this.label42.Name = "label42";
-            this.label42.Size = new System.Drawing.Size(220, 23);
-            this.label42.TabIndex = 78;
-            this.label42.Text = "Place coordinates(X-Y-Z)";
+            this.lb_typ3_count.AutoSize = true;
+            this.lb_typ3_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_typ3_count.Location = new System.Drawing.Point(115, 95);
+            this.lb_typ3_count.Name = "lb_typ3_count";
+            this.lb_typ3_count.Size = new System.Drawing.Size(72, 28);
+            this.lb_typ3_count.TabIndex = 88;
+            this.lb_typ3_count.Text = "####";
             // 
-            // label43
+            // link_typ3_clear
             // 
-            this.label43.AutoSize = true;
-            this.label43.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label43.Location = new System.Drawing.Point(396, 81);
-            this.label43.Name = "label43";
-            this.label43.Size = new System.Drawing.Size(17, 23);
-            this.label43.TabIndex = 77;
-            this.label43.Text = "-";
+            this.link_typ3_clear.AutoSize = true;
+            this.link_typ3_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_typ3_clear.Location = new System.Drawing.Point(212, 98);
+            this.link_typ3_clear.Name = "link_typ3_clear";
+            this.link_typ3_clear.Size = new System.Drawing.Size(67, 28);
+            this.link_typ3_clear.TabIndex = 87;
+            this.link_typ3_clear.TabStop = true;
+            this.link_typ3_clear.Text = "Clear";
+            this.link_typ3_clear.Click += new System.EventHandler(this.link_typ3_clear_LinkClicked);
             // 
-            // tbx_typ1_coor_z
+            // label37
             // 
-            this.tbx_typ1_coor_z.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ1_coor_z.Location = new System.Drawing.Point(419, 79);
-            this.tbx_typ1_coor_z.Name = "tbx_typ1_coor_z";
-            this.tbx_typ1_coor_z.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ1_coor_z.TabIndex = 76;
+            this.label37.AutoSize = true;
+            this.label37.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label37.Location = new System.Drawing.Point(18, 95);
+            this.label37.Name = "label37";
+            this.label37.Size = new System.Drawing.Size(80, 28);
+            this.label37.TabIndex = 86;
+            this.label37.Text = "Type 3";
             // 
-            // label44
+            // lb_typ2_count
             // 
-            this.label44.AutoSize = true;
-            this.label44.Font = new System.Drawing.Font("Cambria", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label44.Location = new System.Drawing.Point(307, 81);
-            this.label44.Name = "label44";
-            this.label44.Size = new System.Drawing.Size(17, 23);
-            this.label44.TabIndex = 75;
-            this.label44.Text = "-";
+            this.lb_typ2_count.AutoSize = true;
+            this.lb_typ2_count.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lb_typ2_count.Location = new System.Drawing.Point(115, 65);
+            this.lb_typ2_count.Name = "lb_typ2_count";
+            this.lb_typ2_count.Size = new System.Drawing.Size(72, 28);
+            this.lb_typ2_count.TabIndex = 85;
+            this.lb_typ2_count.Text = "####";
             // 
-            // tbx_typ1_coor_y
+            // link_typ2_clear
             // 
-            this.tbx_typ1_coor_y.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ1_coor_y.Location = new System.Drawing.Point(330, 79);
-            this.tbx_typ1_coor_y.Name = "tbx_typ1_coor_y";
-            this.tbx_typ1_coor_y.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ1_coor_y.TabIndex = 74;
+            this.link_typ2_clear.AutoSize = true;
+            this.link_typ2_clear.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.link_typ2_clear.Location = new System.Drawing.Point(212, 65);
+            this.link_typ2_clear.Name = "link_typ2_clear";
+            this.link_typ2_clear.Size = new System.Drawing.Size(67, 28);
+            this.link_typ2_clear.TabIndex = 84;
+            this.link_typ2_clear.TabStop = true;
+            this.link_typ2_clear.Text = "Clear";
+            this.link_typ2_clear.Click += new System.EventHandler(this.link_typ2_clear_LinkClicked);
             // 
-            // tbx_typ1_coor_x
+            // label31
             // 
-            this.tbx_typ1_coor_x.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tbx_typ1_coor_x.Location = new System.Drawing.Point(241, 79);
-            this.tbx_typ1_coor_x.Name = "tbx_typ1_coor_x";
-            this.tbx_typ1_coor_x.Size = new System.Drawing.Size(60, 27);
-            this.tbx_typ1_coor_x.TabIndex = 73;
+            this.label31.AutoSize = true;
+            this.label31.Font = new System.Drawing.Font("Cambria", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label31.Location = new System.Drawing.Point(18, 65);
+            this.label31.Name = "label31";
+            this.label31.Size = new System.Drawing.Size(80, 28);
+            this.label31.TabIndex = 83;
+            this.label31.Text = "Type 2";
+            // 
+            // imgBox_crop
+            // 
+            this.imgBox_crop.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.imgBox_crop.Location = new System.Drawing.Point(6, 87);
+            this.imgBox_crop.Name = "imgBox_crop";
+            this.imgBox_crop.Size = new System.Drawing.Size(512, 384);
+            this.imgBox_crop.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.imgBox_crop.TabIndex = 18;
+            this.imgBox_crop.TabStop = false;
+            this.imgBox_crop.Visible = false;
+            // 
+            // picbox_offCam
+            // 
+            this.picbox_offCam.Image = global::DE1T4_Project.Properties.Resources.offCam;
+            this.picbox_offCam.Location = new System.Drawing.Point(6, 87);
+            this.picbox_offCam.Name = "picbox_offCam";
+            this.picbox_offCam.Size = new System.Drawing.Size(512, 384);
+            this.picbox_offCam.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.picbox_offCam.TabIndex = 17;
+            this.picbox_offCam.TabStop = false;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::DE1T4_Project.Properties.Resources.Layer_2IUH;
+            this.pictureBox1.Location = new System.Drawing.Point(10, 82);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(90, 90);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // btn_pos_home
+            // 
+            this.btn_pos_home.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btn_pos_home.BackgroundImage")));
+            this.btn_pos_home.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btn_pos_home.Location = new System.Drawing.Point(26, 55);
+            this.btn_pos_home.Name = "btn_pos_home";
+            this.btn_pos_home.Size = new System.Drawing.Size(80, 80);
+            this.btn_pos_home.TabIndex = 0;
+            this.btn_pos_home.UseVisualStyleBackColor = true;
+            this.btn_pos_home.Click += new System.EventHandler(this.btn_pos_home_Click);
+            // 
+            // btn_objQueueView
+            // 
+            this.btn_objQueueView.Font = new System.Drawing.Font("Cambria", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_objQueueView.Location = new System.Drawing.Point(19, 331);
+            this.btn_objQueueView.Name = "btn_objQueueView";
+            this.btn_objQueueView.Size = new System.Drawing.Size(125, 40);
+            this.btn_objQueueView.TabIndex = 107;
+            this.btn_objQueueView.Text = "View Queue";
+            this.btn_objQueueView.UseVisualStyleBackColor = true;
+            this.btn_objQueueView.Click += new System.EventHandler(this.btn_objQueueView_Click_1);
             // 
             // Form_Main
             // 
@@ -1800,9 +1867,7 @@ namespace DE1T4_Project
             this.AutoSize = true;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1532, 783);
-            this.Controls.Add(this.groupBox4);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.groupBox2);
+            this.Controls.Add(this.groupBox5);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.imageProcess_grbox);
             this.Controls.Add(this.camera_grbox);
@@ -1824,24 +1889,20 @@ namespace DE1T4_Project
             this.Conveyor_grbox.PerformLayout();
             this.PLC_grbox.ResumeLayout(false);
             this.PLC_grbox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.camera_grbox.ResumeLayout(false);
             this.camera_grbox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).EndInit();
             this.movement_grbox.ResumeLayout(false);
             this.movement_grbox.PerformLayout();
             this.imageProcess_grbox.ResumeLayout(false);
             this.imageProcess_grbox.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.num_img_set)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
+            this.groupBox5.ResumeLayout(false);
+            this.groupBox5.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgBox_crop)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picbox_offCam)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1870,7 +1931,7 @@ namespace DE1T4_Project
         private System.Windows.Forms.GroupBox camera_grbox;
         private System.Windows.Forms.ComboBox cbb_Camlist;
         private System.Windows.Forms.Button btn_cam_connect;
-        private System.Windows.Forms.Button btn_cam_setting;
+        private System.Windows.Forms.Button btn_frame_setting;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.PictureBox picbox_offCam;
         private Emgu.CV.UI.ImageBox imgBox_crop;
@@ -1938,16 +1999,8 @@ namespace DE1T4_Project
         private MetroSet_UI.Controls.MetroSetSwitch sw_img_gray;
         private System.Windows.Forms.LinkLabel link_img_LB_color;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.Label lb_typ3_count;
-        private System.Windows.Forms.LinkLabel link_typ3_clear;
-        private System.Windows.Forms.Label label37;
-        private System.Windows.Forms.Label label38;
-        private System.Windows.Forms.Label label39;
-        private System.Windows.Forms.TextBox tbx_typ3_coor_z;
-        private System.Windows.Forms.Label label40;
-        private System.Windows.Forms.TextBox tbx_typ3_coor_y;
-        private System.Windows.Forms.TextBox tbx_typ3_coor_x;
+        private System.Windows.Forms.LinkLabel link_img_getArea;
+        private System.Windows.Forms.Label lb_img_area;
         private System.Windows.Forms.TextBox tbx_auto_TL_X;
         private System.Windows.Forms.Label label24;
         private System.Windows.Forms.TextBox tbx_auto_TL_Y;
@@ -1958,34 +2011,47 @@ namespace DE1T4_Project
         private System.Windows.Forms.Label label29;
         private System.Windows.Forms.TextBox tbx_auto_offsetZ;
         private System.Windows.Forms.Label label30;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label lb_typ2_count;
-        private System.Windows.Forms.LinkLabel link_typ2_clear;
-        private System.Windows.Forms.Label label31;
-        private System.Windows.Forms.Label label32;
-        private System.Windows.Forms.Label label33;
-        private System.Windows.Forms.TextBox tbx_typ2_coor_z;
-        private System.Windows.Forms.Label label34;
-        private System.Windows.Forms.TextBox tbx_typ2_coor_y;
+        private System.Windows.Forms.Button btn_auto_OnOff;
+        private System.Windows.Forms.Label label23;
+        private System.Windows.Forms.TextBox tbx_auto_ZPick;
+        private System.Windows.Forms.Label label45;
+        private System.Windows.Forms.TextBox tbx_auto_ZPlace;
+        private System.Windows.Forms.TextBox tbx_typ1_coor_x;
+        private System.Windows.Forms.TextBox tbx_typ1_coor_y;
+        private System.Windows.Forms.Label label44;
+        private System.Windows.Forms.TextBox tbx_typ1_coor_z;
+        private System.Windows.Forms.Label label43;
+        private System.Windows.Forms.Label label42;
         private System.Windows.Forms.TextBox tbx_typ2_coor_x;
-        private System.Windows.Forms.GroupBox groupBox4;
+        private System.Windows.Forms.TextBox tbx_typ2_coor_y;
+        private System.Windows.Forms.Label label34;
+        private System.Windows.Forms.TextBox tbx_typ2_coor_z;
+        private System.Windows.Forms.Label label33;
+        private System.Windows.Forms.Label label32;
+        private System.Windows.Forms.TextBox tbx_typ3_coor_x;
+        private System.Windows.Forms.TextBox tbx_typ3_coor_y;
+        private System.Windows.Forms.Label label40;
+        private System.Windows.Forms.TextBox tbx_typ3_coor_z;
+        private System.Windows.Forms.Label label39;
+        private System.Windows.Forms.Label label38;
+        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox groupBox5;
+        private System.Windows.Forms.LinkLabel link_clear_all;
         private System.Windows.Forms.Label lb_typ1_count;
         private System.Windows.Forms.LinkLabel link_typ1_clear;
         private System.Windows.Forms.Label label41;
-        private System.Windows.Forms.Label label42;
-        private System.Windows.Forms.Label label43;
-        private System.Windows.Forms.TextBox tbx_typ1_coor_z;
-        private System.Windows.Forms.Label label44;
-        private System.Windows.Forms.TextBox tbx_typ1_coor_y;
-        private System.Windows.Forms.TextBox tbx_typ1_coor_x;
-        private System.Windows.Forms.Button btn_auto_OnOff;
-        private System.Windows.Forms.Label label23;
-        private System.Windows.Forms.TextBox tbx_auto_ZPlace;
-        private System.Windows.Forms.Label label45;
-        private System.Windows.Forms.TextBox tbx_auto_ZPick;
-        private System.Windows.Forms.LinkLabel link_img_getArea;
-        private System.Windows.Forms.Label lb_img_area;
+        private System.Windows.Forms.Label lb_typ3_count;
+        private System.Windows.Forms.LinkLabel link_typ3_clear;
+        private System.Windows.Forms.Label label37;
+        private System.Windows.Forms.Label lb_typ2_count;
+        private System.Windows.Forms.LinkLabel link_typ2_clear;
+        private System.Windows.Forms.Label label31;
+        private System.Windows.Forms.TextBox tbx_y_limit_low;
+        private System.Windows.Forms.Label label46;
+        private System.Windows.Forms.TextBox tbx_y_limit_high;
+        private System.Windows.Forms.Button btn_camsetup;
+        private System.Windows.Forms.Label label27;
+        private System.Windows.Forms.Button btn_objQueueView;
     }
 }
 

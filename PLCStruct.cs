@@ -39,6 +39,8 @@ namespace DE1T4_Project
         public static DeltaPosition PnP_Typ3_Coor = new DeltaPosition() { X = 0, Y = 0, Z = 0, };
         public static double Z_Pick;
         public static double Z_Place;
+        public static double Y_Pick_Limit_High;
+        public static double Y_Pick_Limit_Low;
         public static short Count_Type_1;
         public static short Count_Type_2;
         public static short Count_Type_3;
@@ -46,183 +48,238 @@ namespace DE1T4_Project
         #region methods
         public static void Home(ref Plc _plc)
         {
-            busy = true;
-            _plc.Write(PLC_Addr.Home, 1);
-            busy = false;
+            WriteBit(ref _plc, PLC_Addr.Home, 1);
         }
         public static void MovP2P(ref Plc _plc, DeltaPosition pos, short nPoint)
         {
-            busy = true;
-            // add to buffet
+            // add to buffer
             PushToRingBuffer(ref _plc, pos);
-            _plc.Write(PLC_Addr.nPoint, nPoint.ConvertToUshort());
+            WriteShort(ref _plc, PLC_Addr.nPoint, nPoint);
             // move
-            _plc.Write(PLC_Addr.MoveTO, 1);
-            _plc.Write(PLC_Addr.MoveTO, 0);
-            busy = false;
+            WriteBit(ref _plc, PLC_Addr.MoveTO, 1);
+            WriteBit(ref _plc, PLC_Addr.MoveTO, 0);
         }
         public static void ChangeEESpeed(ref Plc _plc, short speed)
         {
             EESpeed = speed;
-            busy = true;
-            _plc.Write(PLC_Addr.EESpeed, EESpeed.ConvertToUshort());
-            busy = false;
+            WriteShort(ref _plc, PLC_Addr.EESpeed, EESpeed);
         }
         public static void MovXYZ(ref Plc _plc, string _addr)
         {
-            busy = true;
-            _plc.Write(_addr, 1);
-            _plc.Write(_addr, 0);
-            busy = false;
+            WriteBit(ref _plc, _addr, 1);
+            WriteBit(ref _plc, _addr, 0);
         }
         public static void ChangeDivision(ref Plc _plc, double div)
         {
             Division = div;
-            busy = true;
-            _plc.Write(PLC_Addr.Division, Division.ConvertToUInt());
-            busy = false;
+            WriteDouble(ref _plc, PLC_Addr.Division, Division);
         }
         public static void Vaccum(ref Plc _plc, int value)
         {
-            busy = true;
-            _plc.Write(PLC_Addr.Vaccum, value);
-            busy = false;
+            WriteBit(ref _plc, PLC_Addr.Vaccum, value);
         }
         public static void Valve(ref Plc _plc, int value)
         {
-            busy = true;
-            _plc.Write(PLC_Addr.Valve, value);
-            busy = false;
+            WriteBit(ref _plc, PLC_Addr.Valve, value);
         }
         public static void ChangeConveyorSpeed(ref Plc _plc, double speed)
         {
             Conveyor_Set_Velocity = speed;
-            busy = true;
-            _plc.Write(PLC_Addr.PID_Setpoint, Conveyor_Set_Velocity.ConvertToUInt());
-            busy = false;
+            WriteDouble(ref _plc, PLC_Addr.PID_Setpoint, Conveyor_Set_Velocity);
         }
         public static void Conveyor(ref Plc _plc, int value)
         {
-            busy = true;
-            _plc.Write(PLC_Addr.Conveyor, value);
-            busy = false;
+            WriteBit(ref _plc, PLC_Addr.Conveyor, value);
         }
         public static void PushToRingBuffer(ref Plc _plc ,DeltaPosition Position)
         {
             // write position
-            _plc.Write(PLC_Addr.Push_POS_X, Position.X.ConvertToUInt());
-            _plc.Write(PLC_Addr.Push_POS_Y, Position.Y.ConvertToUInt());
-            _plc.Write(PLC_Addr.Push_POS_Z, Position.Z.ConvertToUInt());
+            WriteDouble(ref _plc, PLC_Addr.Push_POS_X, Position.X);
+            WriteDouble(ref _plc, PLC_Addr.Push_POS_Y, Position.Y);
+            WriteDouble(ref _plc, PLC_Addr.Push_POS_Z, Position.Z);
             // add
-            _plc.Write(PLC_Addr.AddNewPos, 1);
-            _plc.Write(PLC_Addr.AddNewPos, 0);
+            WriteBit(ref _plc, PLC_Addr.AddNewPos, 1);
+            WriteBit(ref _plc, PLC_Addr.AddNewPos, 0);
         }
         public static void ReadPosition(ref Plc _plc)
         {
-            busy = true;
-            PLC.Pos.X = Math.Round(((uint)_plc.Read(PLC_Addr.Pos_Last_X)).ConvertToDouble());
-            PLC.Pos.Y = Math.Round(((uint)_plc.Read(PLC_Addr.Pos_Last_Y)).ConvertToDouble());
-            PLC.Pos.Z = Math.Round(((uint)_plc.Read(PLC_Addr.Pos_Last_Z)).ConvertToDouble());
-            busy = false;
+            ReadParameterDouble(ref _plc, ref PLC.Pos.X, PLC_Addr.Pos_Last_X);
+            ReadParameterDouble(ref _plc, ref PLC.Pos.Y, PLC_Addr.Pos_Last_Y);
+            ReadParameterDouble(ref _plc, ref PLC.Pos.Z, PLC_Addr.Pos_Last_Z);
         }
         public static void ReadConveyorSpeed(ref Plc _plc)
         {
-            busy = true;
-            PLC.Conveyor_Velocity = ((uint)_plc.Read(PLC_Addr.Conveyor_MMPS)).ConvertToInt();
-            busy = false;
+            ReadParameterDouble(ref _plc, ref PLC.Conveyor_Velocity, PLC_Addr.Conveyor_MMPS);
         }
-        public static void ReadParameterDouble(ref Plc _plc, ref double ReadValue, string addr)
-        {
-            busy = true;
-            ReadValue = ((uint)_plc.Read(addr)).ConvertToDouble();
-            busy = false;
-        }
-        public static void ReadParameterShort(ref Plc _plc, ref short ReadValue, string addr)
-        {
-            busy = true;
-            ReadValue = ((ushort)_plc.Read(addr)).ConvertToShort();
-            busy = false;
-        }
-        public static bool read_Singles_Bit(ref Plc _plc, DataType _type, String addr)
-        {
-            int _dbInd = int.Parse(addr.Substring(2, 2));
-            int startInd = int.Parse(addr.Substring(5, 1));
-            int bitInd = int.Parse(addr.Right(1));
-            busy = true;
-            byte[] rTmp_Byte = _plc.ReadBytes(_type, _dbInd, startInd, 1);
-            busy = false;
-            byte write_Byte = rTmp_Byte[0];
-            return write_Byte.SelectBit(bitInd);
-        }
-        public static bool read_Singles_Bit(ref Plc _plc, String addr)
-        {
-            return ((bool)_plc.Read(addr));
-        }
-        
+
+        #region Pick&Place
         public static void Pnp_Start(ref Plc _plc)
         {
-            busy = true;
             short mode = (short)1;
-            _plc.Write(PLC_Addr.PNP_Mode, mode.ConvertToUshort());
-            busy = false;
+            short nPoint = Convert.ToInt16(1);
+            WriteShort(ref _plc, PLC_Addr.PNP_Mode, mode);
+            MovP2P(ref _plc, PnP_Typ1_Coor, nPoint);
+            Vaccum(ref _plc, 1);
+            Conveyor(ref _plc, 1);
+        }
+        public static void Pnp_Stop(ref Plc _plc)
+        {
+            Vaccum(ref _plc, 0);
+            Conveyor(ref _plc, 0);
         }
         public static void PnP_Pick(ref Plc _plc, DeltaPosition PickPos, short TargetIndex)
         {
-            busy = true;
             // write type of target
-            _plc.Write(PLC_Addr.PlacePos_Index, TargetIndex.ConvertToUshort());
+            WriteShort(ref _plc, PLC_Addr.PlacePos_Index, TargetIndex);
             // write position
-            _plc.Write(PLC_Addr.PickPosition_X, PickPos.X.ConvertToUInt());
-            _plc.Write(PLC_Addr.PickPosition_Y, PickPos.Y.ConvertToUInt());
-            //_plc.Write(PLC_Addr.PickPosition_Z, PickPos.Z.ConvertToUInt());
+            WriteDouble(ref _plc, PLC_Addr.PickPosition_X, PickPos.X);
+            WriteDouble(ref _plc, PLC_Addr.PickPosition_Y, PickPos.Y);
+            //WriteDouble(ref _plc, PLC_Addr.PickPosition_Z, PickPos.Z);
             // run
-            _plc.Write(PLC_Addr.Pick_N_Place, 1);
-            _plc.Write(PLC_Addr.Pick_N_Place, 0);
-            busy = false;
+            WriteBit(ref _plc, PLC_Addr.Pick_N_Place, 1);
+            WriteBit(ref _plc, PLC_Addr.Pick_N_Place, 0);
         }
         public static void Read_PnP_Offset(ref Plc _plc)
         {
-            busy = true;
-            PLC.PnP_Offset.X = ((uint)_plc.Read(PLC_Addr.PNP_Offset_X)).ConvertToDouble();
-            PLC.PnP_Offset.Y = ((uint)_plc.Read(PLC_Addr.PNP_Offset_Y)).ConvertToDouble();
-            PLC.PnP_Offset.Z = ((uint)_plc.Read(PLC_Addr.PNP_Offset_Z)).ConvertToDouble();
-            busy = false;
+            ReadParameterDouble(ref _plc, ref PLC.PnP_Offset.X, PLC_Addr.PNP_Offset_X);
+            ReadParameterDouble(ref _plc, ref PLC.PnP_Offset.Y, PLC_Addr.PNP_Offset_Y);
+            ReadParameterDouble(ref _plc, ref PLC.PnP_Offset.Z, PLC_Addr.PNP_Offset_Z);
+        }
+        public static void Read_PnP_Count(ref Plc _plc)
+        {
+            ReadParameterShort(ref _plc, ref PLC.Count_Type_1, PLC_Addr.TargetCount_1);
+            ReadParameterShort(ref _plc, ref PLC.Count_Type_2, PLC_Addr.TargetCount_2);
+            ReadParameterShort(ref _plc, ref PLC.Count_Type_3, PLC_Addr.TargetCount_3);
         }
         public static void Read_PnP_Place_Coor(ref Plc _plc, int _type)
         {
-            busy = true;
             switch (_type) 
             {
                 case 1:
-                    PLC.PnP_Typ1_Coor.X = ((uint)_plc.Read(PLC_Addr.PlacePos_1_X)).ConvertToDouble();
-                    PLC.PnP_Typ1_Coor.Y = ((uint)_plc.Read(PLC_Addr.PlacePos_1_Y)).ConvertToDouble();
-                    PLC.PnP_Typ1_Coor.Z = ((uint)_plc.Read(PLC_Addr.PlacePos_1_Z)).ConvertToDouble();
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ1_Coor.X, PLC_Addr.PlacePos_1_X);
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ1_Coor.Y, PLC_Addr.PlacePos_1_Y);
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ1_Coor.Z, PLC_Addr.PlacePos_1_Z);
                     break;
                 case 2:
-                    PLC.PnP_Typ2_Coor.X = ((uint)_plc.Read(PLC_Addr.PlacePos_2_X)).ConvertToDouble();
-                    PLC.PnP_Typ2_Coor.Y = ((uint)_plc.Read(PLC_Addr.PlacePos_2_Y)).ConvertToDouble();
-                    PLC.PnP_Typ2_Coor.Z = ((uint)_plc.Read(PLC_Addr.PlacePos_2_Z)).ConvertToDouble();
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ2_Coor.X, PLC_Addr.PlacePos_2_X);
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ2_Coor.Y, PLC_Addr.PlacePos_2_Y);
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ2_Coor.Z, PLC_Addr.PlacePos_2_Z);
                     break;
                 case 3:
-                    PLC.PnP_Typ3_Coor.X = ((uint)_plc.Read(PLC_Addr.PlacePos_3_X)).ConvertToDouble();
-                    PLC.PnP_Typ3_Coor.Y = ((uint)_plc.Read(PLC_Addr.PlacePos_3_Y)).ConvertToDouble();
-                    PLC.PnP_Typ3_Coor.Z = ((uint)_plc.Read(PLC_Addr.PlacePos_3_Z)).ConvertToDouble();
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ3_Coor.X, PLC_Addr.PlacePos_3_X);
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ3_Coor.Y, PLC_Addr.PlacePos_3_Y);
+                    ReadParameterDouble(ref _plc, ref PLC.PnP_Typ3_Coor.Z, PLC_Addr.PlacePos_3_Z);
                     break;
             }
-            busy = false;
         }
-        public static void Write_Double(ref Plc _plc, string addr, double value)
+        #endregion Pick&Place
+
+        #region write PLC
+        public static void WriteShort(ref Plc _plc, string addr, short value)
         {
-            busy = true;
-            _plc.Write(addr, value.ConvertToUInt());
-            busy = false;
+            if (PLC.IsConnect)
+            {
+                busy = true;
+                if (_plc.IsConnected)   _plc.Write(addr, value.ConvertToUshort());
+                busy = false;
+            }
         }
-        public static void Write_Short(ref Plc _plc, string addr, short value)
+        public static void WriteDouble(ref Plc _plc, string addr, double value)
         {
-            busy = true;
-            _plc.Write(addr, value.ConvertToUshort());
-            busy = false;
+            if (PLC.IsConnect)
+            {
+                busy = true;
+                if (_plc.IsConnected)   _plc.Write(addr, value.ConvertToUInt());
+                busy = false;
+            }
         }
+        public static void WriteBit(ref Plc _plc, string addr, Int32 value)
+        {
+            if (PLC.IsConnect)
+            {
+                busy = true;
+                if (_plc.IsConnected) _plc.Write(addr, value);
+                busy = false;
+            }
+        }
+        public static bool Convert_N_Write_Double(ref Plc _plc, string textVal, string addr)
+        {
+            double writeVal;
+            bool tryBool = double.TryParse(textVal, out writeVal);
+            if (tryBool)
+            {
+                WriteDouble(ref _plc, addr, writeVal);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public static bool Convert_N_Write_Short(ref Plc _plc, string textVal, string addr)
+        {
+            short writeVal;
+            bool tryBool = short.TryParse(textVal, out writeVal);
+            if (tryBool)
+            {
+                WriteDouble(ref _plc, addr, writeVal);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        #endregion write PLC
+
+        #region read PLC
+        public static bool ReadParameterDouble(ref Plc _plc, ref double ReadValue, string addr)
+        {
+            if (PLC.IsConnect)
+            {
+                busy = true;
+                if (_plc.IsConnected)
+                {
+                    ReadValue = ((uint)_plc.Read(addr)).ConvertToDouble();
+                    busy = false;
+                    return true;
+                }
+                busy = false;
+            }
+            return false;
+        }
+        public static bool ReadParameterShort(ref Plc _plc, ref short ReadValue, string addr)
+        {
+            if (PLC.IsConnect)
+            {
+                busy = true;
+                if (_plc.IsConnected)
+                {
+                    ReadValue = ((ushort)_plc.Read(addr)).ConvertToShort();
+                    busy = false;
+                    return true;
+                }
+                busy = false;
+            }
+            return false;
+        }
+        public static bool ReadParameterBit(ref Plc _plc, ref bool ReadValue, string addr)
+        {
+            if (PLC.IsConnect)
+            {
+                busy = true;
+                if (_plc.IsConnected)
+                {
+                    ReadValue = ((bool)_plc.Read(addr));
+                    busy = false;
+                    return true;
+                }
+                busy = false;
+            }
+            return false;
+        }
+        #endregion read PLC
+
         #endregion methods
     }
 
@@ -233,7 +290,7 @@ namespace DE1T4_Project
         public const string Pos_Last_X = "DB26.DBD122";
         public const string Pos_Last_Y = "DB26.DBD126";
         public const string Pos_Last_Z = "DB26.DBD130";
-        public const string Conveyor_MMPS = "DB11.DBD56";
+        public const string Conveyor_MMPS = "DB11.DBD52";
 
         // write
         public const string Home = "M0.0";
@@ -300,6 +357,9 @@ namespace DE1T4_Project
         public const string TargetCount_1 = "DB36.DBW86";
         public const string TargetCount_2 = "DB36.DBW88";
         public const string TargetCount_3 = "DB36.DBW90";
+
+        public const string Y_Pick_Limit_High = "DB36.DBD98";
+        public const string Y_Pick_Limit_Low = "DB36.DBD102";
         #endregion
     }
 }

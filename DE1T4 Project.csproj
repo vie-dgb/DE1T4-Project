@@ -59,6 +59,24 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CamStruct.cs" />
+    <Compile Include="Form_Object_Infor.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_Object_Infor.Designer.cs">
+      <DependentUpon>Form_Object_Infor.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Form_CamConfig.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form_CamConfig.Designer.cs">
+      <DependentUpon>Form_CamConfig.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Introduces.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Introduces.Designer.cs">
+      <DependentUpon>Introduces.cs</DependentUpon>
+    </Compile>
     <Compile Include="Queue.cs" />
     <Compile Include="PLCStruct.cs" />
     <Compile Include="Form_CamSetting.cs">
@@ -82,11 +100,20 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form_CamConfig.resx">
+      <DependentUpon>Form_CamConfig.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form_Main.resx">
       <DependentUpon>Form_Main.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Form_CamSetting.resx">
       <DependentUpon>Form_CamSetting.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Form_Object_Infor.resx">
+      <DependentUpon>Form_Object_Infor.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Introduces.resx">
+      <DependentUpon>Introduces.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>

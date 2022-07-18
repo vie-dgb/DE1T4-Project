@@ -124,28 +124,26 @@ namespace DE1T4_Project
             lb_get_ratio.Text = tmp;
         }
 
-        private void tb_ratio_Width_Leave(object sender, EventArgs e)
-        {
-            double tmp = Convert.ToDouble(tb_ratio_Width.Text);
-            if (tmp > 0)
-            {
-                settingCam.calibCam.Calib_Width = tmp;
-                accessData.SaveCalibRatio(ref settingCam.calibCam, settingCam.rect.Height, settingCam.rect.Width);
-                getRatio();
-            }
-        }
+        //private void tb_ratio_Width_Leave(object sender, EventArgs e)
+        //{
+        //    double tmp = Convert.ToDouble(tb_ratio_Width.Text);
+        //    if (tmp > 0)
+        //    {
+        //        settingCam.calibCam.Calib_Width = tmp;
+        //        accessData.SaveCalibRatio(ref settingCam.calibCam, settingCam.rect.Height, settingCam.rect.Width);
+        //        getRatio();
+        //    }
+        //}
 
-        private void tb_ratio_Height_Leave(object sender, EventArgs e)
-        {
-            double tmp = Convert.ToDouble(tb_ratio_Height.Text);
-            if (tmp > 0)
-            {
-                settingCam.calibCam.Calib_Height = tmp;
-                accessData.SaveCalibRatio(ref settingCam.calibCam, settingCam.rect.Height, settingCam.rect.Width);
-                getRatio();
-            }
-        }
-
-        
+        //private void tb_ratio_Height_Leave(object sender, EventArgs e)
+        //{
+        //    double tmp = Convert.ToDouble(tb_ratio_Height.Text);
+        //    if (tmp > 0)
+        //    {
+        //        settingCam.calibCam.Calib_Height = tmp;
+        //        accessData.SaveCalibRatio(ref settingCam.calibCam, settingCam.rect.Height, settingCam.rect.Width);
+        //        getRatio();
+        //    }
+        //}
     }
 }

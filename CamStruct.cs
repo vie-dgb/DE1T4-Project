@@ -59,6 +59,20 @@ namespace DE1T4_Project
 
     }
 
+    public class CamConfig 
+    {
+        public double Brightness { get; set; }
+        public double Contrast { get; set; }
+        public double Saturation { get; set; }
+        public double Hue { get; set; }
+        public double Gain { get; set; }
+        public double Sharpness { get; set; }
+        public double Gamma { get; set; }
+        public double WhiteBalanceRedV { get; set; }
+        public double Autofocus { get; set; }
+    }
+
+
     public class frameConfig
     {
         public string X { get; set; }
@@ -92,10 +106,12 @@ namespace DE1T4_Project
         public static Mat set_Frame;
         public static double fps;
         public static Calib calibCam = new Calib();
+        public static CamConfig configCam = new CamConfig();
     }
 
     public class Cam_S
     {
+        public static VideoCapture CamProcess;
         public static int Index;
         public static string Name;
         public static bool captureInProgress = false;

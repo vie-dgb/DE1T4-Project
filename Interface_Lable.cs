@@ -8,8 +8,11 @@ using System.Drawing;
 
 namespace DE1T4_Project
 {
-    
-
+    class Form_Status
+    {
+        public static bool CamSetting = false;
+        public static bool viewQueue = false;
+    }
     class Itf_Lb
     {
         public const string Cam_Start_Btn = "Start Camera";
